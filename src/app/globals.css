@@ -44,7 +44,6 @@
     background-color: var(--background);
     color: var(--foreground);
     overflow-x: hidden;
-    cursor: none;
   }
 }
 

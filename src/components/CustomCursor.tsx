@@ -2,12 +2,23 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  const isDashboard = pathname?.startsWith("/visitor-dashboard");
 
   useEffect(() => {
+    if (isDashboard) {
+      document.body.style.cursor = "auto";
+      return;
+    }
+
+    document.body.style.cursor = "none";
+
     const moveCursor = (e: MouseEvent) => {
       gsap.to(cursorRef.current, {
         x: e.clientX,
@@ -38,13 +49,16 @@ export default function CustomCursor() {
     });
 
     return () => {
+      document.body.style.cursor = "auto";
       window.removeEventListener("mousemove", moveCursor);
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleHover);
         el.removeEventListener("mouseleave", handleLeave);
       });
     };
-  }, []);
+  }, [isDashboard]);
+
+  if (isDashboard) return null;
 
   return (
     <>
