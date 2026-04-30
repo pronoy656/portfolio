@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
 import Image from "next/image";
 
 const navItems = [
@@ -60,7 +59,6 @@ export default function Navbar() {
               Hire
             </a>
           </nav>
-          <ThemeToggle />
         </div>
 
         {/* Mobile Toggle for full menu */}

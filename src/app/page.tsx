@@ -17,7 +17,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <Experience />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Education />
       <Contact />
       <footer className="py-12 px-6 border-t border-white/5 text-center">
