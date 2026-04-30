@@ -1,184 +1,220 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Star, Quote, ArrowUpRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Quote, Star, ArrowRight, ExternalLink } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
+const TESTIMONIALS = [
   {
     name: "Alexander Volkov",
     role: "Lead Engineer @ CyberCore",
     content: "Pronoy's ability to architect scalable frontend systems is world-class. He took our complex dashboard and made it performant and stunning.",
-    size: "large",
-    color: "bg-indigo-50"
+    avatar: "AV",
+    color: "#6366f1",
   },
   {
     name: "Sarah Miller",
     role: "Product Owner @ Luminance",
-    content: "The attention to detail in the micro-animations was beyond our expectations.",
-    size: "small",
-    color: "bg-purple-50"
+    content: "The attention to detail in the micro-animations was beyond our expectations. Every interaction feels deliberate and smooth.",
+    avatar: "SM",
+    color: "#8b5cf6",
   },
   {
     name: "Daniel Kwon",
     role: "Founder @ NeoStack",
-    content: "We needed a developer who understood both high-end design and robust architecture. Pronoy delivered exactly that.",
-    size: "medium",
-    color: "bg-blue-50"
+    content: "We needed a developer who understood both high-end design and robust architecture. Pronoy delivered exactly that and more.",
+    avatar: "DK",
+    color: "#0ea5e9",
   },
   {
     name: "Emily Watson",
     role: "Creative Director",
-    content: "His work with GSAP is pure magic. Our landing page now feels alive.",
-    size: "medium",
-    color: "bg-emerald-50"
+    content: "His work with GSAP is pure magic. Our landing page now feels alive and tells a compelling story through motion.",
+    avatar: "EW",
+    color: "#10b981",
   },
   {
     name: "Michael Ross",
     role: "Startup Mentor",
-    content: "A rare talent who bridges the gap between vision and execution perfectly.",
-    size: "small",
-    color: "bg-orange-50"
+    content: "A rare talent who bridges the gap between vision and execution perfectly. He's not just a developer; he's a product thinker.",
+    avatar: "MR",
+    color: "#f59e0b",
   },
   {
     name: "Jessica Chen",
     role: "CTO @ FlowState",
-    content: "Professionalism, speed, and absolute quality. Pronoy is our go-to for any premium web project.",
-    size: "large",
-    color: "bg-rose-50"
+    content: "Professionalism, speed, and absolute quality. Pronoy is our go-to for any premium web project that requires perfection.",
+    avatar: "JC",
+    color: "#ef4444",
   }
 ];
 
 export default function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const xOffset = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Entrance Animation
-      gsap.from(".bento-card", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-        },
-        y: 100,
+      // Heading Reveal
+      gsap.from(".testimonial-head", {
+        y: 60,
         opacity: 0,
-        duration: 1.5,
-        ease: "expo.out",
-        stagger: 0.1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".testimonial-head",
+          start: "top 85%",
+        }
       });
 
-      // 2. Mouse Parallax (Interactive Spotlight)
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        const x = (clientX / window.innerWidth - 0.5) * 40;
-        const y = (clientY / window.innerHeight - 0.5) * 40;
+      // Cards Reveal
+      gsap.from(".testimonial-card", {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        stagger: {
+          amount: 0.6,
+          grid: "auto",
+          from: "start"
+        },
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".testimonial-grid",
+          start: "top 80%",
+        }
+      });
 
-        gsap.to(".parallax-move", {
-          x: (i) => x * (i + 1) * 0.2,
-          y: (i) => y * (i + 1) * 0.2,
-          duration: 2,
-          ease: "power2.out"
-        });
-
-        // Spotlight update
-        document.querySelectorAll(".bento-card").forEach((card: any) => {
-          const rect = card.getBoundingClientRect();
-          const localX = clientX - rect.left;
-          const localY = clientY - rect.top;
-          card.style.setProperty("--mouse-x", `${localX}px`);
-          card.style.setProperty("--mouse-y", `${localY}px`);
-        });
-      };
-
-      window.addEventListener("mousemove", handleMouseMove);
-      return () => window.removeEventListener("mousemove", handleMouseMove);
+      // Floating Shapes
+      gsap.to(".bg-shape", {
+        y: "random(-40, 40)",
+        x: "random(-40, 40)",
+        duration: "random(4, 8)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
     }, containerRef);
+
     return () => ctx.revert();
   }, []);
 
   return (
     <section 
       ref={containerRef}
-      className="py-40 bg-[#fcfcfd] overflow-hidden relative"
+      className="relative py-24 lg:py-48 bg-white overflow-hidden"
     >
-      <div className="max-w-[1600px] mx-auto px-8 md:px-20">
-        
-        {/* Unique Heading Layout */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-10">
-           <div className="max-w-2xl">
-              <div className="flex items-center gap-4 mb-6">
-                 <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
-                    <Quote size={20} />
-                 </div>
-                 <span className="text-xs font-bold uppercase tracking-[0.4em] text-gray-400">Client Impact</span>
-              </div>
-              <h2 className="text-[10vw] md:text-7xl font-black tracking-tighter text-[#1a1c20] leading-[0.9]">
-                WHAT THEY <span className="text-indigo-600 italic">SAY.</span>
-              </h2>
-           </div>
-           <div className="flex flex-col items-end text-right pb-2">
-              <p className="text-gray-400 text-sm font-medium mb-4 max-w-xs">
-                I help companies across the globe build digital products that people love.
-              </p>
-              <div className="flex items-center gap-2 text-black font-bold group cursor-pointer">
-                 <span>VIEW ALL REVIEWS</span>
-                 <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </div>
-           </div>
-        </div>
-
-        {/* The Unique Bento Spotlight Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[250px]">
-           {testimonials.map((t, i) => (
-             <div 
-               key={i}
-               className={`bento-card group relative p-10 rounded-[2.5rem] overflow-hidden border border-gray-100 transition-all duration-500 hover:border-indigo-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex flex-col justify-between ${
-                 t.size === 'large' ? 'md:col-span-2 md:row-span-2' : 
-                 t.size === 'medium' ? 'md:row-span-2' : ''
-               } ${t.color}`}
-               style={{
-                 '--mouse-x': '50%',
-                 '--mouse-y': '50%'
-               } as any}
-             >
-                {/* Interactive Spotlight Overlay */}
-                <div 
-                  className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                  style={{
-                    background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.08), transparent 40%)`
-                  }}
-                />
-
-                <div className="relative z-10">
-                   <div className="flex gap-1 mb-8 opacity-40 group-hover:opacity-100 transition-opacity">
-                      {[...Array(5)].map((_, j) => (
-                        <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
-                      ))}
-                   </div>
-                   <p className={`text-[#1a1c20] font-bold leading-tight tracking-tight mb-8 transition-transform duration-700 group-hover:scale-[1.02] origin-left ${
-                     t.size === 'large' ? 'text-3xl md:text-5xl' : 
-                     t.size === 'medium' ? 'text-2xl md:text-3xl' : 'text-lg'
-                   }`}>
-                      &ldquo;{t.content}&rdquo;
-                   </p>
-                </div>
-
-                <div className="relative z-10 flex items-center gap-4 pt-6 border-t border-black/5">
-                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center font-black text-xs text-indigo-600 shadow-sm transition-transform duration-500 group-hover:rotate-[360deg]">
-                      {t.name.split(' ').map((n: string) => n[0]).join('')}
-                   </div>
-                   <div className="flex flex-col">
-                      <span className="text-sm font-black text-[#1a1c20] tracking-tight">{t.name}</span>
-                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{t.role}</span>
-                   </div>
-                </div>
-             </div>
-           ))}
-        </div>
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="bg-shape absolute top-[10%] left-[5%] w-64 h-64 bg-indigo-50 rounded-full blur-[100px] opacity-60" />
+        <div className="bg-shape absolute bottom-[10%] right-[5%] w-96 h-96 bg-purple-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
       </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-24 lg:mb-32">
+          <div className="max-w-3xl">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-50 border border-gray-100 text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-8"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              Testimonials
+            </motion.div>
+            <h2 className="testimonial-head text-6xl lg:text-8xl font-black text-gray-900 leading-[0.9] tracking-tight">
+              VOICES OF <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] animate-gradient">PARTNERSHIP.</span>
+            </h2>
+          </div>
+          <p className="testimonial-head max-w-xs text-gray-500 font-medium leading-relaxed lg:text-right">
+            Collaborating with forward-thinking teams to build the future of the web.
+          </p>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="testimonial-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((t, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -10 }}
+              className="testimonial-card group relative p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-500 flex flex-col"
+            >
+              {/* Quote Icon Overlay */}
+              <div className="absolute top-8 right-8 text-indigo-50 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+                <Quote size={120} strokeWidth={4} />
+              </div>
+
+              {/* Rating */}
+              <div className="flex items-center gap-1 mb-8">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+
+              {/* Content */}
+              <p className="text-xl lg:text-2xl font-bold text-gray-900 leading-tight tracking-tight mb-12 flex-grow">
+                &ldquo;{t.content}&rdquo;
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-white text-lg shadow-lg group-hover:scale-110 transition-transform duration-500"
+                  style={{ backgroundColor: t.color }}
+                >
+                  {t.avatar}
+                </div>
+                <div className="flex flex-col">
+                  <h4 className="text-base font-black text-gray-900 tracking-tight">{t.name}</h4>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mt-1.5">{t.role}</p>
+                </div>
+              </div>
+
+              {/* Decorative Corner */}
+              <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                <ExternalLink size={12} className="text-gray-400" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom Callout */}
+        <motion.div 
+          style={{ x: xOffset }}
+          className="mt-32 flex items-center gap-8 whitespace-nowrap opacity-[0.05] select-none pointer-events-none"
+        >
+          {[...Array(3)].map((_, i) => (
+            <span key={i} className="text-8xl lg:text-[12rem] font-black tracking-tighter">
+              TRUSTED BY INNOVATORS WORLDWIDE • 
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      <style jsx global>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          background-size: 200% auto;
+          animation: gradient 8s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

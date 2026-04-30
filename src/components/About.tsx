@@ -4,276 +4,307 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Count-up hook ─────────────────────────────────────────── */
-function useCountUp(target: number, suffix: string, duration = 1.8, start = false) {
-  const [display, setDisplay] = useState("0");
-  useEffect(() => {
-    if (!start) return;
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: target,
-      duration,
-      ease: "power2.out",
-      onUpdate: () => setDisplay(Math.floor(obj.val).toString() + suffix),
-    });
-  }, [start, target, suffix, duration]);
-  return display;
-}
-
 /* ─── Data ──────────────────────────────────────────────────── */
 const STATS = [
-  { target: 3,    suffix: "+",  label: "Years\nExperience",  color: "#6366f1" },
-  { target: 24,   suffix: "+",  label: "Projects\nShipped",  color: "#8b5cf6" },
-  { target: 12,   suffix: "+",  label: "Happy\nClients",     color: "#0ea5e9" },
-  { target: 1200, suffix: "+",  label: "GitHub\nCommits",    color: "#10b981" },
+  { target: 3,    suffix: "+",  label: "Years Experience",  color: "from-indigo-500 to-purple-600" },
+  { target: 24,   suffix: "+",  label: "Projects Shipped",  color: "from-blue-500 to-cyan-500" },
+  { target: 12,   suffix: "+",  label: "Happy Clients",     color: "from-emerald-500 to-teal-600" },
+  { target: 1200, suffix: "+",  label: "GitHub Commits",    color: "from-orange-500 to-pink-600" },
 ];
 
 const SERVICES = [
   {
-    num: "01", title: "UI Engineering",
-    desc: "Pixel-perfect interfaces built with React & Next.js — fast, accessible, and beautiful at every breakpoint.",
-    tags: ["React", "Next.js", "TypeScript"],
+    num: "01",
+    title: "UI Engineering",
+    desc: "Crafting pixel-perfect, accessible interfaces with React and Next.js that scale beautifully across all devices.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
   },
   {
-    num: "02", title: "Motion & Interaction",
-    desc: "Bringing interfaces to life with purposeful GSAP & Framer Motion animations that guide and delight.",
-    tags: ["GSAP", "Framer Motion", "CSS"],
+    num: "02",
+    title: "Motion Design",
+    desc: "Bringing static layouts to life with purposeful GSAP and Framer Motion animations that enhance user engagement.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
   },
   {
-    num: "03", title: "Design Systems",
-    desc: "Scalable, token-based component libraries built for teams that ship fast without sacrificing quality.",
-    tags: ["Tokens", "Figma", "Storybook"],
+    num: "03",
+    title: "Design Systems",
+    desc: "Building scalable, token-based component libraries that maintain consistency and speed up development cycles.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+      </svg>
+    ),
   },
   {
-    num: "04", title: "Performance",
-    desc: "Lighthouse-optimised, Core Web Vitals green — sub-second loads and buttery 60fps interactions.",
-    tags: ["Optimization", "SEO", "Vercel"],
+    num: "04",
+    title: "Performance",
+    desc: "Optimizing Core Web Vitals to ensure sub-second load times and silky-smooth 60fps interactions.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
   },
 ];
 
-const MARQUEE_ITEMS = [
-  "React", "·", "Next.js", "·", "TypeScript", "·",
-  "Tailwind CSS", "·", "GSAP", "·", "Framer Motion", "·",
-  "Node.js", "·", "Figma", "·", "PostgreSQL", "·",
-  "REST APIs", "·", "Git", "·", "Vercel", "·",
-];
+/* ─── Components ────────────────────────────────────────────── */
 
-/* ─── Stat card ─────────────────────────────────────────────── */
-function StatCard({ target, suffix, label, color }: typeof STATS[0]) {
-  const [active, setActive] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const val = useCountUp(target, suffix, 2, active);
+function StatCounter({ target, suffix, label, color, delay }: any) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
 
   useEffect(() => {
-    if (!ref.current) return;
     const trigger = ScrollTrigger.create({
       trigger: ref.current,
       start: "top 90%",
-      onEnter: () => setActive(true),
+      onEnter: () => {
+        let start = 0;
+        const end = target;
+        const duration = 2000;
+        const increment = end / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= end) {
+            setCount(end);
+            clearInterval(timer);
+          } else {
+            setCount(Math.floor(start));
+          }
+        }, 16);
+      },
+      once: true,
     });
     return () => trigger.kill();
-  }, []);
+  }, [target]);
 
   return (
-    <div
-      ref={ref}
-      className="ab-stat flex flex-col justify-center p-6 lg:p-8 rounded-[1.5rem] bg-white border border-gray-100 shadow-sm transition-all hover:shadow-md hover:border-indigo-100"
-    >
-      <span className="text-4xl lg:text-5xl font-black tracking-tight mb-2" style={{ color }}>
-        {val}
-      </span>
-      <span className="text-xs lg:text-sm uppercase tracking-wider font-bold text-gray-400 whitespace-pre-line leading-relaxed">
+    <div ref={ref} className="flex flex-col items-center justify-center p-6 rounded-3xl bg-white/50 backdrop-blur-sm border border-white shadow-xl shadow-gray-200/50">
+      <div className={`text-4xl lg:text-5xl font-black bg-gradient-to-r ${color} bg-clip-text text-transparent mb-1`}>
+        {count}{suffix}
+      </div>
+      <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 text-center leading-tight">
         {label}
-      </span>
+      </div>
     </div>
   );
 }
 
-/* ─── Main Component ────────────────────────────────────────── */
 export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRef   = useRef<HTMLDivElement>(null);
-  const marqRef    = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      /* heading */
-      gsap.from(".ab-head-el", {
-        scrollTrigger: { trigger: ".ab-head-el", start: "top 85%" },
-        y: 40, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1,
+      // Reveal Heading
+      gsap.from(".reveal-text", {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".reveal-text",
+          start: "top 90%",
+        },
       });
 
-      /* portrait reveal */
-      gsap.from(imageRef.current, {
-        scrollTrigger: { trigger: imageRef.current, start: "top 80%" },
-        y: 40, opacity: 0, duration: 1.2, ease: "power3.out",
+      // Portrait Animation
+      gsap.from(imageBoxRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.5,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: imageBoxRef.current,
+          start: "top 85%",
+        },
       });
 
-      gsap.fromTo(".ab-img-wipe",
-        { scaleY: 1, transformOrigin: "top" },
-        {
-          scaleY: 0, duration: 1.2, ease: "power4.inOut",
-          scrollTrigger: { trigger: imageRef.current, start: "top 80%" },
+      // Service Cards - Individual Triggers for reliability
+      gsap.utils.toArray<HTMLElement>(".service-card").forEach((card, i) => {
+        gsap.fromTo(card, 
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+
+      // Floating elements animation
+      gsap.to(".floating", {
+        y: -20,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          each: 0.5,
+          from: "random",
         }
-      );
-
-      /* bio lines */
-      gsap.from(".ab-bio-line", {
-        scrollTrigger: { trigger: ".ab-bio-wrap", start: "top 85%" },
-        y: 30, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.15,
       });
-
-      /* service cards */
-      gsap.from(".ab-svc-card", {
-        scrollTrigger: { trigger: ".ab-svc-grid", start: "top 85%" },
-        y: 40, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1,
-      });
-
-      /* marquee */
-      if (marqRef.current) {
-        const total = marqRef.current.scrollWidth / 2;
-        gsap.to(marqRef.current, {
-          x: `-=${total}`, duration: 30, repeat: -1, ease: "none",
-          modifiers: {
-            x: gsap.utils.unitize((x: any) => parseFloat(String(x)) % total),
-          },
-        });
-      }
-
-    }, sectionRef);
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[#fafafa] text-gray-900 py-20 lg:py-32"
+    <section 
+      id="about" 
+      ref={containerRef}
+      className="relative py-24 lg:py-40 bg-[#f8fafc] overflow-hidden"
     >
-      <div className="max-w-[1300px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-start">
-        
-        {/* ── LEFT: Portrait & Stats ── */}
-        <div className="flex flex-col gap-8 w-full max-w-[500px] mx-auto lg:mx-0">
-          
-          <div ref={imageRef} className="relative w-full h-[450px] sm:h-[550px] rounded-[2rem] overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] border border-black/5 bg-white">
-            <Image
-              src="/logo-2.png"
-              alt="Pronoy"
-              fill
-              className="object-cover object-top"
-              unoptimized
-              priority
-            />
-            
-            {/* Reveal wipe */}
-            <div className="ab-img-wipe absolute inset-0 bg-[#fafafa] z-10" />
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[120px] -mr-64 -mt-64" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[150px] -ml-96 -mb-96" />
 
-            {/* Floating Name Plate */}
-            <div className="absolute bottom-6 left-6 right-6 z-20 flex items-center justify-between p-4 sm:px-6 sm:py-4 rounded-2xl bg-white/90 backdrop-blur-md border border-white/50 shadow-sm">
-              <div>
-                <p className="text-gray-900 font-black text-lg leading-none">Pronoy</p>
-                <p className="text-gray-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider mt-1.5">Frontend Developer</p>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* ── LEFT: Visual ── */}
+          <div className="relative group">
+            <div 
+              ref={imageBoxRef}
+              className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl shadow-indigo-200/50"
+            >
+              <Image
+                src="/logo-2.png"
+                alt="Pronoy Portfolio"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority
+              />
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+              
+              {/* Floating Badge */}
+              <div className="absolute top-8 left-8 floating">
+                <div className="px-5 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border border-white shadow-lg flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-black uppercase tracking-widest text-gray-800">Available to work</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-emerald-700 text-[10px] font-black uppercase tracking-wider">Available</span>
+
+              {/* Glass Info Plate */}
+              <div className="absolute bottom-8 left-8 right-8 p-6 rounded-[2rem] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-black text-white leading-none mb-1">Pronoy</h3>
+                    <p className="text-white/80 text-xs font-bold uppercase tracking-widest">Dhaka, Bangladesh</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Dots */}
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 opacity-20 pointer-events-none floating">
+              <div className="grid grid-cols-6 gap-4">
+                {[...Array(36)].map((_, i) => (
+                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {STATS.map((s) => (
-              <StatCard key={s.label} {...s} />
+          {/* ── RIGHT: Content ── */}
+          <div className="flex flex-col">
+            <div className="reveal-text mb-6">
+              <span className="px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600">
+                The Architect
+              </span>
+            </div>
+
+            <h2 className="reveal-text text-5xl lg:text-7xl font-black text-gray-900 leading-[0.95] tracking-tight mb-10">
+              Turning vision into <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">digital reality.</span>
+            </h2>
+
+            <div className="reveal-text space-y-6 text-lg lg:text-xl text-gray-500 font-medium leading-relaxed mb-12">
+              <p>
+                I&apos;m <span className="text-gray-900 font-bold">Pronoy</span>, a Frontend Engineer obsessed with the tiny details that transform a good interface into a <span className="text-indigo-600 underline decoration-indigo-200 decoration-4 underline-offset-4">masterpiece</span>.
+              </p>
+              <p>
+                With 3+ years of experience, I bridge the gap between design and development, ensuring every pixel is purposeful and every animation is smooth.
+              </p>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="reveal-text grid grid-cols-2 gap-4 mb-16">
+              {STATS.map((stat, i) => (
+                <StatCounter key={i} {...stat} delay={i * 0.1} />
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="reveal-text flex flex-wrap gap-5">
+              <button className="px-8 py-4 rounded-2xl bg-gray-900 text-white font-bold text-sm tracking-widest hover:bg-gray-800 transition-all hover:shadow-xl hover:-translate-y-1">
+                LET&apos;S TALK
+              </button>
+              <button className="px-8 py-4 rounded-2xl bg-white border border-gray-200 text-gray-900 font-bold text-sm tracking-widest hover:border-indigo-500 hover:text-indigo-600 transition-all">
+                VIEW WORK
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── SERVICES BENTO GRID ── */}
+        <div className="mt-32 lg:mt-48">
+          <div className="text-center mb-16">
+            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-4">Core Expertise</h3>
+            <h4 className="text-4xl lg:text-5xl font-black text-gray-900">What I Bring to the Table</h4>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {SERVICES.map((svc, i) => (
+              <div 
+                key={i} 
+                className="service-card group p-8 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+                  {svc.icon}
+                </div>
+                <h5 className="text-xl font-bold text-gray-900 mb-4">{svc.title}</h5>
+                <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                  {svc.desc}
+                </p>
+                <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Learn More 
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-
-        {/* ── RIGHT: Content ── */}
-        <div className="flex flex-col pt-0 lg:pt-8">
-          
-          <div className="ab-head-el inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white border border-gray-200 w-fit mb-8 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-indigo-500" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-600">About Me</span>
-          </div>
-
-          <h2 className="ab-head-el text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.05] mb-8">
-            Driven by design.<br/>
-            <span className="text-gray-300">Engineered for performance.</span>
-          </h2>
-
-          <div className="ab-bio-wrap flex flex-col gap-6 text-lg sm:text-xl text-gray-500 leading-relaxed mb-14 font-medium">
-            <p className="ab-bio-line">
-              Hey — I&apos;m <span className="text-indigo-600 font-bold">Pronoy</span>, a passionate frontend developer based in Dhaka who lives at the intersection of design and engineering.
-            </p>
-            <p className="ab-bio-line">
-              With over 3 years crafting production-grade applications, I specialise in building interfaces that feel as good as they look. React, Next.js, and TypeScript are my daily tools, but what really drives me is the obsessive pursuit of a flawless user experience.
-            </p>
-          </div>
-
-          <div className="mb-14">
-            <h3 className="ab-head-el text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">What I Do</h3>
-            <div className="ab-svc-grid grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {SERVICES.map((s) => (
-                <div
-                  key={s.num}
-                  className="ab-svc-card flex flex-col p-6 rounded-[1.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 group"
-                >
-                  <div className="w-10 h-10 rounded-full bg-gray-50 text-indigo-500 flex items-center justify-center mb-5 border border-gray-100 group-hover:bg-indigo-50 transition-colors">
-                    <span className="font-black text-xs tracking-wider">{s.num}</span>
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-lg mb-2">{s.title}</h4>
-                  <p className="text-sm leading-relaxed text-gray-500 mb-6 flex-grow">{s.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {s.tags.map((t) => (
-                      <span key={t} className="px-3 py-1.5 rounded-full bg-gray-50 border border-gray-100 text-[10px] text-gray-500 font-bold uppercase tracking-wide">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <a
-            href="#"
-            className="ab-head-el inline-flex items-center justify-center gap-3 w-fit px-8 py-4 rounded-full font-bold text-sm tracking-wide text-white bg-indigo-600 shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:-translate-y-1 hover:bg-indigo-700 transition-all duration-300"
-          >
-            Download Resume
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-          </a>
-        </div>
       </div>
 
-      {/* ════════════ MARQUEE STRIP ════════════ */}
-      <div className="relative z-10 overflow-hidden py-6 bg-white border-y border-gray-100 mt-24">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
-        
-        <div ref={marqRef} className="flex items-center gap-12 whitespace-nowrap w-max">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span
-              key={i}
-              className={
-                item === "·"
-                  ? "text-gray-200 text-2xl select-none"
-                  : "text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-indigo-600 transition-colors cursor-default"
-              }
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Side Marquee or Strip can be added here if needed, but keeping it clean for premium feel */}
     </section>
   );
 }

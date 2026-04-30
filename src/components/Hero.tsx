@@ -96,87 +96,62 @@ export default function Hero() {
 
       <div className="relative z-10 w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 items-center px-8 md:px-24 py-20 max-w-[1920px] mx-auto">
         
-        {/* ── LEFT COLUMN: CONTENT ── */}
-        <div className="lg:col-span-7 flex flex-col gap-10">
+        {/* ── CENTERED CONTENT ── */}
+        <div className="lg:col-span-12 flex flex-col items-center text-center gap-10">
           
           <div className="hero-reveal flex items-center gap-3">
-             <div className="px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full flex items-center gap-2">
-                <Sparkles size={10} className="text-indigo-600" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-indigo-600">
+             <div className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full flex items-center gap-2">
+                <Sparkles size={12} className="text-indigo-600" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">
                   Full-Stack Architect
                 </span>
              </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h1 className="hero-reveal text-[10vw] md:text-[6vw] font-bold tracking-tight leading-[1] text-[#1a1c20]">
+          <div className="flex flex-col gap-4 items-center">
+            <h1 className="hero-reveal text-[10vw] md:text-[8vw] font-bold tracking-tighter leading-[0.9] text-[#1a1c20]">
               Elevating Digital <br/> 
               <span className="text-indigo-600 italic font-medium">Standard.</span>
             </h1>
-            <p className="hero-reveal text-base md:text-lg text-gray-600 max-w-lg mt-8 leading-relaxed font-medium">
+            <p className="hero-reveal text-base md:text-xl text-gray-500 max-w-2xl mt-8 leading-relaxed font-medium">
               I specialize in crafting high-performance, visually stunning 
-              web applications that leave a lasting impression.
+              web applications that leave a lasting impression. Dedicated to 
+              bridging the gap between engineering and art.
             </p>
           </div>
 
-          <div className="hero-reveal flex flex-wrap items-center gap-8 mt-4">
+          <div className="hero-reveal flex flex-wrap items-center justify-center gap-8 mt-4">
              <button className="group flex items-center gap-4 px-10 py-5 bg-[#1a1c20] text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-indigo-500/20">
-               Start Project 
+                Let&apos;s Build Together
                <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform">
                  <MoveRight size={14} />
                </div>
              </button>
              <a href="#projects" className="group text-sm font-bold text-[#1a1c20] flex items-center gap-2">
-               <span className="border-b-2 border-indigo-500/30 group-hover:border-indigo-500 transition-colors py-1">Browse Work</span>
+               <span className="border-b-2 border-indigo-500/30 group-hover:border-indigo-500 transition-colors py-1">Browse Case Studies</span>
                <ArrowRight size={14} className="text-indigo-500 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
              </a>
           </div>
 
           {/* Experience Bar */}
-          <div className="hero-reveal flex items-center gap-12 mt-8">
-             <div className="flex flex-col">
-               <span className="text-3xl font-black text-[#1a1c20] tracking-tighter">03+</span>
-               <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1">Years Expert</span>
+          <div className="hero-reveal flex items-center gap-12 mt-12 bg-white/50 backdrop-blur-sm p-8 rounded-[2rem] border border-gray-100 shadow-sm">
+             <div className="flex flex-col items-center">
+               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">03+</span>
+               <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1 text-center">Years Expert</span>
              </div>
              <div className="w-px h-12 bg-gray-200" />
-             <div className="flex flex-col">
-               <span className="text-3xl font-black text-[#1a1c20] tracking-tighter">24+</span>
-               <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1">Global Success</span>
+             <div className="flex flex-col items-center">
+               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">24+</span>
+               <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1 text-center">Global Success</span>
+             </div>
+             <div className="w-px h-12 bg-gray-200" />
+             <div className="flex flex-col items-center">
+               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">100%</span>
+               <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1 text-center">Happy Clients</span>
              </div>
           </div>
         </div>
 
-        {/* ── RIGHT COLUMN: VISUAL ── */}
-        <div className="lg:col-span-5 relative mt-20 lg:mt-0 flex justify-center items-center">
-           <div 
-             ref={visualRef}
-             className="hero-image-box hero-visual-float relative w-[80vw] lg:w-[32vw] aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-transform"
-           >
-              {/* Refined Glass Borders */}
-              <div className="absolute inset-0 z-20 border-[1px] border-white/40 rounded-[2.5rem] pointer-events-none" />
-              <div className="absolute inset-0 z-0 bg-[#f0f2f5]" />
-              
-              <Image 
-                src="/hero-visual.png" 
-                alt="Hero Visual" 
-                fill 
-                className="object-cover z-0 brightness-[1.02]"
-                priority
-              />
-
-              {/* Floating Badge */}
-              <div className="absolute top-8 right-8 z-20 p-4 bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl">
-                 <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-black text-[#1a1c20] uppercase tracking-wider">Available</span>
-                 </div>
-              </div>
-           </div>
-
-           {/* Floating Shapes */}
-           <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-400/15 blur-3xl rounded-full animate-pulse" />
-           <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-purple-400/15 blur-3xl rounded-full animate-pulse" />
-        </div>
 
       </div>
 
