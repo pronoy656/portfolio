@@ -98,18 +98,8 @@ export default function Hero() {
         
         {/* ── CENTERED CONTENT ── */}
         <div className="lg:col-span-12 flex flex-col items-center text-center gap-10">
-          
-          <div className="hero-reveal flex items-center gap-3">
-             <div className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full flex items-center gap-2">
-                <Sparkles size={12} className="text-indigo-600" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">
-                  Full-Stack Architect
-                </span>
-             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 items-center">
-            <h1 className="hero-reveal text-[10vw] md:text-[8vw] font-bold tracking-tighter leading-[0.9] text-[#1a1c20]">
+          <div className="flex flex-col gap-8 items-center">
+            <h1 className="hero-reveal text-[10vw] md:text-[8vw] font-bold tracking-tighter leading-[0.9] text-[#1a1c20] mt-12">
               Elevating Digital <br/> 
               <span className="text-indigo-600 italic font-medium">Standard.</span>
             </h1>
@@ -157,6 +147,14 @@ export default function Hero() {
 
       {/* ── FOOTER BAR ── */}
       <div className="absolute bottom-10 left-0 right-0 px-8 md:px-24 flex justify-between items-end">
+      
+        <div className="hidden md:flex gap-12">
+           <div className="flex flex-col gap-1 items-end">
+             <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Based In</span>
+             <span className="text-xs font-bold text-[#1a1c20]">Dhaka, Bangladesh</span>
+           </div>
+           
+        </div>
         <div className="flex flex-col gap-4">
            <div className="flex gap-6 mb-2">
               {[GithubIcon, LinkedinIcon, InstagramIcon].map((Icon, i) => (
@@ -168,12 +166,6 @@ export default function Hero() {
            <div className="flex flex-col gap-1">
              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Current Focus</span>
              <span className="text-xs font-bold text-[#1a1c20]">Next.js / TypeScript / GSAP</span>
-           </div>
-        </div>
-        <div className="hidden md:flex gap-12">
-           <div className="flex flex-col gap-1 items-end">
-             <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Based In</span>
-             <span className="text-xs font-bold text-[#1a1c20]">Dhaka, Bangladesh</span>
            </div>
         </div>
       </div>

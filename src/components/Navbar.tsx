@@ -30,27 +30,16 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-[100] px-6 py-8">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Pill Logo Section */}
-        <motion.div
+        <motion.a
+          href="/"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-4 pl-2 pr-4 py-2 rounded-full bg-black/5 border border-black/10 backdrop-blur-md"
+          className="group flex items-center gap-2"
         >
-          <div className="relative w-10 h-10 rounded-full overflow-hidden bg-brand">
-            <Image
-              src="/logo-potfolio.png"
-              alt="Logo"
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          </div>
-          <span className="text-[10px] font-bold uppercase tracking-widest hidden md:block text-foreground">
-            Pronoy
+          <span className="text-xl font-black uppercase tracking-tighter text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
+            Pronoy<span className="text-indigo-600">.</span>
           </span>
-          <button className="md:hidden ml-2 text-foreground">
-            <Menu size={16} />
-          </button>
-        </motion.div>
+        </motion.a>
 
         {/* Desktop Nav - Centered/Right */}
         <div className="hidden md:flex items-center gap-4">
