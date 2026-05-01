@@ -87,7 +87,7 @@ export default function About() {
                   Beyond aesthetics, I prioritize <span className="text-gray-900 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">performance optimization</span> and the ability to <span className="text-gray-900 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">handle projects smoothly</span> from initial logic to deployment. My approach is defined by a relentless drive to <span className="text-gray-900 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">problem solve</span> complex technical challenges.
                 </p>
                 <p>
-                  I ensure <span className="text-gray-900 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">smooth API integration</span> while maintaining <span className="text-indigo-600 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">clear client communication</span> to translate high-level engineering into real-world business value.
+                  I maintain <span className="text-indigo-600 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-4">clear client communication</span> to translate high-level engineering into real-world business value.
                 </p>
               </div>
 
