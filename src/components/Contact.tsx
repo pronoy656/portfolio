@@ -120,13 +120,19 @@ export default function Contact() {
                   />
                 </div>
                 
-                <button 
+                <motion.button 
                   disabled={formState === "submitting"}
-                  className="w-full py-6 rounded-full bg-foreground text-background font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-brand hover:text-white transition-all disabled:opacity-50"
+                  whileTap={{ scale: 0.98 }}
+                  className="relative w-full py-6 rounded-full bg-foreground text-background font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 overflow-hidden group transition-colors duration-500 hover:text-white disabled:opacity-50"
                 >
-                  {formState === "submitting" ? "Sending..." : "Start Project"}
-                  <ArrowRight size={20} />
-                </button>
+                  {/* Left-to-right fill effect */}
+                  <div className="absolute inset-0 bg-brand scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
+                  
+                  <span className="relative z-10 flex items-center gap-3">
+                    {formState === "submitting" ? "Sending..." : "Start Project"}
+                    <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-500 ease-out" />
+                  </span>
+                </motion.button>
               </form>
             )}
           </motion.div>
