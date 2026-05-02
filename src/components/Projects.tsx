@@ -30,14 +30,14 @@ const projects = [
   {
     title: "Nexus Protocol",
     category: "Fintech & Web3 / 2024",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1600&auto=format&fit=crop",
+    image: "/portfolio-mockup.png",
     desc: "Redesigning the future of decentralized finance with a focus on institutional-grade security and trustless architecture.",
     color: "#f8fafc"
   },
   {
     title: "EcoStack",
     category: "SaaS Solution / 2023",
-    image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1600&auto=format&fit=crop",
+    image: "/tutor-mockup-2.png",
     desc: "Optimizing cloud infrastructure management through a minimalist and highly efficient user interface for enterprise teams.",
     color: "#f1f5f9"
   },
@@ -218,9 +218,9 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Side Number */}
-                <div className="absolute top-10 right-10 hidden lg:block">
-                  <span className="text-8xl font-black text-gray-50 select-none">
+                {/* Background Number */}
+                <div className="absolute bottom-6 right-10 hidden lg:block pointer-events-none select-none overflow-hidden">
+                  <span className="text-[10vw] font-black text-gray-100/50 leading-none antialiased">
                     0{i + 1}
                   </span>
                 </div>
