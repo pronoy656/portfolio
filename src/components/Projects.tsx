@@ -154,7 +154,7 @@ export default function Projects() {
           {projects.map((project, i) => (
             <div
               key={i}
-              ref={(el) => (cardsRef.current[i] = el)}
+              ref={(el) => { cardsRef.current[i] = el; }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
               style={{ 
                 zIndex: i + 10,
