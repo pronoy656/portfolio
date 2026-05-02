@@ -23,7 +23,7 @@ const projects = [
   {
     title: "Lumina Studio",
     category: "Creative Agency / 2023",
-    image: "/hero-visual.png",
+    image: "/football-mockup-2.png",
     desc: "Delivering a cinematic web experience for a global design studio with fluid transitions and immersive interactions.",
     color: "#f1f5f9"
   },
