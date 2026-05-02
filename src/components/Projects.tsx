@@ -60,6 +60,7 @@ const projects = [
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const indicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -73,6 +74,17 @@ export default function Projects() {
           end: `+=${cards.length * 100}%`, // Adjust length based on number of cards
           pin: true,
           scrub: 1,
+          onUpdate: (self) => {
+            // Update progress bar
+            if (indicatorRef.current) {
+              const progressBar = indicatorRef.current.querySelector(".progress-bar") as HTMLElement;
+              if (progressBar) {
+                progressBar.style.width = `${self.progress * 100}%`;
+              }
+              // Fade out indicator at the very end
+              indicatorRef.current.style.opacity = self.progress > 0.9 ? `${(1 - self.progress) * 10}` : "1";
+            }
+          },
         },
       });
 
@@ -218,10 +230,13 @@ export default function Projects() {
         </div>
 
         {/* Scroll Progress Indicator */}
-        <div className="absolute bottom-12 right-12 flex flex-col items-end gap-2">
+        <div 
+          ref={indicatorRef}
+          className="absolute bottom-12 right-12 flex flex-col items-end gap-2 z-[160]"
+        >
            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scroll to Explore</span>
            <div className="w-12 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-             <div className="h-full bg-indigo-600 w-1/4 animate-pulse" />
+             <div className="progress-bar h-full bg-indigo-600 w-0 transition-all duration-300" />
            </div>
         </div>
 

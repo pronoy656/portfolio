@@ -22,9 +22,14 @@ export default function Education() {
   return (
     <section id="education" className="py-32 px-6 bg-foreground/[0.01]">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-xs font-bold text-brand uppercase tracking-[0.4em] mb-16">
-          Education
-        </h2>
+        {/* Section Header */}
+        <div className="flex flex-col gap-4 mb-20">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">Academic Background</span>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
+            KNOWLEDGE <span className="text-gray-200">&</span> <br/>
+            <span className="text-gray-200 italic">GROWTH.</span>
+          </h2>
+        </div>
         
         <div className="space-y-0">
           {education.map((edu, i) => (

@@ -32,9 +32,14 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-8">
-            <h2 className="text-xs font-bold text-brand uppercase tracking-[0.4em] mb-16">
-              Work Experience
-            </h2>
+            {/* Section Header */}
+            <div className="flex flex-col gap-4 mb-20">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">Work Experience</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
+                STORY <span className="text-gray-200">&</span> <br/>
+                <span className="text-gray-200 italic">JOURNEY.</span>
+              </h2>
+            </div>
             
             <div className="space-y-0">
               {experiences.map((exp, i) => (
