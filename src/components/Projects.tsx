@@ -16,7 +16,7 @@ const projects = [
   {
     title: "Aura AI",
     category: "AI Platform / 2024",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
+    image: "/jbay-mockup(2).png",
     desc: "Architecting a high-performance AI analytics dashboard with real-time data streaming and predictive modeling.",
     color: "#f8fafc"
   },
@@ -150,7 +150,7 @@ export default function Projects() {
         </div>
 
         {/* Cards Container */}
-        <div className="relative w-full max-w-7xl h-[75vh] flex items-center justify-center mt-48">
+        <div className="relative w-full max-w-7xl h-[85vh] flex items-center justify-center mt-48">
           {projects.map((project, i) => (
             <div
               key={i}
@@ -163,7 +163,7 @@ export default function Projects() {
               }}
             >
               <div 
-                className="relative w-full h-full bg-white rounded-[3rem] overflow-hidden border border-gray-100 pointer-events-auto flex flex-col lg:flex-row items-center"
+                className="relative w-full h-[75vh] bg-white rounded-[3rem] overflow-hidden border border-gray-100 pointer-events-auto flex flex-col lg:flex-row items-stretch"
                 style={{
                   transform: "translate3d(0,0,0)",
                   backfaceVisibility: "hidden",
@@ -171,12 +171,12 @@ export default function Projects() {
               >
                 
                 {/* Image Section */}
-                <div className="relative w-full lg:w-3/5 h-full overflow-hidden group">
+                <div className="relative w-full lg:w-3/5 h-full overflow-hidden group bg-[#0f0f0f]">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-contain transition-transform duration-700"
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-black/5" />
