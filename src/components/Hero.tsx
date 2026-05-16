@@ -111,11 +111,13 @@ export default function Hero() {
           </div>
 
           <div className="hero-reveal flex flex-wrap items-center justify-center gap-8 mt-4">
-             <button className="group flex items-center gap-4 px-10 py-5 bg-[#1a1c20] text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-indigo-500/20">
-                Let&apos;s Build Together
-               <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+             <button className="group relative flex items-center gap-4 px-10 py-5 bg-[#1a1c20] text-white rounded-full font-bold overflow-hidden active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_60px_rgba(99,102,241,0.35)] transition-shadow duration-500">
+               {/* Left-to-right fill effect */}
+               <div className="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
+               <span className="relative z-10">Let&apos;s Build Together</span>
+               <span className="relative z-10 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
                  <MoveRight size={14} />
-               </div>
+               </span>
              </button>
              <a href="#projects" className="group text-sm font-bold text-[#1a1c20] flex items-center gap-2">
                <span className="border-b-2 border-indigo-500/30 group-hover:border-indigo-500 transition-colors py-1">Browse Case Studies</span>
