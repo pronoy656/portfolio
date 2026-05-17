@@ -119,21 +119,41 @@ export default function Hero() {
                  <MoveRight size={14} />
                </span>
              </button>
-             <a href="#projects" className="group text-sm font-bold text-[#1a1c20] flex items-center gap-2">
-               <span className="border-b-2 border-indigo-500/30 group-hover:border-indigo-500 transition-colors py-1">Browse Case Studies</span>
-               <ArrowRight size={14} className="text-indigo-500 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+             {/* Premium ghost pill — secondary CTA */}
+             <a
+               href="#projects"
+               className="group relative inline-flex items-center gap-3 px-5 py-3 rounded-full transition-all duration-300 active:scale-95"
+               style={{
+                 boxShadow: "0 0 0 1.5px rgba(26,28,32,0.12), 0 4px 20px rgba(0,0,0,0.06)"
+               }}
+             >
+               {/* Hover fill — very subtle */}
+               <div className="absolute inset-0 rounded-full bg-[#1a1c20]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+               {/* Label with animated underline from left */}
+               <span className="relative z-10 text-sm font-bold text-[#1a1c20]">
+                 <span className="relative">
+                   View My Work
+                   <span className="absolute bottom-0 left-0 h-[1.5px] w-0 group-hover:w-full bg-indigo-500 transition-all duration-400 ease-out rounded-full" />
+                 </span>
+               </span>
+
+               {/* Arrow chip */}
+               <span className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-[#1a1c20]/6 border border-[#1a1c20]/10 group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-all duration-300 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                 <ArrowRight size={12} className="text-[#1a1c20] group-hover:text-white transition-colors duration-300" />
+               </span>
              </a>
           </div>
 
           {/* Experience Bar */}
           <div className="hero-reveal flex items-center gap-12 mt-12 bg-white/50 backdrop-blur-sm p-8 rounded-[2rem] border border-gray-100 shadow-sm">
              <div className="flex flex-col items-center">
-               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">03+</span>
+               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">01+</span>
                <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1 text-center">Years Expert</span>
              </div>
              <div className="w-px h-12 bg-gray-200" />
              <div className="flex flex-col items-center">
-               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">24+</span>
+               <span className="text-4xl font-black text-[#1a1c20] tracking-tighter">12+</span>
                <span className="text-[9px] uppercase tracking-widest font-black text-gray-500 mt-1 text-center">Global Success</span>
              </div>
              <div className="w-px h-12 bg-gray-200" />

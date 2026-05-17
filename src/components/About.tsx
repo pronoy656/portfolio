@@ -94,12 +94,14 @@ export default function About() {
               {/* Service List */}
               <div className="pt-12 border-t border-gray-100">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-8 text-center lg:text-left">Selected Expertise</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {[
-                    "UI Engineering",
-                    "Motion Design",
-                    "Performance Audit",
-                    "Design Systems"
+                    "Interface Sculptor",
+                    "Animation Alchemist",
+                    "Speed Wizard",
+                    "Component Artisan",
+                    "State Flow Architect",
+                    "Pixel Perfectionist"
                   ].map((svc, i) => (
                     <div key={i} className="flex items-center gap-4 group cursor-default">
                       <div className="w-2 h-2 rounded-full bg-indigo-600 group-hover:scale-150 transition-transform" />

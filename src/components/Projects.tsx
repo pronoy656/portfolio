@@ -265,15 +265,26 @@ export default function Projects() {
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6 md:p-12">
+            <style>{`.modal-scroll::-webkit-scrollbar { display: none; }`}</style>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)} className="absolute inset-0 bg-gray-900/60 backdrop-blur-md" />
-            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative w-full max-w-5xl bg-white rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]">
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative w-full max-w-6xl bg-white rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[90vh]">
               <button onClick={() => setSelectedProject(null)} className="absolute top-8 right-8 z-50 p-3 rounded-full bg-gray-900/5 hover:bg-gray-900/10 transition-colors">
                 <X size={20} className="text-gray-900" />
               </button>
-              <div className="w-full md:w-1/2 relative bg-[#0f0f0f] min-h-[300px] md:min-h-0">
-                <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-contain p-8" unoptimized />
+              {/* Left — image pane: stretches to full modal height via self-stretch */}
+              <div className="w-full md:w-[45%] shrink-0 self-stretch relative bg-[#0f0f0f] rounded-t-[3rem] md:rounded-l-[3rem] md:rounded-tr-none overflow-hidden" style={{ minHeight: "320px" }}>
+                {/* Premium blurred backdrop to fill empty space */}
+                <Image src={selectedProject.image} alt="" fill className="object-cover opacity-50 scale-125 blur-3xl pointer-events-none" unoptimized />
+                <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                
+                {/* Foreground crisp image */}
+                <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-contain p-6 md:p-10 drop-shadow-2xl z-10" unoptimized />
               </div>
-              <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col gap-8 overflow-y-auto">
+              {/* Right — scrollable content; scrollbar hidden via inline style */}
+              <div
+                className="modal-scroll w-full md:w-[55%] p-8 md:p-14 flex flex-col gap-8 overflow-y-auto rounded-b-[3rem] md:rounded-r-[3rem] md:rounded-bl-none"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+              >
                 <div className="flex flex-col gap-2">
                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">{selectedProject.category}</span>
                   <h3 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none">{selectedProject.title}</h3>
