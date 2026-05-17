@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { 
   LayoutDashboard, FolderKanban, Sparkles, Briefcase, FileText, 
   Trophy, FileBadge, Mail, Download,
@@ -174,6 +174,33 @@ const GlowingCubeGraphic = () => (
 
 
 export default function VisitorDashboard() {
+  const [githubUser, setGithubUser] = useState<any>(null);
+  const [githubEvents, setGithubEvents] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchGitHub = async () => {
+      try {
+        const userRes = await fetch('https://api.github.com/users/pronoy656');
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setGithubUser(userData);
+        }
+        
+        const eventsRes = await fetch('https://api.github.com/users/pronoy656/events/public?per_page=3');
+        if (eventsRes.ok) {
+          const eventsData = await eventsRes.json();
+          setGithubEvents(eventsData);
+        }
+      } catch (err) {
+        console.error("Failed to fetch GitHub data:", err);
+      }
+    };
+    
+    fetchGitHub();
+    const interval = setInterval(fetchGitHub, 30000); // Live updates every 30 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex h-screen bg-[#0B0C10] text-gray-100 font-sans overflow-hidden fixed inset-0 z-[9999]">
       
@@ -218,11 +245,18 @@ export default function VisitorDashboard() {
           <div className="w-8 h-px bg-white/10 mb-6" />
           <p className="text-[11px] text-gray-300 mb-6 leading-relaxed">Let&apos;s build something<br/>amazing together.</p>
           <div className="flex items-center gap-2.5 mb-6">
-            {[Github, Linkedin, Twitter, Mail].map((Icon, i) => (
-              <div key={i} className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center hover:bg-white/10 hover:text-white text-gray-400 transition-colors cursor-pointer backdrop-blur-md">
-                <Icon size={14} />
-              </div>
-            ))}
+            <a href="https://github.com/pronoy656" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center hover:bg-[#24292e] hover:text-white text-gray-400 transition-colors cursor-pointer backdrop-blur-md">
+              <Github size={14} />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center hover:bg-[#0077b5] hover:text-white text-gray-400 transition-colors cursor-pointer backdrop-blur-md">
+              <Linkedin size={14} />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center hover:bg-[#1da1f2] hover:text-white text-gray-400 transition-colors cursor-pointer backdrop-blur-md">
+              <Twitter size={14} />
+            </a>
+            <a href="mailto:contact@example.com" className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center hover:bg-[#ea4335] hover:text-white text-gray-400 transition-colors cursor-pointer backdrop-blur-md">
+              <Mail size={14} />
+            </a>
           </div>
           <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-indigo-500/40 bg-transparent hover:bg-indigo-500/10 transition-colors text-[11px] font-medium text-indigo-100">
             <Download size={14} className="text-indigo-400" />
@@ -362,10 +396,10 @@ export default function VisitorDashboard() {
                      <span className="text-[10px] text-indigo-400 cursor-pointer font-medium hover:underline">View all</span>
                    </div>
                    <div className="grid grid-cols-2 gap-3">
-                     <StatItem icon={Code2} value="30+" label="Projects Completed" iconBg="bg-blue-500/10" iconColor="text-blue-400" />
+                     <StatItem icon={Code2} value={githubUser ? githubUser.public_repos : "..."} label="Public Repos" iconBg="bg-blue-500/10" iconColor="text-blue-400" />
+                     <StatItem icon={Star} value={githubUser ? githubUser.followers : "..."} label="Followers" iconBg="bg-yellow-500/10" iconColor="text-yellow-400" />
+                     <StatItem icon={Users2} value={githubUser ? githubUser.following : "..."} label="Following" iconBg="bg-emerald-500/10" iconColor="text-emerald-400" />
                      <StatItem icon={Briefcase} value="3+" label="Years Experience" iconBg="bg-purple-500/10" iconColor="text-purple-400" />
-                     <StatItem icon={Users2} value="15+" label="Happy Clients" iconBg="bg-emerald-500/10" iconColor="text-emerald-400" />
-                     <StatItem icon={Trophy} value="10+" label="Achievements" iconBg="bg-amber-500/10" iconColor="text-amber-400" />
                    </div>
                  </div>
 
@@ -391,24 +425,59 @@ export default function VisitorDashboard() {
                      <span className="text-[10px] text-indigo-400 cursor-pointer font-medium hover:underline">View all</span>
                    </div>
                    <div className="space-y-5">
-                      <ActivityItem 
-                        icon={<Github size={12} className="text-[#0a0a0f]" />} 
-                        title="Pushed 3 commits to DevFlow" 
-                        time="2 hours ago" 
-                        colorClass="bg-white" 
-                      />
-                      <ActivityItem 
-                        icon={<span className="text-white text-[10px] font-bold">d</span>} 
-                        title="Added 4 new shots to portfolio" 
-                        time="5 hours ago" 
-                        colorClass="bg-[#ea4c89]" 
-                      />
-                      <ActivityItem 
-                        icon={<FileText size={12} className="text-white" />} 
-                        title="Published a new blog post" 
-                        time="1 day ago" 
-                        colorClass="bg-blue-500" 
-                      />
+                      {githubEvents.length > 0 ? githubEvents.map((event: any) => {
+                         let title = "Activity on " + event.repo.name.split('/')[1];
+                         let colorClass = "bg-white/10 text-white";
+                         let Icon = <Github size={12} className="text-white" />;
+                         
+                         if (event.type === 'PushEvent') {
+                            title = `Pushed ${event.payload.size} commits to ${event.repo.name.split('/')[1]}`;
+                            colorClass = "bg-indigo-500";
+                            Icon = <Code2 size={12} className="text-white" />;
+                         } else if (event.type === 'CreateEvent') {
+                            title = `Created ${event.payload.ref_type} in ${event.repo.name.split('/')[1]}`;
+                            colorClass = "bg-emerald-500";
+                            Icon = <FileText size={12} className="text-white" />;
+                         } else if (event.type === 'WatchEvent') {
+                            title = `Starred ${event.repo.name.split('/')[1]}`;
+                            colorClass = "bg-yellow-500";
+                            Icon = <Star size={12} className="text-[#0a0a0f]" />;
+                         } else if (event.type === 'PullRequestEvent') {
+                            title = `${event.payload.action} PR in ${event.repo.name.split('/')[1]}`;
+                            colorClass = "bg-purple-500";
+                            Icon = <Terminal size={12} className="text-white" />;
+                         }
+                         
+                         const timeAgo = (dateStr: string) => {
+                            const diff = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / 1000);
+                            if (diff < 60) return `Just now`;
+                            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+                            if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+                            return `${Math.floor(diff / 86400)}d ago`;
+                         };
+
+                         return (
+                            <ActivityItem 
+                              key={event.id}
+                              icon={Icon}
+                              title={title}
+                              time={timeAgo(event.created_at)}
+                              colorClass={colorClass}
+                            />
+                         );
+                      }) : (
+                        <div className="flex flex-col gap-5">
+                          {[1, 2, 3].map(i => (
+                            <ActivityItem 
+                              key={i}
+                              icon={<Github size={12} className="text-white/50" />} 
+                              title="Loading activity..." 
+                              time="..." 
+                              colorClass="bg-white/5 animate-pulse" 
+                            />
+                          ))}
+                        </div>
+                      )}
                    </div>
                  </div>
 
