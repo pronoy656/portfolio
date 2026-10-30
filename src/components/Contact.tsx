@@ -47,18 +47,33 @@ export default function Contact() {
             <div className="space-y-8 mt-16">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Email</p>
-                <a href="mailto:hello@pronoy.dev" className="text-2xl md:text-3xl font-bold tracking-tight hover:text-brand transition-colors">
-                  hello@pronoy.dev
+                <a href="mailto:pronoypaul56@gmail.com" className="text-2xl md:text-3xl font-bold tracking-tight hover:text-brand transition-colors">
+                  pronoypaul56@gmail.com
                 </a>
+              </div>
+              <div className="flex flex-col md:flex-row gap-8">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Phone</p>
+                  <a href="tel:+8801843387800" className="text-lg md:text-xl font-bold tracking-tight text-gray-800 hover:text-brand transition-colors">
+                    +880 1843-387800
+                  </a>
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Location</p>
+                  <p className="text-lg md:text-xl font-bold tracking-tight text-gray-800">
+                    Dhaka, Bangladesh
+                  </p>
+                </div>
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Socials</p>
                 <div className="flex gap-6">
-                  {["Twitter", "LinkedIn", "GitHub", "Instagram"].map(social => (
-                    <a key={social} href="#" className="text-sm font-bold hover:text-brand transition-colors uppercase tracking-widest">
-                      {social}
-                    </a>
-                  ))}
+                  <a href="https://linkedin.com/in/pronoy-pal" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-brand transition-colors uppercase tracking-widest">
+                    LinkedIn
+                  </a>
+                  <a href="https://github.com/pronoy656" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-brand transition-colors uppercase tracking-widest">
+                    GitHub
+                  </a>
                 </div>
               </div>
             </div>
@@ -138,15 +153,6 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
-
-      <footer className="mt-48 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold tracking-widest text-muted-text uppercase">
-        <p>© {new Date().getFullYear()} PRONOY. ALL RIGHTS RESERVED.</p>
-        <div className="flex gap-8">
-          <p>EST. 2024</p>
-          <span className="opacity-20">/</span>
-          <p>DHAKA, BD</p>
-        </div>
-      </footer>
     </section>
   );
 }

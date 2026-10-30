@@ -6,15 +6,19 @@ import { motion } from "framer-motion";
 const categories = [
   {
     title: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "GSAP", "Tailwind"],
+    skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 & CSS3"],
   },
   {
-    title: "Backend",
-    skills: ["Node.js", "PostgreSQL", "Prisma", "Supabase", "Redis"],
+    title: "State & APIs",
+    skills: ["Redux Toolkit", "TanStack Query", "Axios", "REST APIs", "CRUD Operations", "JWT Auth"],
   },
   {
-    title: "Tools",
-    skills: ["Figma", "Git", "Docker", "Vercel", "Stripe"],
+    title: "Backend & DB",
+    skills: ["MongoDB", "Socket.IO", "Postman", "REST Architecture", "API Integration"],
+  },
+  {
+    title: "Tools & Core",
+    skills: ["Git & GitHub", "AWS", "Figma", "Chrome DevTools", "Performance Tuning", "Responsive UI"],
   },
 ];
 
@@ -32,7 +36,7 @@ export default function Skills() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
@@ -41,17 +45,17 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-8 border-b border-indigo-400/20 pb-4">
+              <h3 className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-8 border-b border-indigo-500/20 pb-4">
                 {cat.title}
               </h3>
               <div className="space-y-4">
                 {cat.skills.map((skill, j) => (
                   <div key={skill} className="flex items-center justify-between group">
-                    <span className="text-2xl font-bold tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span className="text-lg lg:text-xl font-bold tracking-tight text-gray-800 opacity-60 group-hover:opacity-100 group-hover:text-indigo-600 transition-all">
                       {skill}
                     </span>
-                    <span className="h-px flex-1 mx-4 bg-white/5 group-hover:bg-indigo-400/20 transition-colors" />
-                    <span className="text-[10px] font-bold opacity-20 group-hover:opacity-100 group-hover:text-indigo-400">
+                    <span className="h-px flex-1 mx-3 bg-gray-100 group-hover:bg-indigo-400/20 transition-colors" />
+                    <span className="text-[10px] font-bold text-gray-400 group-hover:text-indigo-500 transition-colors">
                       0{i + 1}—0{j + 1}
                     </span>
                   </div>

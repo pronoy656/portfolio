@@ -7,8 +7,36 @@ import CustomCursor from "@/components/CustomCursor";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pronoy | Digital Architect",
-  description: "Portfolio of Pronoy, crafting high-end digital experiences.",
+  title: "Pronoy Pal | Frontend Developer",
+  description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+  metadataBase: new URL("https://pronoypal.dev"),
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+    shortcut: "/logo.png",
+  },
+  openGraph: {
+    title: "Pronoy Pal | Frontend Developer",
+    description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+    url: "https://pronoypal.dev",
+    siteName: "Pronoy Pal",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "Pronoy Pal Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Pronoy Pal | Frontend Developer",
+    description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({

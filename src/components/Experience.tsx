@@ -7,22 +7,18 @@ import Image from "next/image";
 
 const experiences = [
   {
-    company: "TechNova Solutions",
-    role: "Senior Frontend Engineer",
-    period: "2022 — Present",
-    description: "Leading the frontend team in building scalable SaaS platforms with Next.js and GSAP. Optimized performance by 40%.",
-  },
-  {
-    company: "Pixel Perfect Agency",
+    company: "Sparktech Agency",
     role: "Frontend Developer",
-    period: "2020 — 2022",
-    description: "Developed high-end creative websites for luxury brands. Focused on immersive animations and smooth user interactions.",
-  },
-  {
-    company: "Startup Hub",
-    role: "Junior Web Developer",
-    period: "2018 — 2020",
-    description: "Built responsive web applications and collaborated with designers to implement pixel-perfect UI components.",
+    location: "Dhaka, Bangladesh (Onsite)",
+    period: "Jul 2025 — Present",
+    description:
+      "Since joining Sparktech Agency, I have completed and delivered 16+ live client projects, with several more projects currently in progress. Working on diverse projects and communicating directly with clients has helped me master complex business logic and seamless user flows.",
+    points: [
+      "Delivered 16+ production projects from initial concept to launch",
+      "Transformed complex Figma designs into responsive, production-ready interfaces",
+      "Integrated REST APIs, Socket.IO real-time features, and secure authentication",
+      "Collaborated closely with UI/UX designers and backend teams to ensure code quality"
+    ]
   },
 ];
 
@@ -55,6 +51,9 @@ export default function Experience() {
                     <p className="text-sm font-bold text-muted-text uppercase tracking-widest">
                       {exp.period}
                     </p>
+                    <p className="text-xs text-indigo-600 font-semibold mt-1">
+                      {exp.location}
+                    </p>
                   </div>
                   <div className="md:col-span-4">
                     <h3 className="text-2xl font-bold tracking-tighter group-hover:text-brand transition-colors">
@@ -64,10 +63,18 @@ export default function Experience() {
                       {exp.role}
                     </p>
                   </div>
-                  <div className="md:col-span-5">
+                  <div className="md:col-span-5 flex flex-col gap-4">
                     <p className="text-muted-text leading-relaxed">
                       {exp.description}
                     </p>
+                    <ul className="space-y-2 mt-2">
+                      {exp.points.map((pt, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs text-gray-500">
+                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </motion.div>
               ))}

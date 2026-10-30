@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { name: "About",      href: "#about" },
@@ -71,7 +72,7 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-[100] flex justify-center"
         style={{
-          padding:       scrolled ? "12px 20px" : "0",
+          padding:       scrolled ? "14px 24px" : "0",
           pointerEvents: "none",
           transition:    `padding ${DUR} ${SPRING} ${D1}`,
         }}
@@ -88,8 +89,8 @@ export default function Navbar() {
         <div
           className="w-full flex items-center justify-between"
           style={{
-            maxWidth:       scrolled ? "740px"                              : "1920px",
-            padding:        scrolled ? "6px 6px 6px 22px"                  : "20px 48px",
+            maxWidth:       scrolled ? "860px"                              : "1920px",
+            padding:        scrolled ? "10px 10px 10px 24px"                : "20px 48px",
             borderRadius:   scrolled ? "9999px"                             : "0px",
             background:     scrolled ? "rgba(255,255,255,0.88)"             : "rgba(255,255,255,0)",
             backdropFilter: scrolled ? "blur(24px) saturate(1.8)"           : "blur(0px)",
@@ -109,27 +110,28 @@ export default function Navbar() {
         >
           {/* ── Logo ── */}
           <a href="/" className="shrink-0 group select-none flex items-center">
-            <span
-              className="font-black uppercase tracking-tighter text-gray-900 group-hover:text-indigo-600 transition-colors duration-300"
+            <Image
+              src="/logo.png"
+              alt="Pronoy Pal Logo"
+              width={40}
+              height={40}
+              priority
               style={{
-                fontSize:        "20px",   // static — no reflow
-                lineHeight:      "1",
-                display:         "inline-block",
+                width:           scrolled ? "32px" : "40px",
+                height:          scrolled ? "32px" : "40px",
+                borderRadius:    "10px",
+                objectFit:       "contain",
                 transformOrigin: "left center",
-                // scale() is GPU-composited → never triggers layout
-                transform:  scrolled ? "scale(0.75)" : "scale(1)",
-                transition: `transform ${DUR} ${SPRING} ${D1}`,
+                transition: `width ${DUR} ${SPRING} ${D1}, height ${DUR} ${SPRING} ${D1}`,
               }}
-            >
-              Pronoy<span className="text-indigo-600">.</span>
-            </span>
+            />
           </a>
 
           {/* ── Desktop nav ── */}
           <nav
             className="hidden md:flex items-center"
             style={{
-              gap:            "2px",
+              gap:            "3px",
               padding:        scrolled ? "0"                         : "4px",
               background:     scrolled ? "rgba(255,255,255,0)"       : "rgba(255,255,255,0.5)",
               backdropFilter: scrolled ? "blur(0px)"                 : "blur(20px)",
@@ -151,7 +153,7 @@ export default function Navbar() {
                 onClick={(e) => handleNavClick(e, item.href)}
                 className="nav-link"
                 style={{
-                  padding:    scrolled ? "6px 12px" : "8px 20px",
+                  padding:    scrolled ? "8px 14px" : "8px 20px",
                   transition: [
                     `padding    ${DUR} ${SPRING} ${D2}`,
                     "color      0.28s ease",
@@ -169,14 +171,14 @@ export default function Navbar() {
               style={{
                 display:         "block",
                 borderRadius:    "9999px",
-                fontSize:        "10px",
+                fontSize:        "11px",
                 fontWeight:      "700",
                 textTransform:   "uppercase",
-                letterSpacing:   "0.1em",
+                letterSpacing:   "0.08em",
                 color:           "white",
                 background:      "#4f46e5",
-                padding:         scrolled ? "6px 14px" : "8px 20px",
-                marginLeft:      scrolled ? "2px"      : "0px",
+                padding:         scrolled ? "8px 18px" : "8px 20px",
+                marginLeft:      scrolled ? "3px"      : "0px",
                 textDecoration:  "none",
                 transition: [
                   `padding       ${DUR} ${SPRING} ${D2}`,
