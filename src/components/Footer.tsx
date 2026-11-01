@@ -1,114 +1,68 @@
 "use client";
 
 import React from "react";
-import { ArrowUp } from "lucide-react";
-import Image from "next/image";
-
-const GithubIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-);
-
-const LinkedinIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-);
+import { ArrowUp, MapPin } from "lucide-react";
 
 export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const id = href.replace("#", "");
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100 text-[#1a1c20] transition-colors">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        {/* ── Main Minimal Grid ── */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-gray-100">
-          {/* Brand & Title */}
-          <div className="flex flex-col gap-1.5">
-            <a href="/" className="inline-flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Pronoy Pal Logo"
-                width={44}
-                height={44}
-                style={{ borderRadius: "10px", objectFit: "contain" }}
-              />
-              <span className="text-2xl font-black uppercase tracking-tighter text-[#1a1c20] hover:text-indigo-600 transition-colors">
-                Pronoy<span className="text-indigo-600">.</span>
-              </span>
-            </a>
-            <p className="text-xs font-medium text-gray-500">
-              Frontend Developer • Dhaka, Bangladesh
-            </p>
-          </div>
-
-          {/* Minimal Navigation Links */}
-          <nav className="flex flex-wrap items-center gap-6 text-xs font-bold uppercase tracking-wider text-gray-500">
-            {[
-              { name: "About", href: "#about" },
-              { name: "Works", href: "#projects" },
-              { name: "Stack", href: "#skills" },
-              { name: "Experience", href: "#experience" },
-              { name: "Education", href: "#education" },
-              { name: "Contact", href: "#contact" },
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="hover:text-indigo-600 transition-colors"
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* Social Icons & Back to Top */}
-          <div className="flex items-center gap-3">
-            <a
-              href="https://github.com/pronoy656"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-600 hover:border-indigo-600 transition-all hover:scale-105"
-            >
-              <GithubIcon />
-            </a>
-            <a
-              href="https://linkedin.com/in/pronoy-pal"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-600 hover:border-indigo-600 transition-all hover:scale-105"
-            >
-              <LinkedinIcon />
-            </a>
-            <button
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              className="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-indigo-600 transition-all hover:scale-105 ml-2"
-            >
-              <ArrowUp size={14} />
-            </button>
-          </div>
-        </div>
-
-        {/* ── Sub Footer / Copyright ── */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 font-medium">
-          <p>© {new Date().getFullYear()} Pronoy Pal. All rights reserved.</p>
-          <p className="text-[11px] text-gray-400">
-            Built with Next.js, TypeScript & Tailwind CSS
-          </p>
-        </div>
+    <footer className="relative bg-gradient-to-b from-white via-indigo-50/40 to-indigo-100/60 border-t border-indigo-100/80 overflow-hidden select-none">
+      
+      {/* ── Background Gradient with Website Main Brand Colors (Indigo & Soft Violet) ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Main Central Brand Indigo Aura Glow */}
+        <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[90vw] sm:w-[75vw] h-[360px] bg-gradient-to-t from-indigo-500/20 via-indigo-400/12 to-transparent blur-[130px] rounded-full" />
+        
+        {/* Top-Right Ambient Brand Indigo Orb */}
+        <div className="absolute -top-20 right-0 w-[45vw] h-[280px] bg-gradient-to-b from-indigo-200/40 to-transparent blur-[100px] rounded-full" />
+        
+        {/* Bottom-Left Ambient Brand Violet Orb */}
+        <div className="absolute -bottom-16 left-0 w-[40vw] h-[260px] bg-gradient-to-tr from-indigo-300/25 via-indigo-100/20 to-transparent blur-[100px] rounded-full" />
       </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-16 sm:pt-24 pb-12 flex flex-col items-center justify-between gap-12 sm:gap-16">
+        
+        {/* ── Giant Name: PRONOY (Halka / Subtly Visible Watermark) ── */}
+        <div className="w-full text-center select-none py-4 pointer-events-none">
+          <h1 className="text-[17vw] sm:text-[16vw] md:text-[15vw] font-black tracking-tight leading-none text-center uppercase text-indigo-950/[0.09] select-none">
+            PRONOY
+          </h1>
+        </div>
+
+        {/* ── Bottom Balanced Row: Location | Copyright | Back to Top ── */}
+        <div className="w-full pt-8 border-t border-indigo-100/90 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-600">
+          
+          {/* Location */}
+          <div className="flex items-center gap-2 text-[#1a1c20] font-semibold order-2 sm:order-1">
+            <MapPin size={14} className="text-indigo-600" />
+            <span>Dhaka, Bangladesh</span>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-center order-3 sm:order-2 text-gray-500">
+            <span>© {new Date().getFullYear()} Pronoy Pal. All rights reserved.</span>
+          </div>
+
+          {/* Back to top button */}
+          <button
+            onClick={scrollToTop}
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#1a1c20] text-gray-800 hover:text-white border border-gray-200/90 hover:border-[#1a1c20] shadow-2xs hover:shadow-md transition-all duration-200 active:scale-95 cursor-pointer order-1 sm:order-3"
+          >
+            <span className="text-xs font-bold font-sans">Back to top</span>
+            <div className="w-4 h-4 rounded-full bg-gray-100 group-hover:bg-white/20 flex items-center justify-center transition-colors">
+              <ArrowUp size={11} className="text-gray-700 group-hover:text-white transition-transform group-hover:-translate-y-0.5" />
+            </div>
+          </button>
+
+        </div>
+
+      </div>
+
     </footer>
   );
 }

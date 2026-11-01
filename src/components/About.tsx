@@ -81,8 +81,9 @@ export default function About() {
                   src="/pronoy-photo.jpg"
                   alt="Pronoy Pal — Frontend-Focused Full-Stack Developer"
                   fill
+                  sizes="(max-width: 768px) 84vw, 420px"
                   className="object-cover object-top hover:scale-103 transition-transform duration-700 ease-out"
-                  priority
+                  loading="lazy"
                 />
               </div>
 

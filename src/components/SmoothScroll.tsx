@@ -25,7 +25,9 @@ export default function SmoothScroll() {
     };
 
     gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(0);
+    // Use safe lag smoothing (500ms threshold, 33ms adjusted) instead of lagSmoothing(0)
+    // to prevent violent scroll/animation jumping when switching tabs or experiencing CPU spikes
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Expose for component navigation
     (window as any).__lenis = lenis;

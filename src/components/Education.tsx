@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import {
   GraduationCap,
@@ -156,29 +156,41 @@ export default function Education() {
 
   // ── Hover Campus Preview States ──
   const [isHoveringCampus, setIsHoveringCampus] = useState(false);
-  const [cardPos, setCardPos] = useState({ x: 0, y: 0 });
+  const cardX = useMotionValue(0);
+  const cardY = useMotionValue(0);
   const [showCampusModal, setShowCampusModal] = useState(false);
   const [modalCampusIndex, setModalCampusIndex] = useState(0);
 
-  // Track cursor smoothly and clamp inside screen boundaries
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const cardWidth = typeof window !== "undefined" && window.innerWidth < 640 ? 320 : 480;
+  // Track cursor smoothly via Framer Motion values (zero React re-renders) and clamp inside screen boundaries
+  const updateCardPosition = (clientX: number, clientY: number) => {
+    if (typeof window === "undefined") return;
+    const cardWidth = window.innerWidth < 640 ? 320 : 480;
     const cardHeight = 350;
     const padding = 16;
 
-    let x = e.clientX + 20;
-    if (typeof window !== "undefined" && x + cardWidth > window.innerWidth - padding) {
-      x = e.clientX - cardWidth - 20;
+    let x = clientX + 20;
+    if (x + cardWidth > window.innerWidth - padding) {
+      x = clientX - cardWidth - 20;
     }
     if (x < padding) x = padding;
 
-    let y = e.clientY - cardHeight / 2;
+    let y = clientY - cardHeight / 2;
     if (y < padding) y = padding;
-    if (typeof window !== "undefined" && y + cardHeight > window.innerHeight - padding) {
+    if (y + cardHeight > window.innerHeight - padding) {
       y = window.innerHeight - cardHeight - padding;
     }
 
-    setCardPos({ x, y });
+    cardX.set(x);
+    cardY.set(y);
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    updateCardPosition(e.clientX, e.clientY);
+    setIsHoveringCampus(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    updateCardPosition(e.clientX, e.clientY);
   };
 
   return (
@@ -429,7 +441,7 @@ export default function Education() {
                   {/* Middle: Title & Institution with Interactive Hover Trigger */}
                   <div
                     className="md:col-span-5 relative"
-                    onMouseEnter={() => setIsHoveringCampus(true)}
+                    onMouseEnter={handleMouseEnter}
                     onMouseLeave={() => setIsHoveringCampus(false)}
                     onMouseMove={handleMouseMove}
                   >
@@ -519,16 +531,19 @@ export default function Education() {
       <AnimatePresence>
         {isHoveringCampus && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 14 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", damping: 28, stiffness: 360 }}
             style={{
               position: "fixed",
-              left: cardPos.x,
-              top: cardPos.y,
+              top: 0,
+              left: 0,
+              x: cardX,
+              y: cardY,
               zIndex: 9999,
               pointerEvents: "none", // Critical: prevents blocking native smooth scroll or wheel events
+              willChange: "transform",
             }}
             className="pointer-events-none select-none w-[320px] sm:w-[480px] rounded-2xl bg-white/95 dark:bg-[#0c0e14]/95 backdrop-blur-2xl border border-white/80 dark:border-white/10 p-3 shadow-[0_30px_70px_rgba(0,0,0,0.28)] ring-1 ring-black/5 flex flex-col gap-2.5"
           >
@@ -559,8 +574,8 @@ export default function Education() {
                     src={img.src}
                     alt={img.title}
                     fill
+                    sizes="(max-width: 640px) 160px, 240px"
                     className="object-cover"
-                    priority
                   />
                   {/* Dark gradient for text legibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />

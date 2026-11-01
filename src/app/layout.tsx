@@ -46,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased noise selection:bg-indigo-500 selection:text-white`}>
+      <body className={`${inter.className} antialiased selection:bg-indigo-500 selection:text-white`}>
         <SmoothScroll />
         <CustomCursor />
         <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,_var(--bg-gradient-start)_0%,_var(--bg-gradient-end)_100%)] pointer-events-none -z-10" />

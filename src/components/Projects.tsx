@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, memo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight, ArrowRight, X, ExternalLink, Sparkles, Layers } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, ExternalLink, Layers } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,9 +57,9 @@ export default function Projects() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
+          pin: pinRef.current,
           start: "top top",
           end: `+=${cards.length * 110}%`,
-          pin: true,
           scrub: 0.7,
           anticipatePin: 1,
           onUpdate: (self) => {
@@ -120,10 +120,6 @@ export default function Projects() {
         {/* ── Section Title Header (Spacious clean gap below navbar and above cards) ── */}
         <div className="w-full max-w-7xl mx-auto flex items-end justify-between gap-4 z-[60] shrink-0 mb-6 sm:mb-8 md:mb-10">
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.35em] text-indigo-600 flex items-center gap-1.5">
-              <Sparkles size={12} className="text-indigo-600" />
-              Selected Portfolio
-            </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-gray-900 leading-none">
               WORKS <span className="text-gray-300 font-light">&amp;</span>{" "}
               <span className="text-gray-400 italic font-semibold">CREATIONS.</span>
@@ -307,11 +303,15 @@ export default function Projects() {
       {/* ── Fullscreen Case Study Modal ── */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 md:p-12">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+          <motion.div
+            key="project-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 md:p-12"
+          >
+            <div
               onClick={() => setSelectedProject(null)}
               className="absolute inset-0 bg-gray-950/70 backdrop-blur-md"
             />
@@ -319,6 +319,7 @@ export default function Projects() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="relative w-full max-w-6xl bg-white rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[90vh] overflow-hidden border border-gray-100"
             >
               <button
@@ -428,7 +429,7 @@ export default function Projects() {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

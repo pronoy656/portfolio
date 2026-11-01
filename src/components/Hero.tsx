@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, MoveRight, Star, Sparkles, Download } from "lucide-react";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,7 +93,6 @@ const techIcons = [
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const visualRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -106,44 +104,9 @@ export default function Hero() {
         ease: "power3.out",
         stagger: 0.1,
       });
-
-      gsap.from(".hero-image-box", {
-        scale: 0.95,
-        opacity: 0,
-        duration: 1.8,
-        ease: "power4.out",
-        delay: 0.4,
-      });
-
-      // Subtle float animation for the visual
-      gsap.to(".hero-visual-float", {
-        y: -15,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
     }, containerRef);
 
-    // Mouse parallax for the image box
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const x = (clientX / window.innerWidth - 0.5) * 30;
-      const y = (clientY / window.innerHeight - 0.5) * 30;
-      
-      gsap.to(visualRef.current, {
-        x: x,
-        y: y,
-        duration: 1.2,
-        ease: "power2.out"
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      ctx.revert();
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -153,12 +116,8 @@ export default function Hero() {
     >
       {/* ── Background Mood Elements ── */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Luminous Glows */}
-        {/* <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[60%] bg-indigo-100/60 blur-[140px] rounded-full" />
-        <div className="absolute bottom-[-15%] left-[-5%] w-[50%] h-[50%] bg-purple-100/70 blur-[120px] rounded-full" /> */}
-        
-        {/* Subtle Texture */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-multiply" />
+        {/* Soft Ambient Brand Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70vw] h-[35vw] bg-gradient-to-r from-indigo-100/30 via-purple-100/20 to-transparent blur-[140px] rounded-full" />
         
         {/* Elegant Watermark */}
         <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-indigo-900/[0.04] uppercase tracking-tighter select-none pointer-events-none">
