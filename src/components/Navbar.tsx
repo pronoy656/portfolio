@@ -7,6 +7,7 @@ import Image from "next/image";
 
 const navItems = [
   { name: "About",      href: "#about" },
+  { name: "Services",   href: "#services" },
   { name: "Works",      href: "#projects" },
   { name: "Stack",      href: "#skills" },
   { name: "Experience", href: "#experience" },
@@ -39,6 +40,8 @@ export default function Navbar() {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       // Update the URL hash without triggering a jump
       window.history.pushState(null, "", href);
+    } else {
+      window.location.href = `/${href}`;
     }
   };
 

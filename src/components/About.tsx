@@ -79,7 +79,7 @@ export default function About() {
               <div className="relative w-[84%] aspect-[4/5] rounded-[2rem] overflow-hidden bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.18)] border border-gray-100 z-10 group">
                 <Image
                   src="/pronoy-photo.jpg"
-                  alt="Pronoy Pal — Frontend Engineer"
+                  alt="Pronoy Pal — Frontend-Focused Full-Stack Developer"
                   fill
                   className="object-cover object-top hover:scale-103 transition-transform duration-700 ease-out"
                   priority

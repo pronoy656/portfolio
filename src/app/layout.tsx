@@ -7,8 +7,8 @@ import CustomCursor from "@/components/CustomCursor";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pronoy Pal | Frontend Developer",
-  description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+  title: "Pronoy Pal | Frontend-Focused Full-Stack Developer",
+  description: "Portfolio of Pronoy Pal — Frontend-Focused Full-Stack Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
   metadataBase: new URL("https://pronoypal.dev"),
   icons: {
     icon: "/logo.png",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     shortcut: "/logo.png",
   },
   openGraph: {
-    title: "Pronoy Pal | Frontend Developer",
-    description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+    title: "Pronoy Pal | Frontend-Focused Full-Stack Developer",
+    description: "Portfolio of Pronoy Pal — Frontend-Focused Full-Stack Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
     url: "https://pronoypal.dev",
     siteName: "Pronoy Pal",
     images: [
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Pronoy Pal | Frontend Developer",
-    description: "Portfolio of Pronoy Pal — Frontend Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
+    title: "Pronoy Pal | Frontend-Focused Full-Stack Developer",
+    description: "Portfolio of Pronoy Pal — Frontend-Focused Full-Stack Developer specializing in React.js, Next.js, TypeScript, and responsive production web applications.",
     images: ["/logo.png"],
   },
 };

@@ -212,11 +212,11 @@ export default function VisitorDashboard() {
           <div className="absolute inset-0 bg-[#0a0a0f]/40 z-10" />
           <div className="absolute inset-0 bg-indigo-900/20 mix-blend-color z-10" />
           <Image 
-            src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=100&w=1000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1000&auto=format&fit=crop"
             alt="Dark Mountains"
             fill
+            sizes="100vw"
             className="object-cover object-bottom opacity-70"
-            unoptimized
           />
         </div>
 

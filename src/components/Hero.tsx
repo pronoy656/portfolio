@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, MoveRight, Star, Sparkles } from "lucide-react";
+import { ArrowRight, MoveRight, Star, Sparkles, Download } from "lucide-react";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -193,27 +193,27 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-6 items-center">
-            <h1 className="hero-reveal font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-3 text-center">
-              <span className="text-[8.5vw] sm:text-[7vw] lg:text-[5.8vw] leading-none whitespace-nowrap">
-                I Build Fast &amp; Scalable
+          <div className="flex flex-col gap-5 sm:gap-6 items-center">
+            <h1 className="hero-reveal font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-2 sm:gap-3 text-center">
+              <span className="text-[7.8vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.05] whitespace-nowrap">
+                Frontend-Focused
               </span>
-              <span className="text-[8.5vw] sm:text-[7vw] lg:text-[5.8vw] leading-none text-indigo-600 whitespace-nowrap">
-                Web Applications.
+              <span className="text-[7.8vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.05] text-indigo-600 whitespace-nowrap">
+                Full-Stack Developer.
               </span>
             </h1>
 
             <p className="hero-reveal text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed font-medium text-center">
-              I&apos;m <span className="text-gray-900 font-bold">Pronoy Pal</span> — a Frontend Engineer who turns ideas into
+              I&apos;m <span className="text-gray-900 font-bold">Pronoy Pal</span> — a Frontend-Focused Full-Stack Developer who turns ideas into
               production-ready products. I specialise in{" "}
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-sm">
                 React &amp; Next.js
               </span>{" "}
-              ,{" "}
+              , scalable{" "}
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-sm">
-                Performance
+                Full-Stack Architecture
               </span>{" "}
-              optimisation, and shipping clean,{" "}
+              , and shipping clean,{" "}
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-sm">
                 Accessible UI
               </span>{" "}
@@ -221,27 +221,34 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="hero-reveal flex flex-wrap items-center justify-center gap-5 mt-2">
-             <a href="#projects" className="group relative flex items-center gap-4 px-9 py-4 bg-[#1a1c20] text-white rounded-full font-bold overflow-hidden active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(99,102,241,0.3)] transition-all duration-500">
-               {/* Left-to-right fill effect */}
-               <div className="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
-               <span className="relative z-10 text-sm">Explore Deployed Builds</span>
-               <span className="relative z-10 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
-                 <MoveRight size={13} />
-               </span>
-             </a>
-             {/* Premium ghost pill — secondary CTA */}
-             <a
-               href="#contact"
-               className="group relative inline-flex items-center gap-3 px-6 py-4 rounded-full transition-all duration-300 active:scale-95 border border-gray-200/90 hover:border-indigo-600 bg-white shadow-sm"
-             >
-               <span className="relative z-10 text-sm font-bold text-[#1a1c20] group-hover:text-indigo-600 transition-colors">
-                 Initialize Contact
-               </span>
-               <span className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-gray-100 group-hover:bg-indigo-50 text-gray-700 group-hover:text-indigo-600 transition-colors">
-                 <ArrowRight size={12} />
-               </span>
-             </a>
+          <div className="hero-reveal flex flex-wrap items-center justify-center gap-4 sm:gap-5 mt-2">
+            {/* Primary CTA: Explore Projects */}
+            <a
+              href="#projects"
+              className="group relative flex items-center gap-3.5 px-8 sm:px-9 py-4 bg-[#1a1c20] text-white rounded-full font-bold overflow-hidden active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(99,102,241,0.3)] transition-all duration-500 cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
+              <span className="relative z-10 text-sm">Explore Projects</span>
+              <span className="relative z-10 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
+                <MoveRight size={13} />
+              </span>
+            </a>
+
+            {/* Secondary CTA: Download Resume */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Pronoy_Pal_Resume.pdf"
+              className="group relative inline-flex items-center gap-3 px-7 py-4 rounded-full transition-all duration-300 active:scale-95 border border-gray-200/90 hover:border-indigo-600 bg-white shadow-sm hover:shadow-md cursor-pointer"
+            >
+              <span className="relative z-10 text-sm font-bold text-[#1a1c20] group-hover:text-indigo-600 transition-colors">
+                Download Resume
+              </span>
+              <span className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 group-hover:bg-indigo-50 text-gray-700 group-hover:text-indigo-600 transition-all group-hover:translate-y-0.5">
+                <Download size={13} />
+              </span>
+            </a>
           </div>
         </div>
 
