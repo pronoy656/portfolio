@@ -24,19 +24,19 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative z-20 py-40 px-6 bg-white border-t border-gray-100">
+    <section id="skills" className="scroll-mt-20 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-24">
+        <div className="flex flex-col gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-24">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">Technical Expertise</span>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
             CRAFT <span className="text-gray-200">&</span> <br/>
             <span className="text-gray-200 italic">STACK.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}

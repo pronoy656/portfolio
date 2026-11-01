@@ -17,17 +17,17 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-48 px-6 relative overflow-hidden">
+    <section id="contact" className="scroll-mt-20 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-brand/10 blur-[150px] rounded-full" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="mb-8"
+              className="mb-6 sm:mb-8"
             >
               <span className="px-4 py-2 rounded-full border border-border-color text-xs font-bold tracking-widest uppercase text-muted-text">
                 Let's collaborate
@@ -38,29 +38,29 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-12"
+              className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter leading-[0.95] sm:leading-[0.9] mb-8 sm:mb-12"
             >
               TELL ME ABOUT YOUR <br />
               <span className="text-transparent outline-text">PROJECT.</span>
             </motion.h2>
 
-            <div className="space-y-8 mt-16">
+            <div className="space-y-6 sm:space-y-8 mt-10 sm:mt-16">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Email</p>
-                <a href="mailto:pronoypaul56@gmail.com" className="text-2xl md:text-3xl font-bold tracking-tight hover:text-brand transition-colors">
+                <a href="mailto:pronoypaul56@gmail.com" className="text-xl sm:text-2xl md:text-3xl break-all sm:break-normal font-bold tracking-tight hover:text-brand transition-colors">
                   pronoypaul56@gmail.com
                 </a>
               </div>
-              <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex flex-col sm:flex-row gap-6 sm:gap-8">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Phone</p>
-                  <a href="tel:+8801843387800" className="text-lg md:text-xl font-bold tracking-tight text-gray-800 hover:text-brand transition-colors">
+                  <a href="tel:+8801843387800" className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800 hover:text-brand transition-colors">
                     +880 1843-387800
                   </a>
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Location</p>
-                  <p className="text-lg md:text-xl font-bold tracking-tight text-gray-800">
+                  <p className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800">
                     Dhaka, Bangladesh
                   </p>
                 </div>
@@ -83,7 +83,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-8 md:p-12 rounded-[2.5rem] glass-card relative"
+            className="p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] glass-card relative"
           >
             {formState === "success" ? (
               <motion.div

@@ -86,7 +86,7 @@ export default function Services() {
   const [activeCard, setActiveCard] = useState<string>("01");
 
   return (
-    <section id="services" className="py-28 px-6 sm:px-10 lg:px-14 bg-[#fafbfc] relative overflow-hidden">
+    <section id="services" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 lg:py-28 px-4 sm:px-10 lg:px-14 bg-[#fafbfc] relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70vw] h-[35vw] bg-gradient-to-r from-emerald-100/30 via-indigo-100/30 to-purple-100/30 blur-[130px] rounded-full" />
@@ -95,9 +95,9 @@ export default function Services() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* ── Section Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="flex flex-col gap-3">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight text-gray-900">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight text-gray-900">
               SOLUTIONS <span className="text-gray-300 font-light">&amp;</span> <br className="hidden sm:inline" />
               <span className="text-gray-400 italic font-semibold">SERVICES.</span>
             </h2>
@@ -116,9 +116,10 @@ export default function Services() {
             return (
               <div
                 key={service.id}
+                onClick={() => setActiveCard(activeCard === service.id ? "" : service.id)}
                 onMouseEnter={() => setActiveCard(service.id)}
                 onFocus={() => setActiveCard(service.id)}
-                className={`group relative rounded-[2.5rem] p-7 sm:p-9 flex flex-col justify-between overflow-hidden transition-all duration-700 ease-out border min-h-[580px] sm:min-h-[620px] ${
+                className={`group relative rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 flex flex-col justify-between overflow-hidden transition-all duration-700 ease-out border min-h-[500px] sm:min-h-[620px] cursor-pointer ${
                   isHovered
                     ? "bg-white border-white shadow-[0_25px_60px_rgba(0,0,0,0.08)] scale-[1.01]"
                     : "bg-white/95 border-gray-200/70 shadow-[0_10px_35px_rgba(0,0,0,0.03)] hover:border-gray-300/80"

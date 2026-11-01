@@ -360,11 +360,15 @@ export default function AllProjectsPage() {
       {/* ── Fullscreen Case Study Modal ── */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 md:p-12">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+          <motion.div
+            key="projects-page-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-6 md:p-12"
+          >
+            <div
               onClick={() => setSelectedProject(null)}
               className="absolute inset-0 bg-gray-950/70 backdrop-blur-md"
             />
@@ -372,14 +376,16 @@ export default function AllProjectsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-6xl bg-white rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[90vh] overflow-hidden border border-gray-100"
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-6xl bg-white rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] overflow-hidden border border-gray-100"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-50 p-2.5 rounded-full bg-gray-100/80 hover:bg-gray-200 text-gray-800 transition-all cursor-pointer shadow-xs"
+                aria-label="Close modal"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 p-2 sm:p-2.5 rounded-full bg-gray-100/90 hover:bg-gray-200 text-gray-800 transition-all cursor-pointer shadow-xs"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
 
               {/* Left Column: Multi-Image Showcase */}
@@ -488,7 +494,7 @@ export default function AllProjectsPage() {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

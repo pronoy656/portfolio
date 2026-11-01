@@ -64,7 +64,7 @@ const sparktechData = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-28 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
+    <section id="experience" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
       
       {/* ── Background Ambience ── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -75,9 +75,9 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* ── Section Header (Editorial, Bold & Human) ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-gray-100">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-gray-100">
           <div className="flex flex-col gap-2.5">
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
               STORY <span className="text-gray-300 font-light">&amp;</span> <br />
               <span className="text-gray-300 font-light italic">JOURNEY.</span>
             </h2>
@@ -91,51 +91,51 @@ export default function Experience() {
         </div>
 
         {/* ── Top Proof-of-Craft Impact Grid (4 Agency Stat Tiles) ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-12">
           {sparktechData.metrics.map((m, idx) => (
             <div
               key={idx}
-              className="p-5 sm:p-6 rounded-2xl bg-gray-50/70 border border-gray-200/70 flex flex-col justify-between hover:bg-white hover:shadow-sm transition-all duration-300"
+              className="p-4 sm:p-6 rounded-2xl bg-gray-50/70 border border-gray-200/70 flex flex-col justify-between hover:bg-white hover:shadow-sm transition-all duration-300"
             >
-              <span className={`text-3xl sm:text-4xl font-black tracking-tight ${
+              <span className={`text-2xl sm:text-4xl font-black tracking-tight ${
                 idx === 1 ? "text-indigo-600" : idx === 2 ? "text-emerald-600" : "text-gray-900"
               }`}>
                 {m.value}
               </span>
               <div className="mt-2">
                 <span className="text-xs font-bold text-gray-900 block leading-tight">{m.label}</span>
-                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-wider block mt-0.5">{m.desc}</span>
+                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 uppercase tracking-wider block mt-0.5">{m.desc}</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* ── Featured Agency Role Spotlight Card ── */}
-        <div className="bg-white rounded-3xl sm:rounded-[2.5rem] border border-gray-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-6 sm:p-10 md:p-12 relative overflow-hidden flex flex-col gap-10">
+        <div className="bg-white rounded-2xl sm:rounded-[2.5rem] border border-gray-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-5 sm:p-10 md:p-12 relative overflow-hidden flex flex-col gap-8 sm:gap-10">
           
           {/* Top Header Row of the Spotlight Card */}
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-8 border-b border-gray-100">
-            <div className="flex items-start gap-4 sm:gap-5">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 sm:pb-8 border-b border-gray-100">
+            <div className="flex items-start gap-3 sm:gap-5">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold shrink-0 shadow-xs">
                 <Building2 size={24} />
               </div>
               
               <div className="flex flex-col gap-1.5">
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     <span>{sparktechData.status}</span>
                   </span>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-gray-500 font-bold bg-gray-100 px-2.5 py-0.5 rounded-full border border-gray-200/60">
+                  <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-gray-500 font-bold bg-gray-100 px-2.5 py-0.5 rounded-full border border-gray-200/60">
                     {sparktechData.type}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-gray-500">
+                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-mono text-gray-500">
                     <MapPin size={11} className="text-indigo-500" />
                     <span>{sparktechData.location}</span>
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight pt-1">
+                <h3 className="text-xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight pt-1">
                   {sparktechData.role}
                 </h3>
                 <span className="text-base sm:text-lg font-bold text-indigo-600">

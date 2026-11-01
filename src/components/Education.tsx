@@ -185,35 +185,41 @@ export default function Education() {
   };
 
   const handleMouseEnter = (e: React.MouseEvent) => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
     updateCardPosition(e.clientX, e.clientY);
     setIsHoveringCampus(true);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
     updateCardPosition(e.clientX, e.clientY);
   };
 
   return (
-    <section id="education" className="py-32 px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
+    <section id="education" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
               Academic &amp; Credentials
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
               KNOWLEDGE <span className="text-gray-300">&amp;</span> <br />
               <span className="text-gray-300 italic">GROWTH.</span>
             </h2>
           </div>
 
           {/* ── 2 Tabs: Education & Certification ── */}
-          <div className="inline-flex p-1.5 rounded-full bg-white border border-gray-200/80 shadow-sm self-start md:self-end">
+          <div className="inline-flex p-1 sm:p-1.5 rounded-full bg-white border border-gray-200/80 shadow-sm self-start md:self-end">
             <button
               onClick={() => setActiveTab("education")}
-              className={`relative flex items-center gap-2.5 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`relative flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "education"
                   ? "text-white shadow-sm"
                   : "text-gray-500 hover:text-gray-900"

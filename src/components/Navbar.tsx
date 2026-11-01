@@ -44,7 +44,17 @@ export default function Navbar() {
     const id = href.replace("#", "");
     const target = document.getElementById(id);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      // Generous clearance offset so section headers never hide underneath the fixed navbar
+      const offset = isMobile ? -85 : -95;
+
+      const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+      if (lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(target, { offset, duration: 1.1 });
+      } else {
+        const y = target.getBoundingClientRect().top + window.pageYOffset + offset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
       // Update the URL hash without triggering a jump
       window.history.pushState(null, "", href);
     } else {
@@ -76,13 +86,24 @@ export default function Navbar() {
           color: #1a1c20;
           background: rgba(99, 102, 241, 0.09);
         }
+        @media (min-width: 768px) {
+          .nav-header-scrolled {
+            padding: 14px 24px !important;
+          }
+          .nav-bar-scrolled {
+            padding: 10px 10px 10px 24px !important;
+          }
+          .nav-bar-default {
+            padding: 20px 48px !important;
+          }
+        }
       `}</style>
 
       {/* ── Fixed wrapper ────────────────────────────────────────────────── */}
       <header
-        className="fixed top-0 left-0 right-0 z-[100] flex justify-center"
+        className={`fixed top-0 left-0 right-0 z-[100] flex justify-center ${scrolled ? "nav-header-scrolled" : ""}`}
         style={{
-          padding:       scrolled ? "14px 24px" : "0",
+          padding:       scrolled ? "10px 16px" : "0",
           pointerEvents: "none",
           transition:    `padding ${DUR} ${SPRING} ${D1}`,
         }}
@@ -97,10 +118,10 @@ export default function Navbar() {
          *  • No React hover state — pure CSS :hover
          */}
         <div
-          className="w-full flex items-center justify-between"
+          className={`w-full flex items-center justify-between ${scrolled ? "nav-bar-scrolled" : "nav-bar-default"}`}
           style={{
             maxWidth:       scrolled ? "860px"                              : "1920px",
-            padding:        scrolled ? "10px 10px 10px 24px"                : "20px 48px",
+            padding:        scrolled ? "8px 12px 8px 16px"                  : "14px 18px",
             borderRadius:   scrolled ? "9999px"                             : "0px",
             background:     scrolled ? "rgba(255,255,255,0.88)"             : "rgba(255,255,255,0)",
             backdropFilter: scrolled ? "blur(24px) saturate(1.8)"           : "blur(0px)",
@@ -205,11 +226,11 @@ export default function Navbar() {
 
           {/* ── Mobile hamburger ── */}
           <button
-            className="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 active:scale-95 transition-all text-gray-800"
             onClick={() => setMobileMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={14} /> : <Menu size={14} />}
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </header>
@@ -221,29 +242,29 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-            className="md:hidden fixed inset-0 bg-white z-[90] flex flex-col items-center justify-center gap-8"
+            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+            className="md:hidden fixed inset-0 bg-white/98 backdrop-blur-2xl z-[90] flex flex-col items-center justify-center gap-6 sm:gap-7 px-6 py-20 overflow-y-auto max-h-screen"
           >
             {navItems.map((item, i) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05, duration: 0.35, ease: "easeOut" }}
+                transition={{ delay: i * 0.04, duration: 0.3, ease: "easeOut" }}
                 onClick={(e) => { handleNavClick(e, item.href); setMobileMenuOpen(false); }}
-                className="text-5xl font-bold tracking-tighter text-gray-900 hover:text-indigo-600 transition-colors"
+                className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 hover:text-indigo-600 transition-colors"
               >
                 {item.name}
               </motion.a>
             ))}
             <motion.a
               href="#contact"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.05, duration: 0.35 }}
+              transition={{ delay: navItems.length * 0.04, duration: 0.3 }}
               onClick={(e) => { handleNavClick(e, "#contact"); setMobileMenuOpen(false); }}
-              className="mt-4 px-12 py-4 rounded-full bg-[#1a1c20] text-white font-bold uppercase tracking-widest text-xs hover:bg-indigo-600 transition-all duration-300"
+              className="mt-2 px-10 py-3.5 rounded-full bg-[#1a1c20] text-white font-bold uppercase tracking-widest text-xs hover:bg-indigo-600 active:scale-95 transition-all duration-300 shadow-md"
             >
               Hire Me
             </motion.a>
