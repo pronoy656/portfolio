@@ -4,14 +4,54 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { MoveRight, Briefcase, Code2 } from "lucide-react";
+import { 
+  MoveRight, 
+  MapPin,
+  ArrowUpRight,
+  Mail
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { value: "01+", label: "Year Agency Exp." },
-  { value: "16+", label: "Live Projects" },
-  { value: "Full-Stack", label: "Active Direction" },
+const GithubIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+const LinkedinIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const keyStats = [
+  { value: "16+", label: "Live Projects", detail: "Delivered to production" },
+  { value: "01+", label: "Agency Year", detail: "At Sparktech Agency" },
+  { value: "98+", label: "Performance", detail: "Lighthouse & Vitals" },
 ];
 
 export default function About() {
@@ -22,8 +62,8 @@ export default function About() {
       gsap.from(".about-reveal", {
         opacity: 0,
         y: 25,
-        duration: 0.9,
-        stagger: 0.12,
+        duration: 0.85,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
@@ -38,159 +78,193 @@ export default function About() {
     <section
       id="about"
       ref={containerRef}
-      className="scroll-mt-24 md:scroll-mt-28 pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
+      className="scroll-mt-24 md:scroll-mt-28 pt-6 sm:pt-8 md:pt-10 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto flex flex-col gap-6 sm:gap-8">
         
         {/* ── Section Header ── */}
-        <div className="about-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 pb-5 sm:pb-6 border-b border-gray-100">
+        <div className="about-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-4 sm:pb-5 border-b border-gray-100">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-indigo-600 block mb-2 font-semibold">
+            <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.3em] text-indigo-600 block mb-1 font-bold">
               // 01 · Profile &amp; Mission
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-gray-900 leading-none">
               DRIVEN BY <span className="text-gray-300 font-light italic">PASSION.</span>
             </h2>
           </div>
+
+          <div className="flex items-center gap-2 text-xs font-mono text-gray-500">
+            <span className="w-2 h-2 rounded-full bg-indigo-600" />
+            <span className="font-semibold text-gray-700">Software Engineer · Frontend Focused</span>
+          </div>
         </div>
 
-        {/* ── Main Two-Column Editorial Layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        {/* ── Main Two-Column Bento Row ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* ── Left Column: Layered Glassmorphic Portrait ── */}
-          <div className="about-reveal lg:col-span-5 flex flex-col gap-6">
-            <div className="relative py-6 sm:py-8 px-2 sm:px-4 flex items-center justify-center">
+          {/* ── Left Column: Clean Light Profile Card (Brand Indigo Theme) ── */}
+          <div className="about-reveal lg:col-span-5 flex flex-col">
+            <div className="relative rounded-[2rem] sm:rounded-[2.2rem] bg-white border border-gray-200/90 shadow-[0_16px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(99,102,241,0.08)] transition-all duration-300 p-4 sm:p-5 flex flex-col gap-4">
               
-              {/* Layer 1: True Frosted Glass Panel (Tilted Background) */}
-              <div 
-                className="absolute inset-x-2 inset-y-2 rounded-[2.5rem] rotate-[5deg] border border-white/60 bg-gradient-to-br from-white/30 via-indigo-50/20 to-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(99,102,241,0.12)] pointer-events-none ring-1 ring-indigo-500/10" 
-              />
-
-              {/* Layer 2: Subtle secondary refraction rim */}
-              <div 
-                className="absolute inset-x-5 inset-y-4 rounded-[2.5rem] -rotate-[3deg] border border-white/40 bg-gradient-to-tr from-white/20 via-transparent to-white/10 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.04)] pointer-events-none" 
-              />
-
-              {/* Main Photo Card (Clean & Normal, no artificial overlays) */}
-              <div className="relative w-[84%] aspect-[4/5] rounded-[2rem] overflow-hidden bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.18)] border border-gray-100 z-10 group">
+              {/* Photo Viewport */}
+              <div className="relative w-full aspect-[4/4.2] sm:aspect-[4/4.3] rounded-[1.6rem] overflow-hidden bg-gray-100 border border-gray-200/70 shadow-inner group">
                 <Image
                   src="/pronoy-photo.jpg"
-                  alt="Pronoy Pal — Frontend-Focused Full-Stack Developer"
+                  alt="Pronoy Pal — Frontend Focused & Full Stack Developer"
                   fill
-                  sizes="(max-width: 768px) 84vw, 420px"
-                  className="object-cover object-top hover:scale-103 transition-transform duration-700 ease-out"
-                  loading="lazy"
+                  sizes="(max-width: 768px) 90vw, 460px"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700 ease-out"
+                  priority
                 />
+
+                {/* Floating Bottom Pill: Available for Work + Location (Clean Light Glass) */}
+                <div className="absolute bottom-3 left-3 right-3 px-3.5 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white text-gray-900 shadow-[0_8px_20px_rgba(0,0,0,0.12)] flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600" />
+                    </span>
+                    <span className="font-mono text-[11px] sm:text-xs text-gray-900 font-bold tracking-tight">
+                      Available for Work
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-indigo-700 font-semibold">
+                    <MapPin size={12} className="text-indigo-600 shrink-0" />
+                    <span>Dhaka, BD</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Floating Glass Card (Left: 1+ Years Experience - Premium Glassmorphism) */}
-              <div className="absolute top-8 sm:top-10 -left-1 sm:-left-3 z-20 p-3 sm:p-4 rounded-2xl bg-white/60 backdrop-blur-2xl border border-white/80 shadow-[0_15px_35px_rgba(0,0,0,0.08)] hover:scale-105 transition-all duration-300">
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-indigo-600/10 border border-indigo-600/20 flex items-center justify-center">
-                    <Briefcase size={11} className="text-indigo-600" />
-                  </div>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                </div>
-                <p className="text-xl sm:text-2xl font-black text-gray-900 leading-none">1+</p>
-                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">
-                  Years Exp.
+              {/* Identity & Subtitle (Crisp Light Theme Typography) */}
+              <div className="flex flex-col gap-1 px-1">
+                <h4 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                  Pronoy Pal
+                </h4>
+                <p className="text-xs sm:text-sm font-bold text-indigo-600 font-mono tracking-tight">
+                  Frontend Focused &amp; Full Stack Developer
                 </p>
               </div>
 
-              {/* Floating Glass Pill (Right: </> React.js • Next.js - Premium Glassmorphism) */}
-              <div className="absolute bottom-8 sm:bottom-10 -right-1 sm:-right-3 z-20 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white/70 backdrop-blur-2xl border border-white/80 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center gap-2 hover:scale-105 transition-all duration-300">
-                <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-indigo-600/10 flex items-center justify-center">
-                  <Code2 size={10} className="text-indigo-600" />
-                </div>
-                <span className="text-[11px] sm:text-xs font-bold text-gray-800 tracking-wide">
-                  React.js <span className="text-indigo-600 mx-0.5 sm:mx-1">•</span> Next.js
-                </span>
+              {/* Action Buttons: Hire Me (Brand Indigo) & Get in Touch (Light Frosted Pill) */}
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <a
+                  href="#contact"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm transition-all duration-200 shadow-[0_4px_16px_rgba(99,102,241,0.3)] active:scale-95 group/btn"
+                >
+                  <span>Hire Me</span>
+                  <ArrowUpRight size={15} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </a>
+                <a
+                  href="mailto:pronoypaul56@gmail.com"
+                  className="inline-flex items-center justify-center py-3 px-5 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold text-xs sm:text-sm border border-gray-200/90 hover:border-gray-300 transition-all duration-200 active:scale-95 shadow-2xs"
+                >
+                  <span>Get in Touch</span>
+                </a>
               </div>
 
-            </div>
-
-            {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-gray-50/70 border border-gray-100">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="text-lg sm:text-2xl font-black text-gray-900 tracking-tight leading-none">
-                    {stat.value}
-                  </p>
-                  <p className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-1">
-                    {stat.label}
-                  </p>
+              {/* Bottom Row: CONNECT Label & Social Icons (Light Theme Circles) */}
+              <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+                <span className="text-[10px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase">
+                  CONNECT
+                </span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://github.com/pronoy656"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub Profile"
+                    className="w-8 h-8 rounded-full bg-gray-50 hover:bg-indigo-50 border border-gray-200/90 hover:border-indigo-300 text-gray-600 hover:text-indigo-600 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                  >
+                    <GithubIcon />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/pronoy-pal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn Profile"
+                    className="w-8 h-8 rounded-full bg-gray-50 hover:bg-indigo-50 border border-gray-200/90 hover:border-indigo-300 text-gray-600 hover:text-indigo-600 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                  >
+                    <LinkedinIcon />
+                  </a>
+                  <a
+                    href="mailto:pronoypaul56@gmail.com"
+                    aria-label="Email"
+                    className="w-8 h-8 rounded-full bg-gray-50 hover:bg-indigo-50 border border-gray-200/90 hover:border-indigo-300 text-gray-600 hover:text-indigo-600 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                  >
+                    <Mail size={13} />
+                  </a>
                 </div>
-              ))}
+              </div>
+
             </div>
           </div>
 
-          {/* ── Right Column: Narrative + Key Engineering Pillars ── */}
-          <div className="about-reveal lg:col-span-7 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 leading-snug mb-6">
-                Bridging modern frontend craftsmanship with{" "}
-                <span className="text-indigo-600 underline decoration-indigo-200 decoration-2 underline-offset-8">
-                  full-stack architecture.
+          {/* ── Right Column: Clean Light Narrative & Impact Stats ── */}
+          <div className="about-reveal lg:col-span-7 flex flex-col justify-center gap-5 sm:gap-6">
+            
+            {/* Headline Hook */}
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-gray-900 leading-[1.25]">
+                Engineering modern digital products with{" "}
+                <span className="text-indigo-600 underline decoration-indigo-200 decoration-2 underline-offset-4">
+                  precision, speed &amp; scalability.
                 </span>
               </h3>
 
-              <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed font-normal mb-10">
+              <div className="space-y-2.5 text-sm sm:text-[15px] text-gray-600 leading-relaxed font-normal">
                 <p>
                   I&apos;m a Software Engineer with <strong className="text-gray-900 font-semibold">over 1 year of agency experience</strong> at{" "}
-                  <strong className="text-gray-900 font-semibold">Sparktech Agency</strong>, where I have engineered and successfully delivered{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    16+ live client projects
-                  </span>{" "}
-                  from initial concept through to live deployment.
+                  <strong className="text-indigo-600 font-semibold">Sparktech Agency</strong>, where I have engineered and successfully deployed{" "}
+                  <strong className="text-gray-900 font-semibold">16+ live client web applications</strong> from initial concept to scalable production.
                 </p>
+
                 <p>
-                  My foundational expertise lies in modern frontend development, driven primarily by{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    JavaScript &amp; TypeScript
-                  </span>{" "}
-                  alongside <strong className="text-gray-900 font-semibold">React.js, Next.js (App Router), and Tailwind CSS</strong>.
-                </p>
-                <p>
-                  Currently, I am actively evolving into a complete{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    Full-Stack Developer
-                  </span>{" "}
-                  with an intensive focus on{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    Backend Development
-                  </span>
-                  ,{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    System Design Architecture
-                  </span>
-                  , and{" "}
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                    Web Performance
-                  </span>
-                  .
+                  Specialized in building reactive, accessible frontend architectures using{" "}
+                  <strong className="text-gray-900 font-semibold">React.js, Next.js (App Router), TypeScript, and Tailwind CSS</strong>, while continuously advancing full-stack capabilities in <strong className="text-gray-900 font-semibold">Node.js, Express, MongoDB, and Core Web Vitals optimization</strong>.
                 </p>
               </div>
             </div>
 
-            {/* Actions Bar */}
-            <div className="pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
+            {/* Quick Metrics Cards (Clean Light Cards with Vibrant Brand Indigo Accents) */}
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
+              {keyStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="p-3 sm:p-3.5 rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-indigo-300 hover:shadow-sm transition-all flex flex-col justify-between gap-1"
+                >
+                  <p className="text-xl sm:text-2xl font-black text-indigo-600 tracking-tight leading-none">
+                    {stat.value}
+                  </p>
+                  <div>
+                    <p className="text-[11px] sm:text-xs font-bold text-gray-800 leading-tight">
+                      {stat.label}
+                    </p>
+                    <p className="hidden sm:block text-[10px] font-mono text-gray-400 mt-0.5 truncate">
+                      {stat.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Actions Bar (Light Brand-Indigo Theme, No Pitch-Black Dark Button) */}
+            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
               <a
                 href="#contact"
-                className="group relative flex items-center justify-center gap-4 px-9 py-4 bg-[#1a1c20] text-white rounded-full font-bold overflow-hidden active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(99,102,241,0.3)] transition-all duration-500"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold text-xs sm:text-sm active:scale-95 shadow-[0_4px_16px_rgba(99,102,241,0.28)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.38)] transition-all duration-200"
               >
-                {/* Left-to-right fill effect */}
-                <div className="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
-                <span className="relative z-10 text-sm">Let&apos;s Talk</span>
-                <span className="relative z-10 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
-                  <MoveRight size={13} />
+                <span>Get In Touch</span>
+                <span className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                  <MoveRight size={12} />
                 </span>
               </a>
 
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors py-2 sm:py-0"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700 hover:text-indigo-600 transition-colors py-2 px-2"
               >
-                <span>Explore Featured Works</span>
+                <span>Explore Featured Projects</span>
                 <span className="text-indigo-600 font-bold">→</span>
               </a>
             </div>
