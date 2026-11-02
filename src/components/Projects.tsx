@@ -162,7 +162,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="scroll-mt-20 md:scroll-mt-28 relative bg-[#fafbfc]">
+    <section id="projects" className="scroll-mt-24 md:scroll-mt-28 relative bg-[#fafbfc]">
       
       {/* ══════════════════════════════════════════════════════════════════════
           DESKTOP VIEW (Visible ONLY on md: 768px+, 100% untouched original deck)
@@ -345,12 +345,12 @@ export default function Projects() {
       {/* ══════════════════════════════════════════════════════════════════════
           MOBILE VIEW (Visible ONLY on < md: 768px, Touch-Optimized Native Cards)
           ══════════════════════════════════════════════════════════════════════ */}
-      <div className="block md:hidden pt-8 pb-10 bg-[#fafbfc]">
+      <div className="block md:hidden pt-16 sm:pt-20 pb-12 bg-[#fafbfc]">
         
         {/* Mobile Header (Compact & perfectly aligned) */}
-        <div className="px-4 mb-3 flex items-end justify-between gap-3">
+        <div className="px-4 mb-3.5 flex items-end justify-between gap-3">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-indigo-600 font-bold block mb-0.5">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-indigo-600 font-bold block mb-1">
               // Selected Works
             </span>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 leading-none">
@@ -361,28 +361,11 @@ export default function Projects() {
 
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white hover:bg-gray-900 text-gray-900 hover:text-white border border-gray-200/90 font-bold text-xs tracking-tight shadow-xs active:scale-95 transition-all shrink-0"
+            className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-gray-900 text-gray-900 hover:text-white border border-gray-200/90 font-bold text-xs tracking-tight shadow-xs active:scale-95 transition-all shrink-0"
           >
-            <span>All</span>
+            <span>View All</span>
             <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
-        </div>
-
-        {/* Mobile Interactive Project Selector Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto px-4 pb-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {featuredProjects.map((p, idx) => (
-            <button
-              key={p.id}
-              onClick={() => scrollMobileTo(idx)}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all cursor-pointer ${
-                mobileActiveIndex === idx
-                  ? "bg-[#1a1c20] text-white shadow-xs scale-102"
-                  : "bg-white text-gray-600 hover:text-gray-900 border border-gray-200/80"
-              }`}
-            >
-              <span>{p.number} {p.title}</span>
-            </button>
-          ))}
         </div>
 
         {/* Mobile Native Snap Carousel (Compact, zero empty vertical gaps) */}
@@ -412,24 +395,11 @@ export default function Projects() {
               </div>
 
               {/* Card Body (Tight, clean, snug padding) */}
-              <div className="p-3 flex flex-col gap-2">
+              <div className="p-3 flex flex-col gap-2.5">
                 {/* Tagline */}
                 <h3 className="text-xs font-black text-gray-900 tracking-tight leading-snug line-clamp-1">
                   {project.tagline}
                 </h3>
-
-                {/* Metrics */}
-                <div className="flex flex-wrap items-center gap-1">
-                  {project.metrics.map((m, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-50 border border-gray-200/80 text-[9px] font-mono"
-                    >
-                      <span className="font-black text-gray-900">{m.value}</span>
-                      <span className="text-[8px] text-gray-400 uppercase tracking-wider">{m.label}</span>
-                    </span>
-                  ))}
-                </div>
 
                 {/* Mockup Image (Crisp 16/10 aspect ratio with browser accent bar) */}
                 <div

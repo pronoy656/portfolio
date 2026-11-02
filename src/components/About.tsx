@@ -38,12 +38,12 @@ export default function About() {
     <section
       id="about"
       ref={containerRef}
-      className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 md:py-36 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
+      className="scroll-mt-24 md:scroll-mt-28 pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Header ── */}
-        <div className="about-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-gray-100">
+        <div className="about-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 pb-5 sm:pb-6 border-b border-gray-100">
           <div>
             <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-indigo-600 block mb-2 font-semibold">
               // 01 · Profile &amp; Mission
@@ -51,10 +51,6 @@ export default function About() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-gray-900 leading-none">
               DRIVEN BY <span className="text-gray-300 font-light italic">PASSION.</span>
             </h2>
-          </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-gray-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Available for new opportunities</span>
           </div>
         </div>
 

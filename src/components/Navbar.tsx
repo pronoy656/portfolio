@@ -25,14 +25,20 @@ const D4     = "0.20s";  // shadow — final flourish
 export default function Navbar() {
   const [scrolled, setScrolled]             = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     let lastState = false;
     const onScroll = () => {
-      const isOver = window.scrollY > 60;
+      const isOver = window.scrollY > 40;
       if (isOver !== lastState) {
         lastState = isOver;
         setScrolled(isOver);
+      }
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0) {
+        const p = Math.min(100, Math.max(0, (window.scrollY / total) * 100));
+        setScrollProgress(p);
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -45,15 +51,15 @@ export default function Navbar() {
     const target = document.getElementById(id);
     if (target) {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-      // Generous clearance offset so section headers never hide underneath the fixed navbar
-      const offset = isMobile ? -85 : -95;
+      // Generous clearance offset so section headers never hide underneath the fixed navbar pill
+      const navClearance = isMobile ? 85 : 95;
+      const targetY = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - navClearance);
 
       const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
       if (lenis && typeof lenis.scrollTo === "function") {
-        lenis.scrollTo(target, { offset, duration: 1.1 });
+        lenis.scrollTo(targetY, { duration: 1.1 });
       } else {
-        const y = target.getBoundingClientRect().top + window.pageYOffset + offset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+        window.scrollTo({ top: targetY, behavior: "smooth" });
       }
       // Update the URL hash without triggering a jump
       window.history.pushState(null, "", href);
@@ -86,6 +92,18 @@ export default function Navbar() {
           color: #1a1c20;
           background: rgba(99, 102, 241, 0.09);
         }
+        @media (max-width: 767px) {
+          .nav-header-scrolled {
+            padding: 10px 14px !important;
+            max-width: 100vw !important;
+            box-sizing: border-box !important;
+          }
+          .nav-bar-scrolled {
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3) !important;
+            max-width: calc(100vw - 28px) !important;
+            box-sizing: border-box !important;
+          }
+        }
         @media (min-width: 768px) {
           .nav-header-scrolled {
             padding: 14px 24px !important;
@@ -101,9 +119,11 @@ export default function Navbar() {
 
       {/* ── Fixed wrapper ────────────────────────────────────────────────── */}
       <header
-        className={`fixed top-0 left-0 right-0 z-[100] flex justify-center ${scrolled ? "nav-header-scrolled" : ""}`}
+        className={`fixed top-0 left-0 right-0 z-[100] flex justify-center w-full max-w-full box-border ${scrolled ? "nav-header-scrolled" : ""}`}
         style={{
-          padding:       scrolled ? "10px 16px" : "0",
+          padding:       scrolled ? "10px 14px" : "0",
+          boxSizing:     "border-box",
+          maxWidth:      "100vw",
           pointerEvents: "none",
           transition:    `padding ${DUR} ${SPRING} ${D1}`,
         }}
@@ -118,9 +138,10 @@ export default function Navbar() {
          *  • No React hover state — pure CSS :hover
          */}
         <div
-          className={`w-full flex items-center justify-between ${scrolled ? "nav-bar-scrolled" : "nav-bar-default"}`}
+          className={`w-full max-w-full min-w-0 box-border flex items-center justify-between relative overflow-hidden ${scrolled ? "nav-bar-scrolled" : "nav-bar-default"}`}
           style={{
             maxWidth:       scrolled ? "860px"                              : "1920px",
+            boxSizing:      "border-box",
             padding:        scrolled ? "8px 12px 8px 16px"                  : "14px 18px",
             borderRadius:   scrolled ? "9999px"                             : "0px",
             background:     scrolled ? "rgba(255,255,255,0.88)"             : "rgba(255,255,255,0)",
@@ -139,8 +160,25 @@ export default function Navbar() {
             ].join(", "),
           }}
         >
+          {/* ── Mobile Scrolled Brand Fill (Smooth Left-to-Right sweep on scroll, 100% Solid Plain Color) ── */}
+          <div
+            className="md:hidden absolute inset-0 rounded-full overflow-hidden pointer-events-none z-10"
+            aria-hidden="true"
+          >
+            {/* Pure solid plain brand color layer — zero gradient */}
+            <div
+              className="w-full h-full bg-[#6366f1]"
+              style={{
+                transformOrigin: "left center",
+                transform: scrolled ? "scaleX(1)" : "scaleX(0)",
+                opacity: scrolled ? 1 : 0,
+                transition: "transform 0.68s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease",
+              }}
+            />
+          </div>
+
           {/* ── Logo ── */}
-          <a href="/" className="shrink-0 group select-none flex items-center">
+          <a href="/" className="shrink-0 group select-none flex items-center relative z-20">
             <Image
               src="/logo.png"
               alt="Pronoy Pal Logo"
@@ -150,7 +188,7 @@ export default function Navbar() {
               style={{
                 width:           scrolled ? "32px" : "40px",
                 height:          scrolled ? "32px" : "40px",
-                borderRadius:    "10px",
+                borderRadius:    "8px",
                 objectFit:       "contain",
                 transformOrigin: "left center",
                 transition: `width ${DUR} ${SPRING} ${D1}, height ${DUR} ${SPRING} ${D1}`,
@@ -160,7 +198,7 @@ export default function Navbar() {
 
           {/* ── Desktop nav ── */}
           <nav
-            className="hidden md:flex items-center"
+            className="hidden md:flex items-center relative z-20"
             style={{
               gap:            "3px",
               padding:        scrolled ? "0"                         : "4px",
@@ -226,7 +264,11 @@ export default function Navbar() {
 
           {/* ── Mobile hamburger ── */}
           <button
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 active:scale-95 transition-all text-gray-800"
+            className={`md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-95 relative z-20 ${
+              scrolled
+                ? "bg-white/20 hover:bg-white/30 text-white"
+                : "bg-black/5 hover:bg-black/10 text-gray-800"
+            }`}
             onClick={() => setMobileMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >

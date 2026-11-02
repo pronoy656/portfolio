@@ -24,7 +24,7 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100">
+    <section id="skills" className="scroll-mt-24 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}

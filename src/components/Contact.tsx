@@ -17,7 +17,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden">
+    <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-brand/10 blur-[150px] rounded-full" />
       
       <div className="max-w-7xl mx-auto relative z-10">

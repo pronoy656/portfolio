@@ -86,7 +86,7 @@ export default function Services() {
   const [activeCard, setActiveCard] = useState<string>("01");
 
   return (
-    <section id="services" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 lg:py-28 px-4 sm:px-10 lg:px-14 bg-[#fafbfc] relative overflow-hidden">
+    <section id="services" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 lg:py-28 px-4 sm:px-10 lg:px-14 bg-[#fafbfc] relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70vw] h-[35vw] bg-gradient-to-r from-emerald-100/30 via-indigo-100/30 to-purple-100/30 blur-[130px] rounded-full" />

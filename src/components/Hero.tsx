@@ -112,7 +112,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen bg-[#fcfcfd] overflow-hidden"
+      className="relative min-h-0 md:min-h-screen bg-[#fcfcfd] overflow-hidden"
     >
       {/* ── Background Mood Elements ── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -125,17 +125,19 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 items-center px-4 sm:px-8 md:px-24 py-24 sm:py-20 max-w-[1920px] mx-auto">
+      <div className="relative z-10 w-full min-h-0 md:min-h-screen grid grid-cols-1 lg:grid-cols-12 items-center px-4 sm:px-8 md:px-24 pt-24 pb-6 sm:pt-28 sm:pb-10 md:py-0 max-w-[1920px] mx-auto">
         
         {/* ── CENTERED CONTENT ── */}
         <div className="lg:col-span-12 flex flex-col items-center text-center gap-5 sm:gap-7">
-          {/* Tech Stack Icons with Circular Border (Wrapped cleanly into 3 lines on mobile, single line on desktop) */}
-          <div className="hero-reveal flex flex-wrap items-center justify-center gap-2 sm:gap-4 max-w-[340px] sm:max-w-none mt-2 sm:mt-6 mb-1 sm:mb-2 py-1 px-2">
+          {/* Tech Stack Icons with Circular Border (Wrapped cleanly on mobile, single horizontal line on desktop, Figma hidden on mobile) */}
+          <div className="hero-reveal flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-4 max-w-[340px] md:max-w-none mt-2 sm:mt-6 mb-1 sm:mb-2 py-1 px-2">
             {techIcons.map((tech) => (
               <div
                 key={tech.name}
                 title={tech.name}
-                className="group relative flex items-center justify-center transition-all duration-300 hover:scale-125 hover:z-30 cursor-pointer select-none"
+                className={`group relative items-center justify-center transition-all duration-300 hover:scale-125 hover:z-30 cursor-pointer select-none ${
+                  tech.name === "Figma" ? "hidden md:flex" : "flex"
+                }`}
               >
                 {/* Circle Border Container */}
                 <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-gray-200/90 ring-2 ring-white bg-white hover:border-gray-900/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] flex items-center justify-center transition-all duration-300">
@@ -152,12 +154,12 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-3.5 sm:gap-5 items-center">
-            <h1 className="hero-reveal font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-1 sm:gap-3 text-center px-2">
-              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] whitespace-nowrap">
+          <div className="flex flex-col gap-3.5 sm:gap-5 items-center w-full">
+            <h1 className="hero-reveal font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-1 sm:gap-3 text-center px-2 max-w-full">
+              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] whitespace-normal sm:whitespace-nowrap">
                 Frontend-Focused
               </span>
-              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] text-indigo-600 whitespace-nowrap">
+              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] text-indigo-600 whitespace-normal sm:whitespace-nowrap">
                 Full-Stack Developer.
               </span>
             </h1>
@@ -211,8 +213,8 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* ── Social Profiles (GitHub & LinkedIn directly after the buttons) ── */}
-          <div className="hero-reveal flex items-center justify-center gap-3 mt-1 sm:mt-2">
+          {/* ── MOBILE-ONLY Social Profiles (GitHub & LinkedIn directly after the buttons on mobile) ── */}
+          <div className="hero-reveal flex md:hidden items-center justify-center gap-3 mt-1 sm:mt-2">
             <a
               href="https://github.com/pronoy656"
               target="_blank"
@@ -236,8 +238,8 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* ── Current Focus (Placed directly underneath the buttons & socials) ── */}
-          <div className="hero-reveal flex flex-col items-center gap-1 mt-1 text-center">
+          {/* ── MOBILE-ONLY Current Focus (Placed directly underneath the buttons on mobile) ── */}
+          <div className="hero-reveal flex md:hidden flex-col items-center gap-1 mt-1 text-center">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-gray-400">
@@ -252,19 +254,41 @@ export default function Hero() {
 
       </div>
 
-      {/* ── DESKTOP FOOTER BAR ── */}
-      <div className="hidden md:flex absolute bottom-8 left-0 right-0 px-12 md:px-24 justify-between items-end pointer-events-none [&_a]:pointer-events-auto">
-        <div className="flex flex-col gap-1 items-start">
-          <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400">Based In</span>
-          <span className="text-xs font-bold text-[#1a1c20]">Dhaka, Bangladesh</span>
+      {/* ── DESKTOP FOOTER BAR (Restored exactly to original desktop layout) ── */}
+      <div className="hidden md:flex absolute bottom-10 left-0 right-0 px-8 md:px-24 justify-between items-end pointer-events-none [&_a]:pointer-events-auto">
+        <div className="flex gap-12">
+          <div className="flex flex-col gap-1 items-start">
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Based In</span>
+            <span className="text-xs font-bold text-[#1a1c20]">Dhaka, Bangladesh</span>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1 items-end">
-          <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400">Status</span>
-          <span className="text-xs font-bold text-emerald-600 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Available for Opportunities
-          </span>
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-6 mb-2 justify-end">
+            <a
+              href="https://github.com/pronoy656"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-gray-500 hover:text-indigo-600 transition-all duration-300 hover:scale-125 transform"
+            >
+              <GithubIcon />
+            </a>
+            <a
+              href="https://linkedin.com/in/pronoy-pal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-gray-500 hover:text-indigo-600 transition-all duration-300 hover:scale-125 transform"
+            >
+              <LinkedinIcon />
+            </a>
+          </div>
+
+          <div className="flex flex-col gap-1 items-end">
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Current Focus</span>
+            <span className="text-xs font-bold text-[#1a1c20]">System Design &amp; Web Performance</span>
+          </div>
         </div>
       </div>
 

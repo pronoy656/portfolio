@@ -64,7 +64,7 @@ const sparktechData = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
+    <section id="experience" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
       
       {/* ── Background Ambience ── */}
       <div className="absolute inset-0 pointer-events-none">

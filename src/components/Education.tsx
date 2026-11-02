@@ -200,7 +200,7 @@ export default function Education() {
   };
 
   return (
-    <section id="education" className="scroll-mt-20 md:scroll-mt-28 py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
+    <section id="education" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-32 px-4 sm:px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Header ── */}
