@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Check, ChevronsRight } from "lucide-react";
 import AuditReviewGlass from "@/components/AuditReviewGlass";
+import ExplodeText from "@/components/ExplodeText";
 
 interface ServiceItem {
   id: string;
@@ -246,7 +247,19 @@ export default function Services() {
                           <div className="w-4 h-4 rounded-full bg-[#a3e635] flex items-center justify-center shrink-0 shadow-sm">
                             <Check size={10} className="text-gray-950 stroke-[3.5]" />
                           </div>
-                          <span>{item}</span>
+                          <ExplodeText
+                            text={item}
+                            trigger={isHovered}
+                            delay={idx * 0.08}
+                            animateBy="letter"
+                            from="start"
+                            scale={2.2}
+                            blur={6}
+                            duration={0.45}
+                            charDelay={0.015}
+                            color="#1f2937"
+                            fontSize="text-xs sm:text-[13px]"
+                          />
                         </li>
                       ))}
                     </ul>

@@ -23,7 +23,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-24 md:scroll-mt-28 pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
+      className="scroll-mt-24 md:scroll-mt-28 pt-2 sm:pt-4 md:pt-6 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
     >
       {/* ── Background Magic Rings ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-60">
@@ -46,7 +46,7 @@ export default function About() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center gap-8 sm:gap-11">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center gap-6 sm:gap-9">
         
         {/* ── Big Centered Section Title ── */}
         <motion.div
@@ -57,34 +57,25 @@ export default function About() {
           className="flex flex-col items-center text-center w-full"
         >
           <RevealText as="h2" mode="once" className="text-5xl sm:text-7xl md:text-8xl lg:text-[96px] font-black tracking-tighter text-gray-900 leading-none">
-            DRIVEN BY <span className="text-gray-300 font-light italic">PASSION.</span>
+            ENGINEERING VALUE <span className="text-gray-300 font-light italic">&amp; IMPACT.</span>
           </RevealText>
         </motion.div>
 
-        {/* ── Wide Centered Engineering Narrative & Subtitle ── */}
+        {/* ── Unified High-Impact Value Narrative ── */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, delay: shouldReduceMotion ? 0 : 0.15, ease }}
-          className="flex flex-col items-center text-center gap-6 sm:gap-7 max-w-4xl mx-auto"
+          className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-4xl mx-auto"
         >
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black tracking-tight text-gray-900 leading-[1.24] text-center max-w-4xl">
-            Architecting modern digital systems with{" "}
-            <span className="text-indigo-600 underline decoration-indigo-200 decoration-2 underline-offset-4">
-              frontend precision, scalable backend logic &amp; performance engineering.
-            </span>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-gray-900 tracking-tight leading-tight">
+            About Me
           </h3>
 
-          <div className="space-y-4 text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-normal text-center max-w-3xl">
-            <p>
-              I bridge the gap between creative visual fidelity and robust software architecture. With <strong className="text-gray-900 font-semibold">over 1 year of high-velocity agency experience</strong> at <strong className="text-indigo-600 font-semibold">Sparktech Agency</strong>, I have engineered and deployed <strong className="text-gray-900 font-semibold">16+ production web applications</strong> from core system design to production deployment.
-            </p>
-
-            <p>
-              Specialized in building reactive, component-driven architectures using <strong className="text-gray-900 font-semibold">React.js, Next.js (App Router), TypeScript, and Tailwind CSS</strong>, paired with scalable backend APIs in <strong className="text-gray-900 font-semibold">Node.js, Express, MongoDB</strong>, and ruthless <strong className="text-gray-900 font-semibold">Core Web Vitals optimization</strong> for peak sub-second efficiency.
-            </p>
-          </div>
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-medium text-center max-w-4xl">
+            I transform complex business visions into <strong className="text-gray-950 font-bold">resilient, high-velocity digital products</strong>. By unifying <strong className="text-indigo-600 font-bold">system design</strong>, production-grade frontend architecture, and <strong className="text-indigo-600 font-bold">sub-second web performance</strong>, I engineer software that scales effortlessly, retains users, and delivers measurable ROI — validated across <strong className="text-gray-950 font-bold">16+ live production deployments</strong>.
+          </p>
         </motion.div>
 
         {/* ── Quick Metrics Cards (Centered Grid) ── */}

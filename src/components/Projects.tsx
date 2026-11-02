@@ -293,13 +293,13 @@ export default function Projects() {
                       </div>
 
                       <div className="flex items-center gap-2.5 shrink-0">
-                        <button
-                          onClick={() => setSelectedProject(project)}
+                        <Link
+                          href={`/projects/${project.slug || project.id}`}
                           className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[13px] font-bold shadow-sm hover:shadow-md hover:shadow-indigo-500/20 active:scale-95 transition-all cursor-pointer"
                         >
                           <span>View Details</span>
                           <ArrowUpRight size={14} />
-                        </button>
+                        </Link>
 
                         <a
                           href={project.liveLink || "https://github.com/pronoy656"}
@@ -456,13 +456,13 @@ export default function Projects() {
 
                 {/* Action Buttons (100% visible, snug & tap-friendly) */}
                 <div className="pt-2 border-t border-gray-100 flex items-center gap-1.5">
-                  <button
-                    onClick={() => setSelectedProject(project)}
+                  <Link
+                    href={`/projects/${project.slug || project.id}`}
                     className="flex-1 inline-flex items-center justify-center gap-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer"
                   >
                     <span>Details</span>
                     <ArrowUpRight size={12} />
-                  </button>
+                  </Link>
 
                   <a
                     href={project.liveLink || "https://github.com/pronoy656"}
@@ -621,13 +621,21 @@ export default function Projects() {
                 </div>
 
                 <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
+                  <Link
+                    href={`/projects/${selectedProject.slug || selectedProject.id}`}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gray-900 hover:bg-black text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+                  >
+                    <span>Read Full Case Study</span>
+                    <ArrowUpRight size={14} />
+                  </Link>
+
                   <a
                     href={selectedProject.liveLink || "https://github.com/pronoy656"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
                   >
-                    <span>View Live Application</span>
+                    <span>View Live</span>
                     <ArrowUpRight size={14} />
                   </a>
 

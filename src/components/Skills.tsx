@@ -1,35 +1,127 @@
 "use client";
 
-import React from "react";
-import { motion, useReducedMotion } from "motion/react";
+import React, { useRef, useState } from "react";
+import { motion, useReducedMotion, useInView } from "motion/react";
+import ExplodeText from "@/components/ExplodeText";
 
 const categories = [
   {
     title: "Frontend",
-    skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 & CSS3"],
+    skills: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "Tailwind CSS",
+      "HTML5 & CSS3",
+    ],
   },
   {
     title: "State & APIs",
-    skills: ["Redux Toolkit", "TanStack Query", "Axios", "REST APIs", "CRUD Operations", "JWT Auth"],
+    skills: [
+      "Redux Toolkit",
+      "TanStack Query",
+      "Axios",
+      "REST APIs",
+      "CRUD Operations",
+      "JWT Auth",
+    ],
   },
   {
     title: "Backend & DB",
-    skills: ["MongoDB", "Socket.IO", "Postman", "REST Architecture", "API Integration"],
+    skills: [
+      "MongoDB",
+      "Socket.IO",
+      "Postman",
+      "REST Architecture",
+      "API Integration",
+    ],
   },
   {
     title: "Tools & Core",
-    skills: ["Git & GitHub", "AWS", "Figma", "Chrome DevTools", "Performance Tuning", "Responsive UI"],
+    skills: [
+      "Git & GitHub",
+      "AWS",
+      "Figma",
+      "Chrome DevTools",
+      "Performance Tuning",
+      "Responsive UI",
+    ],
   },
 ];
 
+interface SkillItemProps {
+  skill: string;
+  catIndex: number;
+  skillIndex: number;
+  sectionInView: boolean;
+}
+
+function SkillItem({
+  skill,
+  catIndex,
+  skillIndex,
+  sectionInView,
+}: SkillItemProps) {
+  const [hoverCount, setHoverCount] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => {
+        setIsHovered(true);
+        setHoverCount((prev) => prev + 1);
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+      className="flex items-center justify-between group cursor-pointer select-none py-1 transition-all"
+    >
+      <div className="relative flex items-center">
+        <ExplodeText
+          text={skill}
+          trigger={sectionInView}
+          replayKey={hoverCount}
+          initialVisible={true}
+          delay={hoverCount > 0 ? 0 : catIndex * 0.1 + skillIndex * 0.04}
+          animateBy="letter"
+          from="start"
+          scale={2.2}
+          blur={6}
+          duration={0.45}
+          charDelay={0.016}
+          color={isHovered ? "#4f46e5" : "rgba(31, 41, 55, 0.72)"}
+          fontSize="text-lg lg:text-xl font-bold tracking-tight"
+          className="transition-colors duration-200"
+        />
+      </div>
+      <span
+        className={`h-px flex-1 mx-3 transition-colors duration-300 ${
+          isHovered ? "bg-indigo-500/40" : "bg-gray-100"
+        }`}
+      />
+      <span
+        className={`text-[10px] font-mono font-bold tracking-wider transition-colors duration-200 ${
+          isHovered ? "text-indigo-600 font-black" : "text-gray-400"
+        }`}
+      >
+        0{catIndex + 1}—0{skillIndex + 1}
+      </span>
+    </div>
+  );
+}
+
 export default function Skills() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.15 });
   const shouldReduceMotion = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section id="skills" className="scroll-mt-24 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100">
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="scroll-mt-24 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100"
+    >
       <div className="max-w-7xl mx-auto">
-        
         {/* Section Header (Scroll Reveal) */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
@@ -38,9 +130,11 @@ export default function Skills() {
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
           className="flex flex-col gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-24"
         >
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">Technical Expertise</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
+            Technical Expertise
+          </span>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
-            CRAFT <span className="text-gray-200">&amp;</span> <br/>
+            CRAFT <span className="text-gray-200">&amp;</span> <br />
             <span className="text-gray-200 italic">STACK.</span>
           </h2>
         </motion.div>
@@ -63,15 +157,13 @@ export default function Skills() {
               </h3>
               <div className="space-y-4">
                 {cat.skills.map((skill, j) => (
-                  <div key={skill} className="flex items-center justify-between group">
-                    <span className="text-lg lg:text-xl font-bold tracking-tight text-gray-800 opacity-60 group-hover:opacity-100 group-hover:text-indigo-600 transition-all">
-                      {skill}
-                    </span>
-                    <span className="h-px flex-1 mx-3 bg-gray-100 group-hover:bg-indigo-400/20 transition-colors" />
-                    <span className="text-[10px] font-bold text-gray-400 group-hover:text-indigo-500 transition-colors">
-                      0{i + 1}—0{j + 1}
-                    </span>
-                  </div>
+                  <SkillItem
+                    key={skill}
+                    skill={skill}
+                    catIndex={i}
+                    skillIndex={j}
+                    sectionInView={inView}
+                  />
                 ))}
               </div>
             </motion.div>

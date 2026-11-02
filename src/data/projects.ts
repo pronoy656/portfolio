@@ -1,5 +1,6 @@
 export interface Project {
   id: string;
+  slug?: string;
   number: string;
   title: string;
   tagline: string;
@@ -21,6 +22,7 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: "01",
+    slug: "k10-football",
     number: "01",
     title: "K10 Football",
     tagline: "Smart Club Management & Live Match Tactics",
@@ -65,6 +67,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "02",
+    slug: "heaven-furniture",
     number: "02",
     title: "Heaven Furniture",
     tagline: "Modern Luxury Furniture E-Commerce Experience",
@@ -108,6 +111,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "03",
+    slug: "fixpair",
     number: "03",
     title: "Fixpair",
     tagline: "Real-Time Expert Consultation & Video Transcriptions",
@@ -152,6 +156,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "04",
+    slug: "devpulse-analytics",
     number: "04",
     title: "DevPulse Analytics",
     tagline: "Enterprise Developer Intelligence & Velocity Platform",
@@ -195,6 +200,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "05",
+    slug: "novapay-wallet",
     number: "05",
     title: "NovaPay Wallet",
     tagline: "Cross-Border Digital Wallet & Instant Multi-Currency Transfers",
@@ -238,6 +244,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "06",
+    slug: "cloudnest-drive",
     number: "06",
     title: "CloudNest Drive",
     tagline: "Collaborative Cloud Storage & Secure Asset Workspace",
@@ -281,6 +288,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "07",
+    slug: "apex-design-system",
     number: "07",
     title: "Apex Design System",
     tagline: "Accessible Multi-Brand Component Engine & UI Token Studio",
@@ -324,6 +332,7 @@ export const projectsData: Project[] = [
   },
   {
     id: "08",
+    slug: "zenith-marketing-studio",
     number: "08",
     title: "Zenith Marketing Studio",
     tagline: "High-Performance Growth Landing Suite & Visual CMS",

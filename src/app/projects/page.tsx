@@ -286,13 +286,13 @@ export default function AllProjectsPage() {
 
                     {/* Action Buttons */}
                     <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
-                      <button
-                        onClick={() => setSelectedProject(project)}
+                      <Link
+                        href={`/projects/${project.slug || project.id}`}
                         className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
                       >
                         <span>View Details</span>
                         <ArrowUpRight size={13} />
-                      </button>
+                      </Link>
 
                       {project.liveLink && (
                         <a
@@ -470,15 +470,23 @@ export default function AllProjectsPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 flex gap-4">
+                  <div className="pt-4 flex flex-col sm:flex-row gap-3">
+                    <Link
+                      href={`/projects/${selectedProject.slug || selectedProject.id}`}
+                      className="flex-1 py-3.5 px-4 rounded-xl bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-black transition-all flex items-center justify-center gap-2 shadow-sm"
+                    >
+                      <span>Read Full Case Study</span>
+                      <ArrowUpRight size={14} />
+                    </Link>
+
                     <a
                       href={selectedProject.liveLink || "https://github.com/pronoy656"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-4 rounded-full bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-indigo-600 transition-all flex items-center justify-center gap-2 shadow-sm"
+                      className="flex-1 py-3.5 px-4 rounded-xl bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 shadow-sm"
                     >
-                      <span>Visit Live Project</span>
-                      <ArrowUpRight size={15} />
+                      <span>Visit Live</span>
+                      <ArrowUpRight size={14} />
                     </a>
 
                     <a
@@ -486,7 +494,7 @@ export default function AllProjectsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="GitHub Repository"
-                      className="px-5 py-4 rounded-full border border-gray-200 hover:border-indigo-600 hover:text-indigo-600 transition-all flex items-center justify-center text-gray-700"
+                      className="px-4 py-3.5 rounded-xl border border-gray-200 hover:border-indigo-600 hover:text-indigo-600 transition-all flex items-center justify-center text-gray-700 shrink-0"
                     >
                       <GithubIcon />
                     </a>

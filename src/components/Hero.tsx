@@ -4,6 +4,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { MoveRight, Download } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
+import ExplodeText from "@/components/ExplodeText";
 
 const AsciiWave = dynamic(() => import("@/components/AsciiWave"), {
   ssr: false,
@@ -197,67 +198,93 @@ export default function Hero() {
             {/* Localized White Gradient Spread behind Headline & Subtitle for crystal-clear readability */}
             <div className="absolute -inset-x-8 sm:-inset-x-16 -inset-y-8 sm:-inset-y-12 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.7)_50%,transparent_75%)] blur-xl pointer-events-none -z-10" />
 
-            {/* 2 & 3. Main Headline & Full-Stack Developer Title (Each line slides up from behind a mask) */}
+            {/* 2 & 3. Main Headline & Full-Stack Developer Title (Explode / Blur Text Animation) */}
             <h1 className="font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-1 sm:gap-2 text-center px-2 max-w-full">
               {/* Line 1: Frontend-Focused */}
-              <span className="overflow-hidden inline-block py-0.5">
-                <motion.span
-                  initial={{ y: shouldReduceMotion ? "0%" : "120%", opacity: shouldReduceMotion ? 1 : 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{
-                    duration: shouldReduceMotion ? 0.01 : 0.75,
-                    delay: shouldReduceMotion ? 0 : 0.42,
-                    ease,
-                  }}
-                  className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] whitespace-normal sm:whitespace-nowrap inline-block will-change-transform"
-                >
-                  Frontend-Focused
-                </motion.span>
-              </span>
+              <div className="flex justify-center">
+                <ExplodeText
+                  text="Frontend-Focused"
+                  animateBy="letter"
+                  from="start"
+                  scale={3}
+                  blur={8}
+                  duration={0.65}
+                  charDelay={0.025}
+                  delay={0.15}
+                  color="#1a1c20"
+                  fontSize="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] font-black tracking-tighter"
+                  className="justify-center"
+                />
+              </div>
 
               {/* Line 2: Full-Stack Developer. */}
-              <span className="overflow-hidden inline-block py-0.5">
-                <motion.span
-                  initial={{ y: shouldReduceMotion ? "0%" : "120%", opacity: shouldReduceMotion ? 1 : 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{
-                    duration: shouldReduceMotion ? 0.01 : 0.75,
-                    delay: shouldReduceMotion ? 0 : 0.60,
-                    ease,
-                  }}
-                  className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] text-indigo-600 whitespace-normal sm:whitespace-nowrap inline-block will-change-transform"
-                >
-                  Full-Stack Developer.
-                </motion.span>
-              </span>
+              <div className="flex justify-center">
+                <ExplodeText
+                  text="Full-Stack Developer."
+                  animateBy="letter"
+                  from="start"
+                  scale={3}
+                  blur={8}
+                  duration={0.65}
+                  charDelay={0.025}
+                  delay={0.45}
+                  color="#4f46e5"
+                  fontSize="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] font-black tracking-tighter"
+                  className="justify-center"
+                />
+              </div>
             </h1>
 
-            {/* 4. Subtitle Paragraph (fades & slides in after the title) */}
-            <motion.p
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: shouldReduceMotion ? 0.01 : 0.65,
-                delay: shouldReduceMotion ? 0 : 0.82,
-                ease,
-              }}
-              className="text-sm sm:text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed font-medium text-center px-2"
-            >
-              I&apos;m <span className="text-gray-900 font-bold">Pronoy Pal</span> — a Frontend-Focused Full-Stack Developer who turns ideas into
-              production-ready products. I specialise in{" "}
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                React &amp; Next.js
-              </span>{" "}
-              , scalable{" "}
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                Full-Stack Architecture
-              </span>{" "}
-              , and shipping clean,{" "}
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
-                Accessible UI
-              </span>{" "}
-              that users love.
-            </motion.p>
+            {/* 4. Subtitle Paragraph (Explode / Blur Text Animation with Expanded Width & System Design Focus) */}
+            <div className="w-full max-w-3xl lg:max-w-4xl text-center px-2 sm:px-4 flex justify-center">
+              <ExplodeText
+                animateBy="word"
+                from="start"
+                scale={2}
+                blur={6}
+                duration={0.45}
+                wordDelay={0.032}
+                delay={0.95}
+                className="justify-center text-center w-full"
+              >
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl lg:max-w-4xl leading-relaxed font-medium text-center flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
+                  <span className="explode-word inline-block opacity-0">I&apos;m</span>
+                  <span className="explode-word inline-block opacity-0 text-gray-900 font-bold">Pronoy</span>
+                  <span className="explode-word inline-block opacity-0 text-gray-900 font-bold">Pal</span>
+                  <span className="explode-word inline-block opacity-0">—</span>
+                  <span className="explode-word inline-block opacity-0">a</span>
+                  <span className="explode-word inline-block opacity-0">Full-Stack</span>
+                  <span className="explode-word inline-block opacity-0">Engineer</span>
+                  <span className="explode-word inline-block opacity-0">currently</span>
+                  <span className="explode-word inline-block opacity-0">focused</span>
+                  <span className="explode-word inline-block opacity-0">on</span>
+                  <span className="explode-word inline-block opacity-0">architecting</span>
+                  <span className="explode-word inline-block opacity-0">resilient</span>
+                  <span className="explode-word inline-flex opacity-0 items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    System Design
+                  </span>
+                  <span className="explode-word inline-block opacity-0">,</span>
+                  <span className="explode-word inline-block opacity-0">maximizing</span>
+                  <span className="explode-word inline-flex opacity-0 items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    Web Performance
+                  </span>
+                  <span className="explode-word inline-block opacity-0">for</span>
+                  <span className="explode-word inline-block opacity-0">sub-second</span>
+                  <span className="explode-word inline-block opacity-0">speeds,</span>
+                  <span className="explode-word inline-block opacity-0">and</span>
+                  <span className="explode-word inline-block opacity-0">shipping</span>
+                  <span className="explode-word inline-block opacity-0">mission-critical</span>
+                  <span className="explode-word inline-flex opacity-0 items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm shadow-xs">
+                    Scalable Architecture
+                  </span>
+                  <span className="explode-word inline-block opacity-0">that</span>
+                  <span className="explode-word inline-block opacity-0">drives</span>
+                  <span className="explode-word inline-block opacity-0">real</span>
+                  <span className="explode-word inline-block opacity-0">business</span>
+                  <span className="explode-word inline-block opacity-0">value.</span>
+                </p>
+              </ExplodeText>
+            </div>
           </div>
 
           {/* 5. CTA Buttons (fade/slide in after subtitle) */}
@@ -266,7 +293,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: shouldReduceMotion ? 0.01 : 0.65,
-              delay: shouldReduceMotion ? 0 : 0.98,
+              delay: shouldReduceMotion ? 0 : 1.75,
               ease,
             }}
             className="flex flex-row items-center justify-center gap-2 sm:gap-5 mt-1 w-full max-w-md sm:max-w-none px-2 sm:px-0"
@@ -306,20 +333,19 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: shouldReduceMotion ? 0.01 : 0.6,
-              delay: shouldReduceMotion ? 0 : 1.05,
+              delay: shouldReduceMotion ? 0 : 1.85,
               ease,
             }}
-            className="flex md:hidden items-center justify-center gap-3 mt-1 sm:mt-2"
+            className="flex md:hidden items-center justify-center gap-3 mt-1 sm:mt-2 z-20 relative"
           >
             <a
               href="https://github.com/pronoy656"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/80 hover:border-indigo-600 text-gray-700 hover:text-indigo-600 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 transition-all duration-200"
+              className="w-10 h-10 rounded-full bg-white border border-gray-200/90 hover:border-indigo-600 hover:bg-indigo-50/50 text-gray-700 hover:text-indigo-600 shadow-xs hover:shadow-md flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all duration-200"
             >
               <GithubIcon />
-              <span className="text-xs font-mono font-bold">GitHub</span>
             </a>
 
             <a
@@ -327,10 +353,9 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/80 hover:border-indigo-600 text-gray-700 hover:text-indigo-600 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 transition-all duration-200"
+              className="w-10 h-10 rounded-full bg-white border border-gray-200/90 hover:border-indigo-600 hover:bg-indigo-50/50 text-gray-700 hover:text-indigo-600 shadow-xs hover:shadow-md flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all duration-200"
             >
               <LinkedinIcon />
-              <span className="text-xs font-mono font-bold">LinkedIn</span>
             </a>
           </motion.div>
 
@@ -339,7 +364,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: shouldReduceMotion ? 0.01 : 0.6,
-              delay: shouldReduceMotion ? 0 : 1.15,
+              delay: shouldReduceMotion ? 0 : 1.95,
               ease,
             }}
             className="flex md:hidden flex-col items-center gap-1 mt-1 text-center"
@@ -358,32 +383,32 @@ export default function Hero() {
 
       </div>
 
-      {/* ── DESKTOP FOOTER BAR (Sequential Entrance) ── */}
+      {/* ── DESKTOP FOOTER BAR (Sequential Entrance & Guaranteed Clickable with Circle Hover Effect) ── */}
       <motion.div
         initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: shouldReduceMotion ? 0.01 : 0.65,
-          delay: shouldReduceMotion ? 0 : 1.05,
+          delay: shouldReduceMotion ? 0 : 1.85,
           ease,
         }}
-        className="hidden md:flex absolute bottom-10 left-0 right-0 px-8 md:px-24 justify-between items-end pointer-events-none [&_a]:pointer-events-auto"
+        className="hidden md:flex absolute bottom-8 sm:bottom-10 left-0 right-0 px-8 md:px-24 justify-between items-end pointer-events-none z-30"
       >
-        <div className="flex gap-12">
+        <div className="flex gap-12 pointer-events-auto">
           <div className="flex flex-col gap-1 items-start">
             <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Based In</span>
             <span className="text-xs font-bold text-[#1a1c20]">Dhaka, Bangladesh</span>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-6 mb-2 justify-end">
+        <div className="flex flex-col gap-3 pointer-events-auto items-end">
+          <div className="flex gap-3 mb-1 justify-end">
             <a
               href="https://github.com/pronoy656"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="text-gray-500 hover:text-indigo-600 transition-all duration-300 hover:scale-125 transform"
+              aria-label="GitHub Profile"
+              className="w-11 h-11 rounded-full border border-gray-200/90 bg-white/95 backdrop-blur-sm hover:border-indigo-600 hover:bg-white text-gray-700 hover:text-indigo-600 shadow-xs hover:shadow-md flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300"
             >
               <GithubIcon />
             </a>
@@ -391,8 +416,8 @@ export default function Hero() {
               href="https://linkedin.com/in/pronoy-pal"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-gray-500 hover:text-indigo-600 transition-all duration-300 hover:scale-125 transform"
+              aria-label="LinkedIn Profile"
+              className="w-11 h-11 rounded-full border border-gray-200/90 bg-white/95 backdrop-blur-sm hover:border-indigo-600 hover:bg-white text-gray-700 hover:text-indigo-600 shadow-xs hover:shadow-md flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300"
             >
               <LinkedinIcon />
             </a>
