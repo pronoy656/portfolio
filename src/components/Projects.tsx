@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Project, projectsData } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -38,6 +38,8 @@ const GithubIcon = () => (
 const featuredProjects = projectsData.slice(0, 6);
 
 export default function Projects() {
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
@@ -174,8 +176,14 @@ export default function Projects() {
           ref={pinRef}
           className="h-screen w-full flex flex-col justify-between px-8 md:px-12 pt-20 md:pt-22 pb-14 relative overflow-hidden"
         >
-          {/* Header */}
-          <div className="w-full max-w-7xl mx-auto flex items-end justify-between gap-4 z-[60] shrink-0 mb-8 md:mb-10">
+          {/* Header (Scroll Reveal) */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
+            className="w-full max-w-7xl mx-auto flex items-end justify-between gap-4 z-[60] shrink-0 mb-8 md:mb-10"
+          >
             <div className="flex flex-col gap-1.5">
               <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-gray-900 leading-none">
                 WORKS <span className="text-gray-300 font-light">&amp;</span>{" "}
@@ -190,7 +198,7 @@ export default function Projects() {
               <span>View All Projects</span>
               <ArrowRight size={14} className="transition-transform group-hover/all:translate-x-1" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Stacking Arena */}
           <div
@@ -347,11 +355,17 @@ export default function Projects() {
           ══════════════════════════════════════════════════════════════════════ */}
       <div className="block md:hidden pt-16 sm:pt-20 pb-12 bg-[#fafbfc]">
         
-        {/* Mobile Header (Compact & perfectly aligned) */}
-        <div className="px-4 mb-3.5 flex items-end justify-between gap-3">
+        {/* Mobile Header (Scroll Reveal) */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease }}
+          className="px-4 mb-3.5 flex items-end justify-between gap-3"
+        >
           <div>
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-indigo-600 font-bold block mb-1">
-              // Selected Works
+              {"// Selected Works"}
             </span>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 leading-none">
               WORKS <span className="text-gray-300 font-light">&amp;</span>{" "}
@@ -366,7 +380,7 @@ export default function Projects() {
             <span>View All</span>
             <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
-        </div>
+        </motion.div>
 
         {/* Mobile Native Snap Carousel (Compact, zero empty vertical gaps) */}
         <div
@@ -374,9 +388,17 @@ export default function Projects() {
           onScroll={handleMobileScroll}
           className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-4 py-1 items-start [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {featuredProjects.map((project) => (
-            <div
+          {featuredProjects.map((project, idx) => (
+            <motion.div
               key={project.id}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.5,
+                delay: shouldReduceMotion ? 0 : idx * 0.08,
+                ease,
+              }}
               className="w-[86vw] max-w-[340px] shrink-0 snap-center rounded-2xl bg-white border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col h-auto"
             >
               {/* Card Header Tab */}
@@ -463,7 +485,7 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

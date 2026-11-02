@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Send, CheckCircle2 } from "lucide-react";
 
 export default function Contact() {
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">("idle");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,20 +26,22 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           <div>
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
               className="mb-6 sm:mb-8"
             >
               <span className="px-4 py-2 rounded-full border border-border-color text-xs font-bold tracking-widest uppercase text-muted-text">
-                Let's collaborate
+                Let&apos;s collaborate
               </span>
             </motion.div>
 
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, delay: shouldReduceMotion ? 0 : 0.1, ease }}
               className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter leading-[0.95] sm:leading-[0.9] mb-8 sm:mb-12"
             >
               TELL ME ABOUT YOUR <br />
@@ -96,7 +100,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-3xl font-bold mb-4">Message Received!</h3>
                 <p className="text-muted-text">
-                  Thanks for reaching out. I'll get back to you within 24 hours.
+                  Thanks for reaching out. I&apos;ll get back to you within 24 hours.
                 </p>
                 <button 
                   onClick={() => setFormState("idle")}
@@ -108,7 +112,7 @@ export default function Contact() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">What's your name?</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">What&apos;s your name?</label>
                   <input
                     required
                     type="text"

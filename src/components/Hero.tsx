@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, MoveRight, Star, Sparkles, Download } from "lucide-react";
+import React from "react";
+import dynamic from "next/dynamic";
+import { MoveRight, Download } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
-gsap.registerPlugin(ScrollTrigger);
+const AsciiWave = dynamic(() => import("@/components/AsciiWave"), {
+  ssr: false,
+});
 
 const GithubIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
@@ -13,10 +15,6 @@ const GithubIcon = () => (
 
 const LinkedinIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-);
-
-const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
 );
 
 import {
@@ -29,7 +27,6 @@ import {
   SiFigma,
   SiNodedotjs,
   SiExpress,
-  SiSocketdotio,
   SiMongodb,
   SiPostman,
   SiTailwindcss,
@@ -92,35 +89,70 @@ const techIcons = [
 ];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Reveal animations
-      gsap.from(".hero-reveal", {
-        y: 40,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        stagger: 0.1,
-      });
-    }, containerRef);
+  // Motion variants respecting prefers-reduced-motion
+  const techContainerVariants: Variants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.035,
+        delayChildren: shouldReduceMotion ? 0 : 0.15,
+      },
+    },
+  };
 
-    return () => ctx.revert();
-  }, []);
+  const techItemVariants: Variants = {
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      scale: shouldReduceMotion ? 1 : 0.85,
+      y: shouldReduceMotion ? 0 : 12,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.01 : 0.45,
+        ease,
+      },
+    },
+  };
 
   return (
     <section
-      ref={containerRef}
       className="relative min-h-0 md:min-h-screen bg-[#fcfcfd] overflow-hidden"
     >
+      {/* ── Interactive ASCII Wave Background ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-30 md:opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)]">
+        <AsciiWave
+          characters=" .:-+*=%@{}#<>"
+          color="#d35af8"
+          waveTension={1.5}
+          waveTwist={0.83}
+          invert={false}
+          noiseScale={1.9}
+          elementSize={23}
+          speed={0.1}
+          hasCursorInteraction={true}
+          intensity={0.5}
+          interactionIntensity={0.15}
+          videoUrl=""
+        />
+      </div>
+
       {/* ── Background Mood Elements ── */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[1]">
+        {/* Spreading Central White Gradient Aura for 100% Text Clarity */}
+        <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-[1100px] h-[680px] sm:h-[620px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.85)_40%,rgba(255,255,255,0.4)_65%,transparent_80%)] blur-2xl pointer-events-none" />
+
         {/* Soft Ambient Brand Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70vw] h-[35vw] bg-gradient-to-r from-indigo-100/30 via-purple-100/20 to-transparent blur-[140px] rounded-full" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[70vw] h-[35vw] bg-gradient-to-r from-indigo-100/25 via-purple-100/15 to-transparent blur-[140px] rounded-full" />
         
         {/* Elegant Watermark */}
-        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-indigo-900/[0.04] uppercase tracking-tighter select-none pointer-events-none">
+        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-indigo-900/[0.03] uppercase tracking-tighter select-none pointer-events-none">
           ENGINEER
         </div>
       </div>
@@ -129,11 +161,18 @@ export default function Hero() {
         
         {/* ── CENTERED CONTENT ── */}
         <div className="lg:col-span-12 flex flex-col items-center text-center gap-5 sm:gap-7">
-          {/* Tech Stack Icons with Circular Border (Wrapped cleanly on mobile, single horizontal line on desktop, Figma hidden on mobile) */}
-          <div className="hero-reveal flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-4 max-w-[340px] md:max-w-none mt-2 sm:mt-6 mb-1 sm:mb-2 py-1 px-2">
+          
+          {/* 1. Tech Stack Icons: Sequential Staggered Entrance */}
+          <motion.div
+            variants={techContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-4 max-w-[340px] md:max-w-none mt-2 sm:mt-6 mb-1 sm:mb-2 py-1 px-2"
+          >
             {techIcons.map((tech) => (
-              <div
+              <motion.div
                 key={tech.name}
+                variants={techItemVariants}
                 title={tech.name}
                 className={`group relative items-center justify-center transition-all duration-300 hover:scale-125 hover:z-30 cursor-pointer select-none ${
                   tech.name === "Figma" ? "hidden md:flex" : "flex"
@@ -150,21 +189,60 @@ export default function Hero() {
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-md bg-gray-900/95 text-white text-[10px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-md z-40">
                   {tech.name}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col gap-3.5 sm:gap-5 items-center w-full">
-            <h1 className="hero-reveal font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-1 sm:gap-3 text-center px-2 max-w-full">
-              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] whitespace-normal sm:whitespace-nowrap">
-                Frontend-Focused
+          <div className="relative flex flex-col gap-3.5 sm:gap-5 items-center w-full">
+            {/* Localized White Gradient Spread behind Headline & Subtitle for crystal-clear readability */}
+            <div className="absolute -inset-x-8 sm:-inset-x-16 -inset-y-8 sm:-inset-y-12 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.7)_50%,transparent_75%)] blur-xl pointer-events-none -z-10" />
+
+            {/* 2 & 3. Main Headline & Full-Stack Developer Title (Each line slides up from behind a mask) */}
+            <h1 className="font-black tracking-tighter text-[#1a1c20] flex flex-col items-center gap-1 sm:gap-2 text-center px-2 max-w-full">
+              {/* Line 1: Frontend-Focused */}
+              <span className="overflow-hidden inline-block py-0.5">
+                <motion.span
+                  initial={{ y: shouldReduceMotion ? "0%" : "120%", opacity: shouldReduceMotion ? 1 : 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0.01 : 0.75,
+                    delay: shouldReduceMotion ? 0 : 0.42,
+                    ease,
+                  }}
+                  className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] whitespace-normal sm:whitespace-nowrap inline-block will-change-transform"
+                >
+                  Frontend-Focused
+                </motion.span>
               </span>
-              <span className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] text-indigo-600 whitespace-normal sm:whitespace-nowrap">
-                Full-Stack Developer.
+
+              {/* Line 2: Full-Stack Developer. */}
+              <span className="overflow-hidden inline-block py-0.5">
+                <motion.span
+                  initial={{ y: shouldReduceMotion ? "0%" : "120%", opacity: shouldReduceMotion ? 1 : 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0.01 : 0.75,
+                    delay: shouldReduceMotion ? 0 : 0.60,
+                    ease,
+                  }}
+                  className="text-[7.2vw] sm:text-[6.4vw] lg:text-[5.2vw] leading-[1.08] sm:leading-[1.05] text-indigo-600 whitespace-normal sm:whitespace-nowrap inline-block will-change-transform"
+                >
+                  Full-Stack Developer.
+                </motion.span>
               </span>
             </h1>
 
-            <p className="hero-reveal text-sm sm:text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed font-medium text-center px-2">
+            {/* 4. Subtitle Paragraph (fades & slides in after the title) */}
+            <motion.p
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.65,
+                delay: shouldReduceMotion ? 0 : 0.82,
+                ease,
+              }}
+              className="text-sm sm:text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed font-medium text-center px-2"
+            >
               I&apos;m <span className="text-gray-900 font-bold">Pronoy Pal</span> — a Frontend-Focused Full-Stack Developer who turns ideas into
               production-ready products. I specialise in{" "}
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm">
@@ -179,11 +257,20 @@ export default function Hero() {
                 Accessible UI
               </span>{" "}
               that users love.
-            </p>
+            </motion.p>
           </div>
 
-          {/* ── CTA Buttons (Both on the SAME LINE on mobile & desktop) ── */}
-          <div className="hero-reveal flex flex-row items-center justify-center gap-2 sm:gap-5 mt-1 w-full max-w-md sm:max-w-none px-2 sm:px-0">
+          {/* 5. CTA Buttons (fade/slide in after subtitle) */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.65,
+              delay: shouldReduceMotion ? 0 : 0.98,
+              ease,
+            }}
+            className="flex flex-row items-center justify-center gap-2 sm:gap-5 mt-1 w-full max-w-md sm:max-w-none px-2 sm:px-0"
+          >
             {/* Primary CTA: Explore Projects */}
             <a
               href="#projects"
@@ -211,10 +298,19 @@ export default function Hero() {
                 <Download size={12} />
               </span>
             </a>
-          </div>
+          </motion.div>
 
-          {/* ── MOBILE-ONLY Social Profiles (GitHub & LinkedIn directly after the buttons on mobile) ── */}
-          <div className="hero-reveal flex md:hidden items-center justify-center gap-3 mt-1 sm:mt-2">
+          {/* 6. MOBILE-ONLY Social Profiles & Current Focus */}
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.6,
+              delay: shouldReduceMotion ? 0 : 1.05,
+              ease,
+            }}
+            className="flex md:hidden items-center justify-center gap-3 mt-1 sm:mt-2"
+          >
             <a
               href="https://github.com/pronoy656"
               target="_blank"
@@ -236,10 +332,18 @@ export default function Hero() {
               <LinkedinIcon />
               <span className="text-xs font-mono font-bold">LinkedIn</span>
             </a>
-          </div>
+          </motion.div>
 
-          {/* ── MOBILE-ONLY Current Focus (Placed directly underneath the buttons on mobile) ── */}
-          <div className="hero-reveal flex md:hidden flex-col items-center gap-1 mt-1 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.6,
+              delay: shouldReduceMotion ? 0 : 1.15,
+              ease,
+            }}
+            className="flex md:hidden flex-col items-center gap-1 mt-1 text-center"
+          >
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-gray-400">
@@ -249,13 +353,22 @@ export default function Hero() {
             <span className="text-xs sm:text-sm font-bold text-[#1a1c20] tracking-tight">
               System Design &amp; Web Performance
             </span>
-          </div>
+          </motion.div>
         </div>
 
       </div>
 
-      {/* ── DESKTOP FOOTER BAR (Restored exactly to original desktop layout) ── */}
-      <div className="hidden md:flex absolute bottom-10 left-0 right-0 px-8 md:px-24 justify-between items-end pointer-events-none [&_a]:pointer-events-auto">
+      {/* ── DESKTOP FOOTER BAR (Sequential Entrance) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: shouldReduceMotion ? 0.01 : 0.65,
+          delay: shouldReduceMotion ? 0 : 1.05,
+          ease,
+        }}
+        className="hidden md:flex absolute bottom-10 left-0 right-0 px-8 md:px-24 justify-between items-end pointer-events-none [&_a]:pointer-events-auto"
+      >
         <div className="flex gap-12">
           <div className="flex flex-col gap-1 items-start">
             <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">Based In</span>
@@ -290,7 +403,7 @@ export default function Hero() {
             <span className="text-xs font-bold text-[#1a1c20]">System Design &amp; Web Performance</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
     </section>
   );

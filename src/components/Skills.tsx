@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 const categories = [
   {
@@ -23,27 +23,40 @@ const categories = [
 ];
 
 export default function Skills() {
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+
   return (
     <section id="skills" className="scroll-mt-24 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
-        <div className="flex flex-col gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-24">
+        {/* Section Header (Scroll Reveal) */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
+          className="flex flex-col gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-24"
+        >
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">Technical Expertise</span>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
-            CRAFT <span className="text-gray-200">&</span> <br/>
+            CRAFT <span className="text-gray-200">&amp;</span> <br/>
             <span className="text-gray-200 italic">STACK.</span>
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.6,
+                delay: shouldReduceMotion ? 0 : i * 0.1,
+                ease,
+              }}
             >
               <h3 className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-8 border-b border-indigo-500/20 pb-4">
                 {cat.title}

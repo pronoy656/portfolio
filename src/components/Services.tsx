@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { Check, ChevronsRight } from "lucide-react";
 import AuditReviewGlass from "@/components/AuditReviewGlass";
 
@@ -84,6 +84,8 @@ const services: ServiceItem[] = [
 
 export default function Services() {
   const [activeCard, setActiveCard] = useState<string>("01");
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
     <section id="services" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 lg:py-28 px-4 sm:px-10 lg:px-14 bg-[#fafbfc] relative overflow-hidden">
@@ -94,8 +96,14 @@ export default function Services() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* ── Section Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        {/* ── Section Header (Scroll-triggered entrance) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16"
+        >
           <div className="flex flex-col gap-3">
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight text-gray-900">
               SOLUTIONS <span className="text-gray-300 font-light">&amp;</span> <br className="hidden sm:inline" />
@@ -106,16 +114,24 @@ export default function Services() {
           <p className="text-sm md:text-base text-gray-500 max-w-md font-medium leading-relaxed">
             End-to-end design and engineering tailored to help ambitious products scale, convert, and outperform.
           </p>
-        </div>
+        </motion.div>
 
-        {/* ── 3-Column Cards Grid ── */}
+        {/* ── 3-Column Cards Grid (Staggered Scroll Reveals) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-          {services.map((service) => {
+          {services.map((service, idx) => {
             const isHovered = activeCard === service.id;
 
             return (
-              <div
+              <motion.div
                 key={service.id}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0.01 : 0.7,
+                  delay: shouldReduceMotion ? 0 : idx * 0.14,
+                  ease,
+                }}
                 onClick={() => setActiveCard(activeCard === service.id ? "" : service.id)}
                 onMouseEnter={() => setActiveCard(service.id)}
                 onFocus={() => setActiveCard(service.id)}
@@ -256,7 +272,7 @@ export default function Services() {
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>

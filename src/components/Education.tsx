@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import {
   GraduationCap,
@@ -151,6 +151,8 @@ const certificationList: CertificationItem[] = [
 ];
 
 export default function Education() {
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
   const [activeTab, setActiveTab] = useState<"education" | "certification">("education");
   const [previewCert, setPreviewCert] = useState<CertificationItem | null>(null);
 
@@ -203,8 +205,14 @@ export default function Education() {
     <section id="education" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-32 px-4 sm:px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
       <div className="max-w-7xl mx-auto">
         
-        {/* ── Section Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16">
+        {/* ── Section Header (Scroll Reveal) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16"
+        >
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
               Academic &amp; Credentials
@@ -273,7 +281,7 @@ export default function Education() {
               </span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Tab Content ── */}
         <AnimatePresence mode="wait">

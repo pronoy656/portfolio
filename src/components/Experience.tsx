@@ -10,6 +10,8 @@ import {
   Layers,
   Users,
 } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import { CountUp } from "@/components/animations";
 
 const sparktechData = {
   role: "Frontend Developer",
@@ -63,6 +65,9 @@ const sparktechData = {
 };
 
 export default function Experience() {
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+
   return (
     <section id="experience" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
       
@@ -75,7 +80,13 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* ── Section Header (Editorial, Bold & Human) ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-gray-100">
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-gray-100"
+        >
           <div className="flex flex-col gap-2.5">
             <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
               STORY <span className="text-gray-300 font-light">&amp;</span> <br />
@@ -88,30 +99,44 @@ export default function Experience() {
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Active at Sparktech Agency · Open to Opportunities</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* ── Top Proof-of-Craft Impact Grid (4 Agency Stat Tiles) ── */}
+        {/* ── Top Proof-of-Craft Impact Grid (4 Agency Stat Tiles, Staggered Reveal) ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-12">
           {sparktechData.metrics.map((m, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.55,
+                delay: shouldReduceMotion ? 0 : idx * 0.08,
+                ease,
+              }}
               className="p-4 sm:p-6 rounded-2xl bg-gray-50/70 border border-gray-200/70 flex flex-col justify-between hover:bg-white hover:shadow-sm transition-all duration-300"
             >
               <span className={`text-2xl sm:text-4xl font-black tracking-tight ${
                 idx === 1 ? "text-indigo-600" : idx === 2 ? "text-emerald-600" : "text-gray-900"
               }`}>
-                {m.value}
+                <CountUp value={m.value} />
               </span>
               <div className="mt-2">
                 <span className="text-xs font-bold text-gray-900 block leading-tight">{m.label}</span>
                 <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 uppercase tracking-wider block mt-0.5">{m.desc}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* ── Featured Agency Role Spotlight Card ── */}
-        <div className="bg-white rounded-2xl sm:rounded-[2.5rem] border border-gray-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-5 sm:p-10 md:p-12 relative overflow-hidden flex flex-col gap-8 sm:gap-10">
+        {/* ── Featured Agency Role Spotlight Card (Smooth Viewport Reveal) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, ease }}
+          className="bg-white rounded-2xl sm:rounded-[2.5rem] border border-gray-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-5 sm:p-10 md:p-12 relative overflow-hidden flex flex-col gap-8 sm:gap-10"
+        >
           
           {/* Top Header Row of the Spotlight Card */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 sm:pb-8 border-b border-gray-100">
@@ -202,7 +227,7 @@ export default function Experience() {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>
