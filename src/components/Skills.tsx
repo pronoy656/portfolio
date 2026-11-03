@@ -54,14 +54,14 @@ interface SkillItemProps {
   skill: string;
   catIndex: number;
   skillIndex: number;
-  sectionInView: boolean;
+  categoryInView: boolean;
 }
 
 function SkillItem({
   skill,
   catIndex,
   skillIndex,
-  sectionInView,
+  categoryInView,
 }: SkillItemProps) {
   const [hoverCount, setHoverCount] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -78,17 +78,17 @@ function SkillItem({
       <div className="relative flex items-center">
         <ExplodeText
           text={skill}
-          trigger={sectionInView}
+          trigger={categoryInView}
           replayKey={hoverCount}
-          initialVisible={true}
-          delay={hoverCount > 0 ? 0 : catIndex * 0.1 + skillIndex * 0.04}
+          initialVisible={false}
+          delay={hoverCount > 0 ? 0 : catIndex * 0.08 + skillIndex * 0.05}
           animateBy="letter"
           from="start"
           scale={2.2}
           blur={6}
           duration={0.45}
           charDelay={0.016}
-          color={isHovered ? "#4f46e5" : "rgba(31, 41, 55, 0.72)"}
+          color={isHovered ? "#4f46e5" : "rgba(31, 41, 55, 0.75)"}
           fontSize="text-lg lg:text-xl font-bold tracking-tight"
           className="transition-colors duration-200"
         />
@@ -109,9 +109,55 @@ function SkillItem({
   );
 }
 
+function SkillCategory({
+  cat,
+  catIndex,
+}: {
+  cat: (typeof categories)[0];
+  catIndex: number;
+}) {
+  const catRef = useRef<HTMLDivElement>(null);
+  // Trigger ONLY when this specific category actually scrolls into view (with a 50px offset into the screen)
+  const isInView = useInView(catRef, {
+    once: true,
+    amount: 0.25,
+    margin: "0px 0px -50px 0px",
+  });
+  const shouldReduceMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+
+  return (
+    <motion.div
+      ref={catRef}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2, margin: "0px 0px -50px 0px" }}
+      transition={{
+        duration: shouldReduceMotion ? 0.01 : 0.6,
+        delay: shouldReduceMotion ? 0 : catIndex * 0.08,
+        ease,
+      }}
+    >
+      <h3 className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-8 border-b border-indigo-500/20 pb-4">
+        {cat.title}
+      </h3>
+      <div className="space-y-4">
+        {cat.skills.map((skill, j) => (
+          <SkillItem
+            key={skill}
+            skill={skill}
+            catIndex={catIndex}
+            skillIndex={j}
+            categoryInView={isInView}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, amount: 0.15 });
   const shouldReduceMotion = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -119,7 +165,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="scroll-mt-24 md:scroll-mt-28 relative z-20 py-20 sm:py-28 md:py-40 px-4 sm:px-6 bg-white border-t border-gray-100"
+      className="scroll-mt-24 md:scroll-mt-28 relative z-20 pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header (Scroll Reveal) */}
@@ -128,45 +174,21 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
-          className="flex flex-col gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-24"
+          className="flex flex-col gap-2.5 sm:gap-3 mb-8 sm:mb-10 md:mb-12"
         >
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
             Technical Expertise
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
-            CRAFT <span className="text-gray-200">&amp;</span> <br />
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter leading-none text-gray-900">
+            CRAFT <span className="text-gray-200">&amp;</span>{" "}
             <span className="text-gray-200 italic">STACK.</span>
           </h2>
         </motion.div>
 
+        {/* Categories Grid - Each column triggers its own text effect when in view */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
           {categories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: shouldReduceMotion ? 0.01 : 0.6,
-                delay: shouldReduceMotion ? 0 : i * 0.1,
-                ease,
-              }}
-            >
-              <h3 className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-8 border-b border-indigo-500/20 pb-4">
-                {cat.title}
-              </h3>
-              <div className="space-y-4">
-                {cat.skills.map((skill, j) => (
-                  <SkillItem
-                    key={skill}
-                    skill={skill}
-                    catIndex={i}
-                    skillIndex={j}
-                    sectionInView={inView}
-                  />
-                ))}
-              </div>
-            </motion.div>
+            <SkillCategory key={cat.title} cat={cat} catIndex={i} />
           ))}
         </div>
       </div>

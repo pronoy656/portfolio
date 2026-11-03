@@ -84,7 +84,7 @@ const services: ServiceItem[] = [
 ];
 
 export default function Services() {
-  const [activeCard, setActiveCard] = useState<string>("01");
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -120,7 +120,7 @@ export default function Services() {
         {/* ── 3-Column Cards Grid (Staggered Scroll Reveals) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {services.map((service, idx) => {
-            const isHovered = activeCard === service.id;
+            const isHovered = hoveredCard === service.id;
 
             return (
               <motion.div
@@ -133,32 +133,21 @@ export default function Services() {
                   delay: shouldReduceMotion ? 0 : idx * 0.14,
                   ease,
                 }}
-                onClick={() => setActiveCard(activeCard === service.id ? "" : service.id)}
-                onMouseEnter={() => setActiveCard(service.id)}
-                onFocus={() => setActiveCard(service.id)}
-                className={`group relative rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 flex flex-col justify-between overflow-hidden transition-all duration-700 ease-out border min-h-[500px] sm:min-h-[620px] cursor-pointer ${
-                  isHovered
-                    ? "bg-white border-white shadow-[0_25px_60px_rgba(0,0,0,0.08)] scale-[1.01]"
-                    : "bg-white/95 border-gray-200/70 shadow-[0_10px_35px_rgba(0,0,0,0.03)] hover:border-gray-300/80"
-                }`}
+                onMouseEnter={() => setHoveredCard(service.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className="group relative rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 flex flex-col justify-between overflow-hidden border min-h-[500px] sm:min-h-[620px] bg-white border-gray-200/80 shadow-[0_10px_35px_rgba(0,0,0,0.03)] hover:border-gray-300/80"
               >
                 {/* ── Ambient Radial Glow on Card Base ── */}
                 <div
-                  className="absolute inset-0 pointer-events-none transition-opacity duration-700 z-0"
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0"
                   style={{
                     background: `radial-gradient(circle at 50% 100%, ${service.glowColor} 0%, transparent 70%)`,
-                    opacity: isHovered ? 1 : 0.45,
+                    opacity: isHovered ? 0.75 : 0.35,
                   }}
                 />
 
                 {/* ── 3D Glass Sculpture Artwork (Inside Card) ── */}
-                <div
-                  className={`absolute inset-0 pointer-events-none transition-all duration-700 ease-out overflow-hidden z-10 flex items-end justify-center ${
-                    isHovered
-                      ? "opacity-25 scale-95 blur-[1.5px]"
-                      : "opacity-100 scale-100"
-                  }`}
-                >
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-10 flex items-end justify-center opacity-30">
                   {service.artwork === "digital" && (
                     <div className="relative w-full h-full">
                       <Image
@@ -166,7 +155,7 @@ export default function Services() {
                         alt="Digital Products 3D Glass Artwork"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 420px"
-                        className="object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover object-bottom"
                         priority
                       />
                       {/* Top gradient fade ensuring title & subtitle stay 100% crisp and readable */}
@@ -181,7 +170,7 @@ export default function Services() {
                         alt="Content & Marketing 3D Glass Artwork"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 420px"
-                        className="object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover object-bottom"
                         priority
                       />
                       {/* Top gradient fade ensuring title & subtitle stay 100% crisp and readable */}
@@ -218,16 +207,10 @@ export default function Services() {
                   </p>
                 </div>
 
-                {/* ── Interactive Content Body (Revealed on Hover) ── */}
+                {/* ── Content Body (Always Visible - No Ease-In Shift) ── */}
                 <div className="relative z-20 flex-1 flex flex-col justify-between mt-4">
                   {/* Bullet Points Container */}
-                  <div
-                    className={`transition-all duration-500 ease-out flex flex-col ${
-                      isHovered
-                        ? "opacity-100 translate-y-0 max-h-[420px]"
-                        : "opacity-0 translate-y-4 max-h-0 pointer-events-none overflow-hidden"
-                    }`}
-                  >
+                  <div className="flex flex-col">
                     {/* Dotted Separator */}
                     <div className="border-b border-dashed border-gray-200/90 my-3.5" />
 
@@ -250,13 +233,14 @@ export default function Services() {
                           <ExplodeText
                             text={item}
                             trigger={isHovered}
-                            delay={idx * 0.08}
+                            initialVisible={true}
+                            delay={idx * 0.05}
                             animateBy="letter"
                             from="start"
                             scale={2.2}
                             blur={6}
-                            duration={0.45}
-                            charDelay={0.015}
+                            duration={0.4}
+                            charDelay={0.012}
                             color="#1f2937"
                             fontSize="text-xs sm:text-[13px]"
                           />
@@ -265,14 +249,8 @@ export default function Services() {
                     </ul>
                   </div>
 
-                  {/* ── Action Button (Lime Green Pill, Revealed on Hover) ── */}
-                  <div
-                    className={`pt-5 transition-all duration-500 ease-out ${
-                      isHovered
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-4 pointer-events-none"
-                    }`}
-                  >
+                  {/* ── Action Button (Lime Green Pill) ── */}
+                  <div className="pt-5">
                     <a
                       href={service.buttonHref}
                       className="group/btn relative w-full py-3.5 px-6 rounded-full bg-[#a3e635] hover:bg-[#bef264] text-gray-950 font-black text-xs sm:text-sm tracking-tight flex items-center justify-between shadow-[0_12px_28px_rgba(163,230,53,0.38)] hover:shadow-[0_16px_36px_rgba(163,230,53,0.5)] active:scale-[0.98] transition-all cursor-pointer"

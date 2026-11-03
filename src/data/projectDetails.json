@@ -1,0 +1,463 @@
+{
+  "shabos-rent": {
+    "id": "05",
+    "slug": "shabos-rent",
+    "number": "05",
+    "title": "ShabbosRent",
+    "tagline": "Halakhic Prop-Tech, Reciprocal Apartment Swap & Affiliate ERP",
+    "category": "Prop-Tech & Community Hospitality / 2024",
+    "role": "Lead Full-Stack Engineer",
+    "badge": "Production Deployed",
+    "summary": "An enterprise-grade hospitality and accommodation ecosystem engineered specifically for the global Shabbat-observant community. Features walking-distance calculation via the Haversine formula (4.8 km/h), reciprocal home exchange, multi-tier dual commission affiliate modeling, and an omnichannel administrative ERP.",
+    "metrics": [
+      { "value": "1,520+", "label": "Verified Listings" },
+      { "value": "4.8 km/h", "label": "Pedestrian Transit Math" },
+      { "value": "₪265+", "label": "Max Yield / Property" },
+      { "value": "100%", "label": "Halakhic & Kosher Aware" }
+    ],
+    "images": [
+      { "url": "/shabosrent-mockup-1.jpg", "label": "1. Search & Walking Distance" },
+      { "url": "/shabosrent-mockup-2.jpg", "label": "2. Admin ERP Dashboard" },
+      { "url": "/shabosrent-mockup-3.jpg", "label": "3. Ambassador Commission Portal" }
+    ],
+    "comparison": {
+      "sectionTitle": "Why Traditional Platforms (Airbnb, Booking) Fail in this Market",
+      "sectionDesc": "General hospitality software is fundamentally unaware of Halakhic (Jewish religious law) constraints. ShabbosRent was architected from the ground up to solve these specialized lifestyle requirements.",
+      "items": [
+        {
+          "title": "Walking vs Driving Transit",
+          "traditional": "Calculates radius in driving minutes or radial km — useless on Shabbat when driving is prohibited.",
+          "solution": "Halakhic Pedestrian Engine: Calculates walking minutes to synagogues & landmarks using Haversine formula at 4.8 km/h.",
+          "icon": "Compass"
+        },
+        {
+          "title": "Religious Amenities",
+          "traditional": "Filters only for generic amenities (pools, Wi-Fi, air conditioning, parking).",
+          "solution": "Kosher Kitchen (separate meat/dairy), Shabbos Plata, Hot Water Urn, Shabbos Timer, Shabbos Elevator, Sukkah Balcony.",
+          "icon": "Flame"
+        },
+        {
+          "title": "Liturgical Calendar",
+          "traditional": "Bookings operate strictly on civil Gregorian calendar dates.",
+          "solution": "Torah Portion (Parshiyot) Integration: Availability syncs with liturgical weekends (e.g., Parshat Bereshit, Yom Tov).",
+          "icon": "Calendar"
+        },
+        {
+          "title": "Holiday Lodging Costs",
+          "traditional": "Surge pricing causes prices to multiply 3x–5x during Jewish high holidays.",
+          "solution": "Reciprocal Apartment Swap: Verified homeowners exchange properties between cities (Jerusalem ↔ Bnei Brak) at zero lodging cost.",
+          "icon": "Repeat"
+        },
+        {
+          "title": "Orthodox Digital Divide",
+          "traditional": "Assumes 100% smartphone and public internet app accessibility.",
+          "solution": "Omnichannel Bridge: IVR telephone hotline with AI speech transcription and 1-click printable PDF synagogue bulletin flyers.",
+          "icon": "Printer"
+        }
+      ]
+    },
+    "subsystems": [
+      {
+        "id": "search",
+        "title": "Walking-Distance Search Engine",
+        "subtitle": "Pedestrian Geospatial Calculus & Halakhic Filtering",
+        "badge": "Guest Facing",
+        "icon": "Search",
+        "details": [
+          {
+            "heading": "Haversine Pedestrian Transit Formula",
+            "text": "Calculates Great-Circle distance to key landmarks (Western Wall / Kotel, Great Synagogue, Geula, Rehavia, Nachlaot, Tzfat Old City) mapped to calibrated walking velocity: 4.8 km/h (1 km ≈ 12.5 mins). Allows strict filtering: 5, 10, 15, or 20-minute walking radii."
+          },
+          {
+            "heading": "Specialized Halakhic & Architecture Filters",
+            "text": "Explicit filtering for Kosher Kitchen (Meat/Dairy separate sinks), Shabbos Plata (hot plate), Continuous Hot Water Urn, automated light timers, Shabbat elevator, and Sukkah Balcony (open to sky)."
+          },
+          {
+            "heading": "Direct WhatsApp & Phone Dispatch",
+            "text": "Features phone sanitization and 1-click WhatsApp/Call hotline dispatch with courtesy reminder: 'Please remind the host you found them via ShabbosRent so we can keep maintaining the site.'"
+          }
+        ]
+      },
+      {
+        "id": "swap",
+        "title": "Reciprocal Apartment Swap Engine",
+        "subtitle": "Zero-Cost Peer-to-Peer Vacation Exchange",
+        "badge": "C2C Matchmaking",
+        "icon": "Repeat",
+        "details": [
+          {
+            "heading": "Mutual Swap Verification Gate",
+            "text": "Users can only initiate swaps if they hold an active, verified apartment listing of their own with swap availability toggled to true. Both participating hosts must be verified."
+          },
+          {
+            "heading": "Side-by-Side Comparison UI",
+            "text": "Interactive modal allowing users to inspect 'Your Listing' alongside 'Target Listing' (Bedrooms, Capacity, Kosher status, Walking proximity) before dispatching a proposal."
+          },
+          {
+            "heading": "Two-Way Confirmation & Unique Swap Codes",
+            "text": "Generates cryptographic swap codes (e.g. SWP-1042) once Host B approves Host A's proposal, securely unmasking private key-exchange contact details."
+          }
+        ]
+      },
+      {
+        "id": "ambassador",
+        "title": "Affiliate & Dual Commission Engine",
+        "subtitle": "Per-Apartment Dual Models & Immutable Accounting Ledger",
+        "badge": "Growth Engine",
+        "icon": "Coins",
+        "details": [
+          {
+            "heading": "Model A vs. Model B (Configured Per Apartment)",
+            "text": "Commission models are assigned per apartment rather than per user. Model A offers ₪15 listing fee + ₪25/rental within a 12-month rolling window (up to ₪265+). Model B offers ₪25 upfront + ₪40 on the first confirmed rental with lifetime validity."
+          },
+          {
+            "heading": "7-Day Decision Deadline & Rate Lock",
+            "text": "Ambassadors have a strict 7-day countdown on their dashboard to select between Model A and Model B before system auto-defaults. Commission rates are contractually locked for 12 months."
+          },
+          {
+            "heading": "1-Level Sub-Ambassador & Reversal Ledgers",
+            "text": "Ambassador A earns a ₪5 bonus when referred Ambassador B attributes a property. Financial ledgers are strictly immutable, supporting negative reversal entries upon booking cancellations."
+          }
+        ]
+      },
+      {
+        "id": "host",
+        "title": "Host Operations & Torah Portion Calendar",
+        "subtitle": "Parshiyot Availability & Automated SMS/Email Bot",
+        "badge": "Host Console",
+        "icon": "Calendar",
+        "details": [
+          {
+            "heading": "Torah Portion (Parshiyot) Selector",
+            "text": "Hosts check off upcoming Shabbatot by religious portion (e.g., Parshat Bereshit, Parshat Noach, Parshat Eikev) instead of selecting obscure Gregorian dates."
+          },
+          {
+            "heading": "Automated Weekly Readiness Bot",
+            "text": "Configurable notification daemon messaging hosts every week (e.g., Thursday at 18:00) via SMS or Email prompting: 'Is your apartment ready for this Shabbat? Tap here to toggle availability.'"
+          },
+          {
+            "heading": "Report Rented & ₪50 Success Fee",
+            "text": "Hosts report off-platform or direct bookings via 1-click, automatically issuing a transparent ₪50 platform success fee record to support continuous site operations."
+          }
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Admin ERP & Community Hotline Hub",
+        "subtitle": "AI Voice Hotline Ingestion & Printable Synagogue Bulletins",
+        "badge": "Back Office ERP",
+        "icon": "Building2",
+        "details": [
+          {
+            "heading": "Voice Inbox with AI Speech-to-Text",
+            "text": "Ingests telephone voicemails from kosher phone users, generating audio players, full speech-to-text transcripts, AI summaries, and automated callback tasks."
+          },
+          {
+            "heading": "Print-Ready PDF Synagogue Flyer Generator",
+            "text": "1-click generation of high-contrast printable PDF notices containing apartment specs, kosher amenities, and hotline tear-off tabs for community synagogue notice boards."
+          },
+          {
+            "heading": "₪50 Debt Collection & Commission Audit",
+            "text": "Master ledger tracking open debts with automated reminder counters alongside approval interfaces for ambassador payouts and financial reversals."
+          }
+        ]
+      }
+    ],
+    "dualCommission": {
+      "sectionTitle": "The Dual Commission Architecture (Model A vs. Model B)",
+      "sectionDesc": "Unlike generic affiliate plugins that tie commissions to the promoter profile, ShabbosRent calculates commissions per property listing. An ambassador can have Property #1 on Model A and Property #2 on Model B.",
+      "modelA": {
+        "title": "Model A — Recurring Yield",
+        "rate": "₪15 Listing Fee + ₪25 per Completed Rental",
+        "badge": "12-Month Window",
+        "desc": "Best suited for prime, high-frequency metropolitan properties in Jerusalem or Tzfat. The ambassador receives ₪15 upon approved listing, then ₪25 for every single rental completed within a 365-day rolling window.",
+        "example": "10 rentals in year one = ₪15 + (10 × ₪25) = ₪265.00 Total"
+      },
+      "modelB": {
+        "title": "Model B — High Upfront Bounty",
+        "rate": "₪25 Listing Fee + ₪40 on First Confirmed Rental",
+        "badge": "Lifetime Validity",
+        "desc": "Best suited for occasional holiday accommodations. The promoter receives ₪25 on listing approval plus a guaranteed ₪40 bounty upon the very first booking, regardless of whether it happens in month 1 or month 24.",
+        "example": "Immediate ₪25 + First rental ₪40 = ₪65.00 Guaranteed"
+      },
+      "contractRules": "Strict 7-Day Model Lock Countdown • 12-Month Rate Freeze • ₪5 Sub-Ambassador Listing Bonus • Immutable Ledger Reversals"
+    },
+    "techArchitecture": [
+      {
+        "title": "Core Framework",
+        "tech": "Next.js 16 (App Router)",
+        "desc": "Utilizes route groups (admin) & (main) with independent layouts, strict layout nesting, and sub-second SSG hydration."
+      },
+      {
+        "title": "UI & Styling Engine",
+        "tech": "Tailwind CSS v4 & Base UI",
+        "desc": "Zero-runtime PostCSS architecture, headless accessible primitives from Base UI and Shadcn for total WCAG compliance."
+      },
+      {
+        "title": "Domain Business Logic",
+        "tech": "Geospatial & Ledger Math",
+        "desc": "Haversine walking math, automated weekly Torah portion availability scheduler, and immutable financial reversal ledgers."
+      },
+      {
+        "title": "Internationalization",
+        "tech": "English & Hebrew RTL",
+        "desc": "Seamless bidirectional switching between English and Hebrew with native Right-to-Left (RTL) styling adaptations."
+      }
+    ],
+    "contributions": [
+      "Implemented geospatial walking-distance calculation using the Haversine formula assuming calibrated 4.8 km/h pedestrian velocity.",
+      "Engineered reciprocal apartment exchange flow with side-by-side listing comparison and validation codes (e.g. SWP-1042).",
+      "Built dual commission accounting ledger with 7-day model lock deadlines, 1-level sub-ambassador bonuses, and negative reversal entries.",
+      "Created an embedded Developer Simulation Toolbar to test multi-party async platform events and automated deadlines.",
+      "Designed AI-assisted telephone hotline voice inbox with speech-to-text transcriptions and print-ready synagogue notice board flyer generator.",
+      "Implemented automated weekly Torah portion availability synchronization bots with SMS/Email readiness triggers."
+    ],
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Base UI",
+      "Shadcn UI",
+      "Recharts",
+      "Lucide React",
+      "i18n (Hebrew RTL)"
+    ],
+    "liveLink": "https://github.com/pronoy656",
+    "githubLink": "https://github.com/pronoy656"
+  },
+  "island-hop": {
+    "id": "04",
+    "slug": "island-hop",
+    "number": "04",
+    "title": "IslandHop",
+    "tagline": "Maritime Transit & Island Ferry Booking Platform",
+    "category": "Maritime Transit & Travel Tech / 2026",
+    "role": "Lead Full-Stack Engineer",
+    "badge": "Production Deployed",
+    "summary": "An enterprise-grade maritime transit engine featuring live passenger ticketing, cryptographic QR boarding passes, a multi-vessel fleet management ERP for ferry operators, and sub-second harbor terminal dispatch tools.",
+    "metrics": [
+      { "value": "100%", "label": "Real-time Seat Sync" },
+      { "value": "3/3", "label": "Active Vessels Monitored" },
+      { "value": "348", "label": "Daily Manifest Capacity" },
+      { "value": "$10.4K", "label": "Net Daily Revenue Logged" }
+    ],
+    "images": [
+      { "url": "/islandhop-mockup-1.jpg", "label": "1. Consumer Ferry Booking Hero" },
+      { "url": "/islandhop-mockup-2.jpg", "label": "2. Harbor Terminal Operator Console" },
+      { "url": "/islandhop-mockup-3.jpg", "label": "3. MacBook Desktop Ticket Dispatch" }
+    ],
+    "subsystems": [
+      {
+        "id": "passengers",
+        "title": "Tourists & Commuters Portal",
+        "subtitle": "Frictionless Ferry Booking & Instant QR Passes",
+        "badge": "Passenger Facing",
+        "icon": "Search",
+        "details": [
+          {
+            "heading": "Dynamic Journey Search & Live Inventory",
+            "text": "Commuters and island tourists search point-to-point ferry corridors, compare catamaran vs high-speed craft options, and check real-time seat availability."
+          },
+          {
+            "heading": "Cryptographic QR Boarding Passes",
+            "text": "Generates scannable, secure mobile QR tickets for rapid harbor gate validation without paper boarding passes."
+          },
+          {
+            "heading": "Self-Service Trip Lookup & Cancellation",
+            "text": "Instant passenger management with automated cancellation refunds and immediate seat inventory release."
+          }
+        ]
+      },
+      {
+        "id": "operators",
+        "title": "Ferry Operator Fleet ERP",
+        "subtitle": "Vessels, Routes, Pricing & Schedule Command",
+        "badge": "Fleet Console",
+        "icon": "Ship",
+        "details": [
+          {
+            "heading": "Multi-Vessel Registry & Maintenance",
+            "text": "Ferry companies manage their vessel fleet (Catamarans, Speedboats, Ferries), cabin classes, and maintenance drydock schedules."
+          },
+          {
+            "heading": "Recurring Departure Engine & Gate Controls",
+            "text": "Automated schedule creator with departure times, harbor berth gate assignments, and weather blackout calendars."
+          },
+          {
+            "heading": "Real-Time Revenue Telemetry",
+            "text": "Track passenger occupancy rates, ticket sales, net revenue by route, and peak travel demand."
+          }
+        ]
+      },
+      {
+        "id": "harbor",
+        "title": "Terminal Staff & Captains",
+        "subtitle": "Live Departure Manifests & Gate Barcode Scanners",
+        "badge": "Harbor Ops",
+        "icon": "Anchor",
+        "details": [
+          {
+            "heading": "Auto-Generated Maritime Passenger Manifests",
+            "text": "Compliant passenger manifests for harbor masters, tracking checked-in vs boarded passengers with strict capacity limits."
+          },
+          {
+            "heading": "Sub-50ms QR Gate Validation",
+            "text": "Terminal officers scan mobile QR passes with instant boarding status updates (PENDING ➔ CHECKED_IN ➔ BOARDED)."
+          },
+          {
+            "heading": "One-Click Departure State Dispatching",
+            "text": "Captains dispatch trip states (ON_TIME, BOARDING, DEPARTED) synchronizing live schedules for passengers."
+          }
+        ]
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Application Core",
+        "tech": "Next.js 16 (Turbopack) & React 19",
+        "desc": "Built with the latest App Router paradigms, Server Components, and optimized client boundaries."
+      },
+      {
+        "title": "Data Tables & Queries",
+        "tech": "TanStack Table v8 & Query v5",
+        "desc": "Declarative server-state caching with query key factories and virtualized high-density fleet manifests."
+      },
+      {
+        "title": "Checkout Flow",
+        "tech": "nuqs & @stepperize/react",
+        "desc": "URL state-synchronized multi-step ticket booking funnel preventing lost state on browser refresh."
+      },
+      {
+        "title": "Form Engine",
+        "tech": "React Hook Form & Zod",
+        "desc": "Strict passenger identity validation with zero-compromise runtime schema enforcement."
+      }
+    ],
+    "contributions": [
+      "Architected multi-tenant frontend architecture using Next.js 16 App Router and React 19.",
+      "Engineered declarative server-state synchronization with TanStack Query v5 and query key factories.",
+      "Built multi-step checkout funnel with URL state persistence using nuqs and @stepperize/react.",
+      "Implemented high-density data tables using TanStack Table v8 for fleet manifests and dispatchers.",
+      "Integrated cryptographic QR ticket generator with sub-50ms validation workflows for terminal gate staff."
+    ],
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "TanStack Query v5",
+      "TanStack Table v8",
+      "Zod",
+      "Lucide React"
+    ],
+    "liveLink": "https://ferry-iland-frontend.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/island-hop"
+  },
+  "k10-football": {
+    "id": "01",
+    "slug": "k10-football",
+    "number": "01",
+    "title": "K10 Football",
+    "tagline": "Smart Club Management & Live Match Tactics",
+    "category": "Club Management / 2025",
+    "role": "Lead Frontend Engineer",
+    "badge": "Production Deployed",
+    "summary": "An enterprise sports-tech ecosystem designed for professional football clubs, academies, coaches, and scouts. Combines athlete biometric telemetry, interactive tactical pitch boards, scout talent evaluation pipelines, and live match day event management.",
+    "metrics": [
+      { "value": "98/100", "label": "Lighthouse Score" },
+      { "value": "40%", "label": "Faster Operations" },
+      { "value": "21", "label": "Wins Tracked" },
+      { "value": "UEFA A", "label": "Coach Validation Standard" }
+    ],
+    "images": [
+      { "url": "/k10-mockup-1.jpg", "label": "1. Coach Profile & Analytics Console" },
+      { "url": "/k10-mockup-2.jpg", "label": "2. Tactical Pitch & Formation Board" },
+      { "url": "/k10-mockup-3.jpg", "label": "3. Scouting & Match Performance Stats" }
+    ],
+    "subsystems": [
+      {
+        "id": "coaching",
+        "title": "Coach Command Center",
+        "subtitle": "Formation Planning & Tactical Strategy",
+        "badge": "Coaches & Staff",
+        "icon": "Sliders",
+        "details": [
+          {
+            "heading": "Tactical Formation Pitch Board",
+            "text": "Drag-and-drop tactical whiteboard allowing coaches to orchestrate custom 4-3-3, 3-5-2, and 4-2-3-1 formations with player movement vectors."
+          },
+          {
+            "heading": "Player Athletic Benchmarks",
+            "text": "Comprehensive athletic profiling tracking sprint velocities, endurance milestones, stamina degradation, and injury risk metrics."
+          },
+          {
+            "heading": "Match Strategy Reports",
+            "text": "Pre-match tactical dossiers and real-time halftime adjustments distributed directly to player mobile dashboards."
+          }
+        ]
+      },
+      {
+        "id": "scouting",
+        "title": "Talent Discovery & Scouting",
+        "subtitle": "Scouting Reports & Club Interest Network",
+        "badge": "Club Scouts",
+        "icon": "Search",
+        "details": [
+          {
+            "heading": "Standardized Player Evaluation",
+            "text": "Standardized scouting scorecard scoring technical ability, tactical awareness, physical prowess, and psychological maturity."
+          },
+          {
+            "heading": "Club Interest Network",
+            "text": "Direct pipeline connecting verified academy athletes to tier-1 professional football clubs across Europe."
+          },
+          {
+            "heading": "Verified Licensing Validation",
+            "text": "Automated verification system authenticating UEFA licenses, agent credentials, and certified medical clearance files."
+          }
+        ]
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Core Platform",
+        "tech": "Next.js & TypeScript",
+        "desc": "Built with clean architecture, enterprise TypeScript typing, and modular state isolation."
+      },
+      {
+        "title": "State & Store",
+        "tech": "Redux Toolkit",
+        "desc": "Predictable centralized state store handling live telemetry feeds, player lineups, and squad mutations."
+      },
+      {
+        "title": "Real-Time Telemetry",
+        "tech": "Socket.IO",
+        "desc": "Sub-100ms bi-directional event bus streaming live score lines, substitutions, and athletic updates."
+      },
+      {
+        "title": "Visual Design",
+        "tech": "Tailwind CSS & shadcn/ui",
+        "desc": "Custom dark stadium aesthetic with high-contrast data visualization and mobile responsiveness."
+      }
+    ],
+    "contributions": [
+      "Engineered an enterprise-grade club operations suite with JWT-based authentication and role-based dashboards.",
+      "Built interactive tactical pitch boards with real-time lineup adjustments via Socket.IO.",
+      "Implemented athletic radar charts and tournament stat visualization using SVG graphs.",
+      "Optimized production bundle achieving a 98/100 Lighthouse performance benchmark.",
+      "Developed responsive squad registries tested across mobile, tablet, and desktop viewports."
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Socket.IO",
+      "Redux Toolkit",
+      "shadcn/ui"
+    ],
+    "liveLink": "https://github.com/pronoy656",
+    "githubLink": "https://github.com/pronoy656"
+  }
+}
+

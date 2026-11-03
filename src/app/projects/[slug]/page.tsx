@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { projectsData } from "@/data/projects";
-import K10FootballShowcase from "@/components/projects/K10FootballShowcase";
-import GenericProjectShowcase from "@/components/projects/GenericProjectShowcase";
+import DynamicProjectShowcase from "@/components/projects/DynamicProjectShowcase";
 import type { Metadata } from "next";
 
 interface Props {
@@ -42,11 +41,6 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
-  // If this is K10 Football, render the dedicated custom showcase
-  if (project.slug === "k10-football" || project.id === "01") {
-    return <K10FootballShowcase project={project} />;
-  }
-
-  return <GenericProjectShowcase project={project} />;
+  return <DynamicProjectShowcase project={project} />;
 }
 

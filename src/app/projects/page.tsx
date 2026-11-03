@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -48,7 +48,6 @@ const CATEGORIES = [
 export default function AllProjectsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Filter projects based on category and search query
   const filteredProjects = useMemo(() => {
@@ -77,7 +76,7 @@ export default function AllProjectsPage() {
 
       {/* ── Main Content Container ── */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-32 sm:pt-36 md:pt-40 pb-24">
-        
+
         {/* ── Back to Home Breadcrumb ── */}
         <div className="mb-6">
           <Link
@@ -154,11 +153,10 @@ export default function AllProjectsPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all ${
-                    active
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all ${active
                       ? "bg-gray-900 text-white shadow-xs"
                       : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-100/80 border border-gray-200/70"
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -213,9 +211,9 @@ export default function AllProjectsPage() {
                 </div>
 
                 {/* ── Mockup Preview Banner ── */}
-                <div
-                  onClick={() => setSelectedProject(project)}
-                  className="relative h-56 sm:h-64 w-full bg-gray-100 overflow-hidden cursor-pointer group/img"
+                <Link
+                  href={`/projects/${project.slug || project.id}`}
+                  className="relative h-56 sm:h-64 w-full bg-gray-100 overflow-hidden cursor-pointer group/img block"
                 >
                   <Image
                     src={project.image || project.images[0]}
@@ -231,7 +229,7 @@ export default function AllProjectsPage() {
                       <ArrowUpRight size={13} />
                     </span>
                   </div>
-                </div>
+                </Link>
 
                 {/* ── Card Body Details ── */}
                 <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-5">
@@ -356,155 +354,6 @@ export default function AllProjectsPage() {
         </section>
 
       </main>
-
-      {/* ── Fullscreen Case Study Modal ── */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            key="projects-page-modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-6 md:p-12"
-          >
-            <div
-              onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-gray-950/70 backdrop-blur-md"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-6xl bg-white rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] overflow-hidden border border-gray-100"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                aria-label="Close modal"
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 p-2 sm:p-2.5 rounded-full bg-gray-100/90 hover:bg-gray-200 text-gray-800 transition-all cursor-pointer shadow-xs"
-              >
-                <X size={18} />
-              </button>
-
-              {/* Left Column: Multi-Image Showcase */}
-              <div className="md:w-1/2 bg-gray-50/50 p-6 sm:p-10 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col justify-between overflow-y-auto">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-200/60 flex items-center justify-center text-xs font-mono font-bold text-indigo-600">
-                      {selectedProject.number}
-                    </span>
-                    <span className="text-xs font-mono uppercase tracking-widest text-indigo-600 font-bold">
-                      {selectedProject.category}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-                      {selectedProject.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-500 font-semibold pt-1">
-                      {selectedProject.tagline}
-                    </p>
-                  </div>
-
-                  {/* Gallery of screens */}
-                  <div className="space-y-4 pt-2">
-                    {selectedProject.images.map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="relative h-44 sm:h-52 w-full rounded-2xl overflow-hidden border border-gray-200/80 shadow-xs group/modalimg"
-                      >
-                        <Image
-                          src={img}
-                          alt={`${selectedProject.title} preview ${idx + 1}`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 480px"
-                          className="object-cover object-top group-hover/modalimg:scale-102 transition-transform duration-300"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Case Study Narrative */}
-              <div className="md:w-1/2 p-6 sm:p-10 overflow-y-auto flex flex-col justify-between space-y-6">
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-[10px] font-mono font-black uppercase tracking-widest text-indigo-600 mb-2">
-                      Overview
-                    </h4>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {selectedProject.fullDesc || selectedProject.desc}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="text-[10px] font-mono font-black uppercase tracking-widest text-indigo-600">
-                      Key Capabilities
-                    </h4>
-                    <ul className="grid grid-cols-1 gap-2.5">
-                      {selectedProject.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-600">
-                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-gray-400">
-                        Role
-                      </span>
-                      <p className="text-sm font-bold text-gray-900">{selectedProject.role}</p>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-gray-400">
-                        Category
-                      </span>
-                      <p className="text-sm font-bold text-gray-900">{selectedProject.category.split('/')[0]}</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex flex-col sm:flex-row gap-3">
-                    <Link
-                      href={`/projects/${selectedProject.slug || selectedProject.id}`}
-                      className="flex-1 py-3.5 px-4 rounded-xl bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-black transition-all flex items-center justify-center gap-2 shadow-sm"
-                    >
-                      <span>Read Full Case Study</span>
-                      <ArrowUpRight size={14} />
-                    </Link>
-
-                    <a
-                      href={selectedProject.liveLink || "https://github.com/pronoy656"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-3.5 px-4 rounded-xl bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 shadow-sm"
-                    >
-                      <span>Visit Live</span>
-                      <ArrowUpRight size={14} />
-                    </a>
-
-                    <a
-                      href={selectedProject.githubLink || "https://github.com/pronoy656"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub Repository"
-                      className="px-4 py-3.5 rounded-xl border border-gray-200 hover:border-indigo-600 hover:text-indigo-600 transition-all flex items-center justify-center text-gray-700 shrink-0"
-                    >
-                      <GithubIcon />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ── Site Footer ── */}
       <Footer />

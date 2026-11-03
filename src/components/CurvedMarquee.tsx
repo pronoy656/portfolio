@@ -37,7 +37,7 @@ export interface CurvedMarqueeProps {
 }
 
 export default function CurvedMarquee({
-  text = "Be ✦ Creative ✦ With ✦ React ✦ Bytes ✦",
+  text = "Be ✦ Creative ✦ With ✦ Next.js ✦ React ✦",
   font,
   color = "#6366f1",
   direction = "right",

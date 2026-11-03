@@ -440,7 +440,11 @@ export default function K10FootballShowcase({ project }: { project: Project }) {
                 <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
                 <span className="ml-3 text-[11px] font-mono text-gray-400 hidden sm:inline">
-                  https://k10football.com/dashboard
+                  {activeScreenIndex === 0
+                    ? "https://k10football.com/dashboard/player"
+                    : activeScreenIndex === 1
+                    ? "https://k10football.com/dashboard/coach"
+                    : "https://k10football.com/dashboard/analytics"}
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -448,13 +452,17 @@ export default function K10FootballShowcase({ project }: { project: Project }) {
                   <button
                     key={idx}
                     onClick={() => setActiveScreenIndex(idx)}
-                    className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-bold transition-all ${
+                    className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold transition-all cursor-pointer ${
                       activeScreenIndex === idx
-                        ? "bg-indigo-600 text-white"
+                        ? "bg-indigo-600 text-white shadow-xs"
                         : "bg-gray-800 text-gray-400 hover:text-white"
                     }`}
                   >
-                    View {idx + 1}
+                    {idx === 0
+                      ? "Player Dossier"
+                      : idx === 1
+                      ? "Coach Console"
+                      : "Skills Analytics"}
                   </button>
                 ))}
               </div>

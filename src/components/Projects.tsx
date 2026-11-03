@@ -6,14 +6,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowUpRight,
   ArrowRight,
-  X,
   ExternalLink,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Project, projectsData } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -40,7 +39,6 @@ const featuredProjects = projectsData.slice(0, 6);
 export default function Projects() {
   const shouldReduceMotion = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
 
@@ -60,20 +58,22 @@ export default function Projects() {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
       if (!cards.length) return;
 
-      // Initial desktop card setup
+      // Initial desktop card setup with GPU layer acceleration
       gsap.set(cards[0], {
         y: 0,
         opacity: 1,
         scale: 1,
         zIndex: 10,
+        force3D: true,
         pointerEvents: "auto",
       });
 
       cards.slice(1).forEach((card, idx) => {
         gsap.set(card, {
-          y: "115vh",
+          y: "110vh",
           opacity: 1,
           zIndex: 10 + idx + 1,
+          force3D: true,
           pointerEvents: "auto",
         });
       });
@@ -84,9 +84,14 @@ export default function Projects() {
           trigger: sectionRef.current,
           pin: pinRef.current,
           start: "top top",
-          end: `+=${cards.length * 110}%`,
-          scrub: 0.7,
-          anticipatePin: 1,
+          // Responsive scroll distance (approx half the previous excessive scroll length)
+          end: `+=${cards.length * 60}%`,
+          // Snappy scrub: 0.25 removes the sluggish rubber-banding lag with smooth scroll
+          scrub: 0.25,
+          // Zero anticipatePin prevents the sudden hitch/catch when scrolling down from About
+          anticipatePin: 0,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           onUpdate: (self) => {
             if (progressBarRef.current) {
               progressBarRef.current.style.width = `${self.progress * 100}%`;
@@ -107,7 +112,7 @@ export default function Projects() {
           {
             y: -26,
             ease: "none",
-            duration: (cards.length - 1) * 1.15,
+            duration: (cards.length - 1) * 1.0,
           },
           0
         );
@@ -120,10 +125,11 @@ export default function Projects() {
           {
             y: i * 36,
             opacity: 1,
-            ease: "power2.out",
+            ease: "power1.out",
             duration: 1,
+            force3D: true,
           },
-          (i - 1) * 1.15
+          (i - 1) * 1.0
         );
       });
     });
@@ -167,7 +173,7 @@ export default function Projects() {
     <section id="projects" className="scroll-mt-24 md:scroll-mt-28 relative bg-[#fafbfc]">
       
       {/* ══════════════════════════════════════════════════════════════════════
-          DESKTOP VIEW (Visible ONLY on md: 768px+, 100% untouched original deck)
+          DESKTOP VIEW (Visible ONLY on md: 768px+, Original Stacking Deck)
           ══════════════════════════════════════════════════════════════════════ */}
       <div ref={sectionRef} className="hidden md:block relative min-h-screen overflow-hidden">
         
@@ -253,10 +259,10 @@ export default function Projects() {
                     {/* 3-Column Image Showcase Row */}
                     <div className="flex-1 min-h-[170px] max-h-[265px] grid grid-cols-3 gap-4 my-2.5">
                       {project.images.map((img, imgIdx) => (
-                        <div
+                        <Link
                           key={imgIdx}
-                          onClick={() => setSelectedProject(project)}
-                          className="group/img relative h-full w-full rounded-2xl overflow-hidden bg-gray-100 border border-gray-200/90 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+                          href={`/projects/${project.slug || project.id}`}
+                          className="group/img relative h-full w-full rounded-2xl overflow-hidden bg-gray-100 border border-gray-200/90 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer block"
                         >
                           {imgIdx === 0 && (
                             <div className="absolute top-0 inset-x-0 h-4 bg-gray-950/60 backdrop-blur-xs border-b border-white/20 z-20 px-2 flex items-center gap-1 pointer-events-none">
@@ -275,7 +281,7 @@ export default function Projects() {
                             loading={i === 0 ? "eager" : "lazy"}
                             priority={i === 0 && imgIdx === 0}
                           />
-                        </div>
+                        </Link>
                       ))}
                     </div>
 
@@ -353,7 +359,7 @@ export default function Projects() {
       {/* ══════════════════════════════════════════════════════════════════════
           MOBILE VIEW (Visible ONLY on < md: 768px, Touch-Optimized Native Cards)
           ══════════════════════════════════════════════════════════════════════ */}
-      <div className="block md:hidden pt-16 sm:pt-20 pb-12 bg-[#fafbfc]">
+      <div className="block md:hidden pt-16 sm:pt-20 pb-6 bg-[#fafbfc]">
         
         {/* Mobile Header (Scroll Reveal) */}
         <motion.div
@@ -424,9 +430,9 @@ export default function Projects() {
                 </h3>
 
                 {/* Mockup Image (Crisp 16/10 aspect ratio with browser accent bar) */}
-                <div
-                  onClick={() => setSelectedProject(project)}
-                  className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 border border-gray-200/80 shadow-2xs cursor-pointer group"
+                <Link
+                  href={`/projects/${project.slug || project.id}`}
+                  className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 border border-gray-200/80 shadow-2xs cursor-pointer group block"
                 >
                   <div className="absolute top-0 inset-x-0 h-3 bg-gray-950/70 backdrop-blur-xs border-b border-white/20 z-20 px-1.5 flex items-center gap-1 pointer-events-none">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
@@ -440,7 +446,7 @@ export default function Projects() {
                     sizes="90vw"
                     className="object-cover object-top group-hover:scale-102 transition-transform duration-500"
                   />
-                </div>
+                </Link>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap items-center gap-1">
@@ -530,130 +536,6 @@ export default function Projects() {
         </div>
 
       </div>
-
-      {/* ══════════════════════════════════════════════════════════════════════
-          SHARED CASE STUDY MODAL (Universal for Desktop & Mobile)
-          ══════════════════════════════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            key="project-modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 md:p-12"
-          >
-            <div
-              onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-gray-950/70 backdrop-blur-md"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-6xl bg-white rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] overflow-hidden border border-gray-100"
-            >
-              <button
-                onClick={() => setSelectedProject(null)}
-                aria-label="Close modal"
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100/90 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer"
-              >
-                <X size={18} />
-              </button>
-
-              {/* Left Pane: Image Showcase */}
-              <div className="w-full md:w-[45%] shrink-0 relative bg-[#0f1117] flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden min-h-[220px] sm:min-h-[320px]">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 520px"
-                  className="object-contain p-4 sm:p-6 md:p-8 drop-shadow-2xl"
-                />
-              </div>
-
-              {/* Right Pane: Detailed Scrollable Content */}
-              <div className="w-full md:w-[55%] p-5 sm:p-8 md:p-12 flex flex-col gap-4 sm:gap-6 overflow-y-auto">
-                <div className="flex flex-col gap-2">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-[0.35em] text-indigo-600">
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
-                    {selectedProject.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 font-medium">
-                    {selectedProject.tagline}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {selectedProject.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-                  <p>{selectedProject.fullDesc}</p>
-                </div>
-
-                <div className="space-y-3">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-gray-400 block">
-                    Core Technical Deliverables
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {selectedProject.features.map((feat, fIdx) => (
-                      <div
-                        key={fIdx}
-                        className="p-3 rounded-xl bg-gray-50 border border-gray-100 text-xs font-medium text-gray-700 flex items-start gap-2"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
-                  <Link
-                    href={`/projects/${selectedProject.slug || selectedProject.id}`}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gray-900 hover:bg-black text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
-                  >
-                    <span>Read Full Case Study</span>
-                    <ArrowUpRight size={14} />
-                  </Link>
-
-                  <a
-                    href={selectedProject.liveLink || "https://github.com/pronoy656"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
-                  >
-                    <span>View Live</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-
-                  <a
-                    href={selectedProject.githubLink || "https://github.com/pronoy656"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub Repository"
-                    className="p-3.5 rounded-xl border border-gray-200 hover:border-gray-900 text-gray-700 hover:text-gray-900 transition-colors"
-                  >
-                    <GithubIcon />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

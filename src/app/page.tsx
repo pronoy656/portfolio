@@ -17,7 +17,7 @@ export default function Home() {
       <Hero />
       <MarqueeSection />
       <About />
-      <Services />
+      {/* <Services /> */}
       <Projects />
       <Skills />
       <Experience />
