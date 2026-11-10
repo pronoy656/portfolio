@@ -14,6 +14,16 @@ const navItems = [
   { name: "Connect",    href: "#contact" },
 ];
 
+const mobileNavItems = [
+  { number: "01", name: "Home",       href: "#hero" },
+  { number: "02", name: "About",      href: "#about" },
+  { number: "03", name: "Skills",     href: "#skills" },
+  { number: "04", name: "Experience", href: "#experience" },
+  { number: "05", name: "Work",       href: "#projects" },
+  { number: "06", name: "Education",  href: "#education" },
+  { number: "07", name: "Contact",    href: "#contact" },
+];
+
 // ── Timing tokens ────────────────────────────────────────────────────────────
 const SPRING = "cubic-bezier(0.25, 1, 0.5, 1)";
 const DUR    = "0.72s";
@@ -45,8 +55,42 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+    if (mobileMenuOpen) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      if (lenis && typeof lenis.stop === "function") {
+        try { lenis.stop(); } catch (_) {}
+      }
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      if (lenis && typeof lenis.start === "function") {
+        try { lenis.start(); } catch (_) {}
+      }
+    }
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      if (lenis && typeof lenis.start === "function") {
+        try { lenis.start(); } catch (_) {}
+      }
+    };
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    if (href === "#hero" || href === "#") {
+      const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+      if (lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(0, { duration: 1.1 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      window.history.pushState(null, "", "/");
+      return;
+    }
     const id = href.replace("#", "");
     const target = document.getElementById(id);
     if (target) {
@@ -264,11 +308,7 @@ export default function Navbar() {
 
           {/* ── Mobile hamburger ── */}
           <button
-            className={`md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-95 relative z-20 ${
-              scrolled
-                ? "bg-white/20 hover:bg-white/30 text-white"
-                : "bg-black/5 hover:bg-black/10 text-gray-800"
-            }`}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 active:scale-95 relative z-20 pointer-events-auto bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-200/90 shadow-2xs"
             onClick={() => setMobileMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -277,39 +317,102 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ── Mobile full-screen overlay ── */}
+      {/* ── Mobile Full-Screen Editorial Menu Overlay (Silky Smooth Curtain Drop & Staggered Reveal) ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-            className="md:hidden fixed inset-0 bg-white/98 backdrop-blur-2xl z-[90] flex flex-col items-center justify-center gap-6 sm:gap-7 px-6 py-20 overflow-y-auto max-h-screen"
+            initial={{ opacity: 0, scale: 0.985, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.985, y: -10 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden fixed inset-0 w-full h-[100dvh] max-h-[100dvh] bg-white z-[120] flex flex-col justify-between px-6 sm:px-10 pt-5 pb-6 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none pointer-events-auto shadow-2xl"
           >
-            {navItems.map((item, i) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.04, duration: 0.3, ease: "easeOut" }}
-                onClick={(e) => { handleNavClick(e, item.href); setMobileMenuOpen(false); }}
-                className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 hover:text-indigo-600 transition-colors"
+            {/* Top Bar: Brand Logo & Close Button */}
+            <div className="flex items-center justify-between pb-4 border-b border-gray-150 shrink-0">
+              <span className="font-serif italic font-bold text-xl text-gray-950 tracking-tight">
+                Pronoy Pal
+              </span>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-200 flex items-center justify-center text-gray-900 transition-colors cursor-pointer active:scale-95"
+                aria-label="Close menu"
               >
-                {item.name}
-              </motion.a>
-            ))}
-            <motion.a
-              href="#contact"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.04, duration: 0.3 }}
-              onClick={(e) => { handleNavClick(e, "#contact"); setMobileMenuOpen(false); }}
-              className="mt-2 px-10 py-3.5 rounded-full bg-[#1a1c20] text-white font-bold uppercase tracking-widest text-xs hover:bg-indigo-600 active:scale-95 transition-all duration-300 shadow-md"
-            >
-              Hire Me
-            </motion.a>
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Navigation List matching the editorial screenshot structure */}
+            <nav className="flex flex-col justify-center my-auto py-2">
+              {mobileNavItems.map((item, i) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: 8, filter: "blur(2px)" }}
+                  transition={{ delay: 0.05 + i * 0.032, duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={(e) => {
+                    handleNavClick(e, item.href);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="group flex items-baseline gap-4 sm:gap-6 py-2.5 sm:py-3.5 border-b border-gray-100 text-left transition-all duration-300 cursor-pointer"
+                >
+                  {/* Number Prefix (01, 02, etc.) */}
+                  <span className="font-mono text-xs sm:text-sm font-bold text-indigo-600 shrink-0 select-none w-6 sm:w-8">
+                    {item.number}
+                  </span>
+
+                  {/* Editorial Serif Heading */}
+                  <span
+                    className={`font-serif text-2xl sm:text-3xl text-gray-800 group-hover:text-indigo-600 group-hover:italic group-hover:translate-x-2 transition-all duration-300 ${
+                      i === 0 ? "italic text-gray-950 font-normal" : "font-normal"
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Bottom Footer Bar */}
+            <div className="pt-4 border-t border-gray-150 flex flex-row items-center justify-between gap-3 shrink-0 mt-auto">
+              {/* Left Social Links */}
+              <div className="flex items-center gap-4 sm:gap-5">
+                <a
+                  href="https://github.com/pronoy656"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] sm:text-xs font-semibold text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://linkedin.com/in/pronoy-pal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] sm:text-xs font-semibold text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="mailto:pronoypaul56@gmail.com"
+                  className="font-mono text-[11px] sm:text-xs font-semibold text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  Email
+                </a>
+              </div>
+
+              {/* Right Available for Work with Pulse */}
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="font-mono text-[10px] sm:text-xs font-bold text-indigo-600 uppercase tracking-wider whitespace-nowrap">
+                  Available for work
+                </span>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

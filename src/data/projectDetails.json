@@ -1,11 +1,11 @@
 {
   "shabos-rent": {
-    "id": "05",
+    "id": "01",
     "slug": "shabos-rent",
-    "number": "05",
+    "number": "01",
     "title": "ShabbosRent",
     "tagline": "Halakhic Prop-Tech, Reciprocal Apartment Swap & Affiliate ERP",
-    "category": "Prop-Tech & Community Hospitality / 2024",
+    "category": "Prop-Tech & Community Hospitality",
     "role": "Lead Full-Stack Engineer",
     "badge": "Production Deployed",
     "summary": "An enterprise-grade hospitality and accommodation ecosystem engineered specifically for the global Shabbat-observant community. Features walking-distance calculation via the Haversine formula (4.8 km/h), reciprocal home exchange, multi-tier dual commission affiliate modeling, and an omnichannel administrative ERP.",
@@ -16,9 +16,21 @@
       { "value": "100%", "label": "Halakhic & Kosher Aware" }
     ],
     "images": [
-      { "url": "/shabosrent-mockup-1.jpg", "label": "1. Search & Walking Distance" },
-      { "url": "/shabosrent-mockup-2.jpg", "label": "2. Admin ERP Dashboard" },
-      { "url": "/shabosrent-mockup-3.jpg", "label": "3. Ambassador Commission Portal" }
+      {
+        "url": "/shabosrent-mockup-1.jpg",
+        "label": "Screen 01 — Landing Hero & Walking Distance Search",
+        "caption": "Consumer search experience with pedestrian walking-distance radius filter to synagogues, Torah portion selectors, and Rent vs. Swap modes."
+      },
+      {
+        "url": "/shabosrent-mockup-2.jpg",
+        "label": "Screen 02 — Administrative ERP & Analytics Dashboard",
+        "caption": "Platform operator console tracking 1,520+ total apartments, active listings, monthly revenue metrics, and city-level search demand."
+      },
+      {
+        "url": "/shabosrent-mockup-3.jpg",
+        "label": "Screen 03 — Ambassador Affiliate & Commission Portal",
+        "caption": "Promoter portal with Model A vs B selection, 7-day model lock alerts, referral link generation, and approved balance ledger."
+      }
     ],
     "comparison": {
       "sectionTitle": "Why Traditional Platforms (Airbnb, Booking) Fail in this Market",
@@ -206,7 +218,7 @@
     ],
     "contributions": [
       "Implemented geospatial walking-distance calculation using the Haversine formula assuming calibrated 4.8 km/h pedestrian velocity.",
-      "Engineered reciprocal apartment exchange flow with side-by-side listing comparison and validation codes (e.g. SWP-1042).",
+      "Engineered reciprocal apartment exchange flow with side-by-side listing comparison and validation codes.",
       "Built dual commission accounting ledger with 7-day model lock deadlines, 1-level sub-ambassador bonuses, and negative reversal entries.",
       "Created an embedded Developer Simulation Toolbar to test multi-party async platform events and automated deadlines.",
       "Designed AI-assisted telephone hotline voice inbox with speech-to-text transcriptions and print-ready synagogue notice board flyer generator.",
@@ -223,17 +235,17 @@
       "Lucide React",
       "i18n (Hebrew RTL)"
     ],
-    "liveLink": "https://github.com/pronoy656",
-    "githubLink": "https://github.com/pronoy656"
+    "liveLink": "https://shabbos-rent-website.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/Shabbos-rent-Website-"
   },
   "island-hop": {
-    "id": "04",
+    "id": "05",
     "slug": "island-hop",
-    "number": "04",
+    "number": "05",
     "title": "IslandHop",
-    "tagline": "Maritime Transit & Island Ferry Booking Platform",
-    "category": "Maritime Transit & Travel Tech / 2026",
-    "role": "Lead Full-Stack Engineer",
+    "tagline": "Enterprise Maritime Transit & Fleet Management Platform",
+    "category": "Maritime & Transit ERP",
+    "role": "Lead Frontend Engineer",
     "badge": "Production Deployed",
     "summary": "An enterprise-grade maritime transit engine featuring live passenger ticketing, cryptographic QR boarding passes, a multi-vessel fleet management ERP for ferry operators, and sub-second harbor terminal dispatch tools.",
     "metrics": [
@@ -243,9 +255,21 @@
       { "value": "$10.4K", "label": "Net Daily Revenue Logged" }
     ],
     "images": [
-      { "url": "/islandhop-mockup-1.jpg", "label": "1. Consumer Ferry Booking Hero" },
-      { "url": "/islandhop-mockup-2.jpg", "label": "2. Harbor Terminal Operator Console" },
-      { "url": "/islandhop-mockup-3.jpg", "label": "3. MacBook Desktop Ticket Dispatch" }
+      {
+        "url": "/islandhop-mockup-1.jpg",
+        "label": "Screen 01 — Consumer Ferry Booking Hero",
+        "caption": "Passenger booking interface with one-way/round-trip routing, terminal departure scheduling, and dynamic passenger count picker."
+      },
+      {
+        "url": "/islandhop-mockup-2.jpg",
+        "label": "Screen 02 — Harbor Terminal Operator Console",
+        "caption": "Operator dashboard monitoring daily passenger counts (348), vessel statuses (3/3 active), departures, and manifest verification."
+      },
+      {
+        "url": "/islandhop-mockup-3.jpg",
+        "label": "Screen 03 — Desktop Laptop Ticket Dispatch",
+        "caption": "High-resolution MacBook desktop perspective showing instant ticket issuance, passenger manifests, and route telemetry."
+      }
     ],
     "subsystems": [
       {
@@ -351,16 +375,16 @@
       "Zod",
       "Lucide React"
     ],
-    "liveLink": "https://ferry-iland-frontend.vercel.app/",
+    "liveLink": "https://island-hop-web-pi.vercel.app/",
     "githubLink": "https://github.com/pronoy656/island-hop"
   },
   "k10-football": {
-    "id": "01",
+    "id": "03",
     "slug": "k10-football",
-    "number": "01",
+    "number": "03",
     "title": "K10 Football",
     "tagline": "Smart Club Management & Live Match Tactics",
-    "category": "Club Management / 2025",
+    "category": "Club Management",
     "role": "Lead Frontend Engineer",
     "badge": "Production Deployed",
     "summary": "An enterprise sports-tech ecosystem designed for professional football clubs, academies, coaches, and scouts. Combines athlete biometric telemetry, interactive tactical pitch boards, scout talent evaluation pipelines, and live match day event management.",
@@ -371,9 +395,21 @@
       { "value": "UEFA A", "label": "Coach Validation Standard" }
     ],
     "images": [
-      { "url": "/k10-mockup-1.jpg", "label": "1. Coach Profile & Analytics Console" },
-      { "url": "/k10-mockup-2.jpg", "label": "2. Tactical Pitch & Formation Board" },
-      { "url": "/k10-mockup-3.jpg", "label": "3. Scouting & Match Performance Stats" }
+      {
+        "url": "/k10-mockup-1.jpg",
+        "label": "Screen 01 — Coach Profile & Analytics Console",
+        "caption": "Executive head coach dashboard showcasing tactical radar analysis, tournament win-loss breakdown, and active club contracts."
+      },
+      {
+        "url": "/k10-mockup-2.jpg",
+        "label": "Screen 02 — Tactical Formation & Pitch Board",
+        "caption": "Interactive squad strategy whiteboard displaying pitch positioning, team movement corridors, and player substitution benches."
+      },
+      {
+        "url": "/k10-mockup-3.jpg",
+        "label": "Screen 03 — Scouting & Match Performance Stats",
+        "caption": "Scouting network registry tracking athlete benchmark metrics, European club interest inquiries, and live match reports."
+      }
     ],
     "subsystems": [
       {
@@ -456,8 +492,296 @@
       "Redux Toolkit",
       "shadcn/ui"
     ],
-    "liveLink": "https://github.com/pronoy656",
+    "liveLink": "https://k10-eta.vercel.app/",
     "githubLink": "https://github.com/pronoy656"
+  },
+  "heaven-furniture": {
+    "id": "04",
+    "slug": "heaven-furniture",
+    "number": "04",
+    "title": "Heaven Furniture",
+    "tagline": "Modern Luxury Furniture E-Commerce Experience",
+    "category": "E-Commerce & Interior Design",
+    "role": "Full-Stack Developer",
+    "badge": "Production Deployed",
+    "summary": "A modern solid-wood architectural furniture e-commerce platform featuring handcrafted collections, interactive floor-plan spatial fitting, category filtering, persistent shopping carts, and a smooth checkout funnel.",
+    "metrics": [
+      { "value": "2.4x", "label": "Conversion Lift" },
+      { "value": "12k+", "label": "Homes Styled" },
+      { "value": "100%", "label": "Solid Teak & Shegun" },
+      { "value": "25+", "label": "Years Heritage" }
+    ],
+    "images": [
+      {
+        "url": "/heaven-mockup-1.jpg",
+        "label": "Screen 01 — Modern Living Room Atelier Hero",
+        "caption": "Editorial landing page showcasing solid-wood living room collections, free delivery badges, and master atelier certifications."
+      },
+      {
+        "url": "/heaven-mockup-2.jpg",
+        "label": "Screen 02 — Handcrafted Solid Wood Product Catalog",
+        "caption": "High-density catalog grid with multi-filter drawer (Category, Price Range, Material), live pricing, and 1-click cart addition."
+      },
+      {
+        "url": "/heaven-mockup-3.jpg",
+        "label": "Screen 03 — Product Detail, Materials & Spatial Fit",
+        "caption": "Detailed specification viewport featuring 10-year warranty breakdown, timber seasoning specs, and high-res wood texture previews."
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Storefront Framework",
+        "tech": "Next.js & React",
+        "desc": "Built with responsive SSR architecture for instantaneous category navigation and SEO-optimized product pages."
+      },
+      {
+        "title": "State Management",
+        "tech": "Zustand & LocalStorage",
+        "desc": "Ultra-lightweight cart state persistence ensuring zero dropped items across page reloads."
+      },
+      {
+        "title": "Styling & Responsive Layout",
+        "tech": "Tailwind CSS",
+        "desc": "Warm, high-aesthetic color palette paired with micro-interactions and mobile-first touch optimization."
+      },
+      {
+        "title": "Payments & Security",
+        "tech": "Stripe & SSL Checkout",
+        "desc": "Frictionless multi-currency payment settlement with instant transaction verification."
+      }
+    ],
+    "contributions": [
+      "Turned intricate Figma design system into high-performance responsive web interfaces.",
+      "Engineered persistent shopping cart with instant slide-out drawer and guest checkout flows.",
+      "Built multi-faceted category filtering with URL query state persistence for shareable catalog URLs.",
+      "Optimized imagery delivery using Next.js Image with WebP compression for sub-second page loads."
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Zustand",
+      "Stripe",
+      "Lucide React"
+    ],
+    "liveLink": "https://heaven-furniture-alpha.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/heaven-furniture"
+  },
+  "fixpair": {
+    "id": "02",
+    "slug": "fixpair",
+    "number": "02",
+    "title": "Fixpair",
+    "tagline": "Real-Time Expert Consultation & Live Transcriptions",
+    "category": "Consultant & Real-Time Booking",
+    "role": "Frontend Engineer",
+    "badge": "Production Deployed",
+    "summary": "A specialized expert consultation platform connecting users with verified consultants across Germany. Features encrypted WebRTC video rooms, live streaming speech-to-text transcriptions, automated post-call meeting summaries, and precision per-minute billing.",
+    "metrics": [
+      { "value": "10k+", "label": "Verified Consultants" },
+      { "value": "25k+", "label": "Completed Sessions" },
+      { "value": "4.9/5", "label": "Average Client Rating" },
+      { "value": "100%", "label": "Encrypted & Private" }
+    ],
+    "images": [
+      {
+        "url": "/fixpair-mockup-1.jpg",
+        "label": "Screen 01 — Consultant Directory & Hero Consultation",
+        "caption": "Trust-centered hero experience with instant consultant booking, client testimonials, and verified professional counts."
+      },
+      {
+        "url": "/fixpair-mockup-2.jpg",
+        "label": "Screen 02 — Real-Time Video Call Room & Live Audio",
+        "caption": "Low-latency WebRTC video room featuring live audio-visual controls, participant screen-sharing, and encrypted channels."
+      },
+      {
+        "url": "/fixpair-mockup-3.jpg",
+        "label": "Screen 03 — Live Speech Transcription & Summary Report",
+        "caption": "Streaming speech-to-text transcription engine delivering real-time dialogue captions and automated AI summary exports."
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Real-Time Signaling",
+        "tech": "Socket.IO & WebRTC",
+        "desc": "Sub-100ms signaling server managing room peer connections, mute/video states, and instant chat."
+      },
+      {
+        "title": "Streaming Transcriptions",
+        "tech": "Web Speech API & Audio Streams",
+        "desc": "Real-time speech-to-text pipeline transcribing consultation audio with punctuation and speaker tagging."
+      },
+      {
+        "title": "State & Cache",
+        "tech": "TanStack Query v5",
+        "desc": "Declarative caching of consultant schedules, booking slots, and user consultation histories."
+      },
+      {
+        "title": "Billing Engine",
+        "tech": "Per-Minute Metering",
+        "desc": "Precision timer tracking call duration with automated ledger calculation and escrow settlement."
+      }
+    ],
+    "contributions": [
+      "Architected WebRTC peer connection manager with automated renegotiation on network switches.",
+      "Integrated live speech transcription stream with zero UI freezing or memory leaks during hour-long calls.",
+      "Built responsive consultant discovery feed with multi-criteria filtering by language, domain, and hourly rate.",
+      "Engineered automated post-meeting report generator exporting PDF action summaries."
+    ],
+    "techStack": [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "WebRTC",
+      "Socket.IO",
+      "TanStack Query",
+      "Lucide React"
+    ],
+    "liveLink": "https://ereabook-updated-work.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/ereabook-updated-work-"
+  },
+  "bytespace": {
+    "id": "06",
+    "slug": "bytespace",
+    "number": "06",
+    "title": "ByteSpace",
+    "tagline": "Creator Course & Digital Learning Platform",
+    "category": "EdTech & Creator Economy",
+    "role": "Lead Frontend Engineer & UI Designer",
+    "badge": "Production Deployed",
+    "summary": "A modern creator-led education hub enabling instructors to publish interactive courses, track student engagement, and monetize digital content through an intuitive high-contrast learning experience.",
+    "metrics": [
+      { "value": "100+", "label": "Interactive Courses" },
+      { "value": "10k+", "label": "Active Students" },
+      { "value": "4.5★", "label": "Student Satisfaction" },
+      { "value": "55%", "label": "Avg Progress Velocity" }
+    ],
+    "images": [
+      {
+        "url": "/bytespace-mockup-1.jpg",
+        "label": "Screen 01 — Course Search & Student Learning Hero",
+        "caption": "High-energy hero landing page with live course search, enrolled student progress counters (55%), and creator spotlights."
+      },
+      {
+        "url": "/bytespace-mockup-2.jpg",
+        "label": "Screen 02 — Creator Community & Testimonial Feed",
+        "caption": "Creator recruitment portal with course editor benefits, student testimonial cards, and verified creator accreditation."
+      },
+      {
+        "url": "/bytespace-mockup-3.jpg",
+        "label": "Screen 03 — Creator Studio & Course Portfolio Showcase",
+        "caption": "Creator profile (PurePearl Studio) showcasing active products, follower metrics, curriculum modules, and video lessons."
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Frontend Core",
+        "tech": "Next.js & TypeScript",
+        "desc": "Built with modern component architecture, dynamic routing for course modules, and optimized static rendering."
+      },
+      {
+        "title": "Fluid UI Styling",
+        "tech": "Tailwind CSS & Framer Motion",
+        "desc": "Vibrant royal blue and lime neon aesthetic with tactile micro-interactions and smooth accordion curriculum lists."
+      },
+      {
+        "title": "Learning Tracking",
+        "tech": "Progress Persistence",
+        "desc": "Real-time module completion tracker synchronizing video watch times and quiz benchmarks."
+      },
+      {
+        "title": "Creator Studio",
+        "tech": "Rich Content Editor",
+        "desc": "Structured course builder for uploading video chapters, coding sandboxes, and downloadable resources."
+      }
+    ],
+    "contributions": [
+      "Engineered responsive course catalog with real-time topic search, difficulty filtering, and creator tags.",
+      "Designed high-energy visual design system with custom brand iconography and layout geometry.",
+      "Built creator profile dashboard with follower feeds, course revenue trackers, and curriculum managers.",
+      "Optimized video lesson player with speed controls, chapter markers, and automated progress logging."
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "React",
+      "Framer Motion",
+      "Lucide React"
+    ],
+    "liveLink": "https://byte-space-silk.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/ByteSpace"
+  },
+  "alfa-bk-university": {
+    "id": "07",
+    "slug": "alfa-bk-university",
+    "number": "07",
+    "title": "Alfa BK University",
+    "tagline": "International University Portal & Academic Administration ERP",
+    "category": "Higher Education & Academic ERP",
+    "role": "Lead Frontend Engineer",
+    "badge": "Production Deployed",
+    "summary": "A comprehensive international university platform pairing a high-converting academic discovery portal with an enterprise-grade Administration Control Panel managing 1,245+ students, 68 faculty members, 8 departments, and live academic telemetry.",
+    "metrics": [
+      { "value": "138+", "label": "Accredited Programs" },
+      { "value": "1,313", "label": "Active Portal Users" },
+      { "value": "14%", "label": "Optimal Server Load" },
+      { "value": "60+", "label": "Countries Represented" }
+    ],
+    "images": [
+      {
+        "url": "/alfabk-mockup-1.jpg",
+        "label": "Screen 01 — Public University Portal & Program Search",
+        "caption": "International landing portal showcasing Fall 2026 admissions, instant search across 138 programs, faculty exploration, and institutional impact metrics."
+      },
+      {
+        "url": "/alfabk-mockup-2.jpg",
+        "label": "Screen 02 — ABK Administration Control Panel ERP",
+        "caption": "Executive registrar console monitoring 1,245 active student enrollments, faculty rosters, attendance alerts, pending exam approvals, and system activity logs."
+      },
+      {
+        "url": "/alfabk-mockup-3.jpg",
+        "label": "Screen 03 — Student Parliament Digital Hub",
+        "caption": "Official student governance portal featuring suggestion submissions, club initiative tracking, academic year 2025/2026 mandate highlights, and direct office communication."
+      }
+    ],
+    "techArchitecture": [
+      {
+        "title": "Core Application",
+        "tech": "Next.js & TypeScript",
+        "desc": "Built with strict TypeScript contracts, SSR/SSG academic pages, and modular App Router separation for Public Portal vs Administration ERP."
+      },
+      {
+        "title": "Academic ERP Engine",
+        "tech": "Role-Based Access & Control Logs",
+        "desc": "Granular clearance levels managing student enrollments, teacher assignments, semester routines, attendance flags, and result approvals."
+      },
+      {
+        "title": "UI & Visual System",
+        "tech": "Tailwind CSS & Responsive Design",
+        "desc": "Authoritative deep navy & warm gold institutional palette paired with crisp, legible admin analytics cards."
+      },
+      {
+        "title": "Real-Time Telemetry",
+        "tech": "Live Activity & Notice Broadcasting",
+        "desc": "Tracks active portal users (1,313), server health load (14%), course additions, and campus-wide announcements."
+      }
+    ],
+    "contributions": [
+      "Engineered responsive international university portal with multi-faculty navigation and real-time search across 138 accredited programs.",
+      "Architected the ABK Administration Control Panel tracking 1,245 students, 68 teachers, 8 departments, and 156 running courses.",
+      "Implemented operational alert modules for pending exam results, low attendance flags, and student registration verification queues.",
+      "Designed institutional quick-action workflows and live system activity feeds streamlining day-to-day registrar operations."
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "React",
+      "Role-Based Access Control",
+      "Academic ERP"
+    ],
+    "liveLink": "https://alfa-bk-university.vercel.app/",
+    "githubLink": "https://github.com/pronoy656/Alfa-Bk-University"
   }
 }
-

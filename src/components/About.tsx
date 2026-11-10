@@ -23,7 +23,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-24 md:scroll-mt-28 pt-2 sm:pt-4 md:pt-6 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden"
+      className="scroll-mt-24 md:scroll-mt-28 pt-16 sm:pt-20 md:pt-28 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden"
     >
       {/* ── Background Magic Rings ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-60">

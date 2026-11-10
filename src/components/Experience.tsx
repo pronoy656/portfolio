@@ -4,63 +4,56 @@ import React from "react";
 import {
   Calendar,
   MapPin,
-  Building2,
-  ShieldCheck,
-  Zap,
-  Layers,
-  Users,
+  CheckCircle2,
+  ArrowUpRight,
 } from "lucide-react";
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiFigma,
+} from "react-icons/si";
 import { motion, useReducedMotion } from "motion/react";
-import { CountUp } from "@/components/animations";
 
-const sparktechData = {
+const experienceData = {
   role: "Frontend Developer",
   company: "Sparktech Agency",
-  period: "Jul 2025 — Present",
-  type: "Full-Time · Onsite",
   location: "Dhaka, Bangladesh",
-  status: "Active Position",
+  type: "Full-Time",
+  period: "August 2025 – Present",
   summary:
-    "Spearheading frontend architecture and client deliverables at Sparktech Agency. Translating intricate Figma design systems into accessible, responsive Next.js and React web applications with real-time Socket.IO communication, centralized state management, and sub-second page performance.",
+    "Developing high-performance, responsive web applications and translating Figma design systems into pixel-perfect, accessible production interfaces.",
   highlights: [
     {
-      title: "16+ Production Deliveries",
-      desc: "Engineered and shipped 16+ live client web platforms from architectural blueprint to high-availability deployment.",
-      icon: <Zap size={16} className="text-amber-500" />,
+      label: "Performance & Rendering",
+      text: "Architecting dynamic SSR, CSR, and SSG with Next.js for sub-second speeds and optimal SEO.",
     },
     {
-      title: "Real-Time WebSocket Architecture",
-      desc: "Built low-latency real-time data feeds, live match statistics, and collaborative feeds using Socket.IO and optimistic updates.",
-      icon: <Layers size={16} className="text-indigo-500" />,
+      label: "Design-System Fidelity",
+      text: "Translating complex Figma design tokens into component architectures with strict WCAG a11y standards.",
     },
     {
-      title: "Pixel-Perfect Figma Translation",
-      desc: "Converted complex multi-breakpoint design files into responsive, zero-layout-shift UI systems compliant with WCAG 2.1 AA standards.",
-      icon: <ShieldCheck size={16} className="text-emerald-500" />,
+      label: "Full-Stack API Flow",
+      text: "Collaborating with backend engineers to integrate robust RESTful APIs across Node.js and MongoDB.",
     },
     {
-      title: "Cross-Functional Sprint Leadership",
-      desc: "Collaborated directly with product managers, UI/UX designers, backend engineers, and clients to ensure on-time delivery.",
-      icon: <Users size={16} className="text-sky-500" />,
+      label: "Agile Engineering",
+      text: "Contributing actively in sprint planning, asynchronous workflows, and peer pull-request code reviews.",
     },
   ],
-  techStack: [
-    "Next.js 15",
-    "React 19",
-    "TypeScript",
-    "Tailwind CSS",
-    "Socket.IO",
-    "Redux Toolkit",
-    "TanStack Query",
-    "REST APIs",
-    "Figma",
-    "Framer Motion",
-  ],
-  metrics: [
-    { value: "16+", label: "Shipped Projects", desc: "Production Client Sites" },
-    { value: "100%", label: "On-Time Handoff", desc: "Sprint Milestones" },
-    { value: "98/100", label: "Avg Lighthouse", desc: "Core Web Vitals" },
-    { value: "60fps", label: "Real-Time UI", desc: "Socket.IO Integration" },
+  technologies: [
+    { name: "Next.js", icon: <SiNextdotjs className="w-3.5 h-3.5 text-black" /> },
+    { name: "React", icon: <SiReact className="w-3.5 h-3.5 text-[#61DAFB]" /> },
+    { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5 text-[#3178C6]" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss className="w-3.5 h-3.5 text-[#06B6D4]" /> },
+    { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5 text-[#5FA04E]" /> },
+    { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5 text-gray-900" /> },
+    { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" /> },
+    { name: "Figma", icon: <SiFigma className="w-3.5 h-3.5 text-[#F24E1E]" /> },
   ],
 };
 
@@ -69,165 +62,115 @@ export default function Experience() {
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section id="experience" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-36 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100 relative overflow-hidden">
-      
-      {/* ── Background Ambience ── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-[45vw] h-[30vw] bg-indigo-50/40 blur-[130px] rounded-full" />
-        <div className="absolute bottom-1/4 left-0 w-[40vw] h-[25vw] bg-emerald-50/30 blur-[120px] rounded-full" />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section
+      id="experience"
+      className="scroll-mt-24 md:scroll-mt-28 py-16 sm:py-24 md:py-28 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-150 relative"
+    >
+      <div className="max-w-7xl mx-auto">
         
-        {/* ── Section Header (Editorial, Bold & Human) ── */}
+        {/* ── Section Header (Quiet, Confident & Minimalist) ── */}
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-gray-100"
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
+          className="flex flex-col gap-2.5 sm:gap-3 mb-12 sm:mb-16"
         >
-          <div className="flex flex-col gap-2.5">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
-              STORY <span className="text-gray-300 font-light">&amp;</span> <br />
-              <span className="text-gray-300 font-light italic">JOURNEY.</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
+            Career &amp; Experience
+          </span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter leading-none text-gray-900">
+              PROVEN EXPERIENCE <span className="text-gray-300 font-light">IN</span> <br />
+              <span className="text-gray-300 italic">PRODUCTION TEAMS.</span>
             </h2>
-          </div>
-
-          {/* Live Availability Status Pill */}
-          <div className="flex items-center gap-2.5 text-xs font-mono font-bold text-gray-600 bg-gray-50 border border-gray-200/80 px-4 py-2.5 rounded-full shadow-2xs self-start md:self-end">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Active at Sparktech Agency · Open to Opportunities</span>
+            <p className="text-xs sm:text-sm font-mono text-gray-500">
+              // 01 PRODUCTION ROLE • ACTIVE
+            </p>
           </div>
         </motion.div>
 
-        {/* ── Top Proof-of-Craft Impact Grid (4 Agency Stat Tiles, Staggered Reveal) ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-12">
-          {sparktechData.metrics.map((m, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: shouldReduceMotion ? 0.01 : 0.55,
-                delay: shouldReduceMotion ? 0 : idx * 0.08,
-                ease,
-              }}
-              className="p-4 sm:p-6 rounded-2xl bg-gray-50/70 border border-gray-200/70 flex flex-col justify-between hover:bg-white hover:shadow-sm transition-all duration-300"
-            >
-              <span className={`text-2xl sm:text-4xl font-black tracking-tight ${
-                idx === 1 ? "text-indigo-600" : idx === 2 ? "text-emerald-600" : "text-gray-900"
-              }`}>
-                <CountUp value={m.value} />
-              </span>
-              <div className="mt-2">
-                <span className="text-xs font-bold text-gray-900 block leading-tight">{m.label}</span>
-                <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 uppercase tracking-wider block mt-0.5">{m.desc}</span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* ── Featured Agency Role Spotlight Card (Smooth Viewport Reveal) ── */}
+        {/* ── Clean Editorial Experience Row (Zero Clutter, Maximum Clarity) ── */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, ease }}
-          className="bg-white rounded-2xl sm:rounded-[2.5rem] border border-gray-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-5 sm:p-10 md:p-12 relative overflow-hidden flex flex-col gap-8 sm:gap-10"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
+          className="border-t border-gray-200/90 pt-8 sm:pt-12 pb-6 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 hover:bg-gray-50/40 transition-colors px-2 -mx-2 sm:px-4 sm:-mx-4 rounded-2xl"
         >
-          
-          {/* Top Header Row of the Spotlight Card */}
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 sm:pb-8 border-b border-gray-100">
-            <div className="flex items-start gap-3 sm:gap-5">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold shrink-0 shadow-xs">
-                <Building2 size={24} />
-              </div>
-              
-              <div className="flex flex-col gap-1.5">
-                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                  <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>{sparktechData.status}</span>
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-gray-500 font-bold bg-gray-100 px-2.5 py-0.5 rounded-full border border-gray-200/60">
-                    {sparktechData.type}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-mono text-gray-500">
-                    <MapPin size={11} className="text-indigo-500" />
-                    <span>{sparktechData.location}</span>
-                  </span>
-                </div>
+          {/* Column 1: Status, Period, Location (3 cols) */}
+          <div className="md:col-span-3 flex flex-col gap-2.5">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Active Role
+            </span>
 
-                <h3 className="text-xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight pt-1">
-                  {sparktechData.role}
-                </h3>
-                <span className="text-base sm:text-lg font-bold text-indigo-600">
-                  {sparktechData.company}
-                </span>
-              </div>
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-gray-700 mt-1">
+              <Calendar size={13} className="text-indigo-600 shrink-0" />
+              <span>{experienceData.period}</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-gray-600 bg-gray-50 px-4 py-2 rounded-full border border-gray-200/80 self-start">
-              <Calendar size={13} className="text-gray-400" />
-              <span>{sparktechData.period}</span>
+            <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
+              <MapPin size={12} className="text-gray-400 shrink-0" />
+              <span>{experienceData.location}</span>
             </div>
+
+            <span className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-widest mt-2">
+              {experienceData.type}
+            </span>
           </div>
 
-          {/* Role Summary / Executive Narrative */}
-          <div className="max-w-4xl">
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
-              {sparktechData.summary}
+          {/* Column 2: Role, Company & Context (4 cols) */}
+          <div className="md:col-span-4 flex flex-col gap-2">
+            <h3 className="text-2xl sm:text-3xl font-black text-gray-950 tracking-tight leading-tight">
+              {experienceData.role}
+            </h3>
+
+            <p className="text-base font-bold text-indigo-600">
+              {experienceData.company}
+            </p>
+
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal pt-1">
+              {experienceData.summary}
             </p>
           </div>
 
-          {/* Key Deliverables & Engineering Accomplishments (2x2 Grid) */}
-          <div className="space-y-4">
-            <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-gray-400 block">
-              Core Engineering Impact &amp; Responsibilities
-            </span>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {sparktechData.highlights.map((h, i) => (
-                <div
-                  key={i}
-                  className="p-5 rounded-2xl bg-gray-50/70 border border-gray-200/70 hover:bg-white hover:border-indigo-100 hover:shadow-xs transition-all duration-200 flex flex-col justify-between gap-2.5"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-white border border-gray-200/80 flex items-center justify-center shrink-0 shadow-2xs">
-                      {h.icon}
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 leading-tight">
-                      {h.title}
-                    </h4>
-                  </div>
-                  <p className="text-xs sm:text-[13px] text-gray-500 leading-relaxed">
-                    {h.desc}
+          {/* Column 3: Key Deliverables & Applied Stack (5 cols) */}
+          <div className="md:col-span-5 flex flex-col justify-between gap-6">
+            {/* Key Deliverables Bullet List */}
+            <div className="space-y-3">
+              {experienceData.highlights.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0" />
+                  <p className="text-gray-600">
+                    <strong className="text-gray-900 font-semibold">{item.label}:</strong>{" "}
+                    {item.text}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Tech Stack Pills */}
-          <div className="pt-6 border-t border-gray-100">
-            <span className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-gray-400 block mb-3">
-              Production Tooling &amp; Technology Stack
-            </span>
-            <div className="flex flex-wrap items-center gap-2">
-              {sparktechData.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-xs font-mono font-semibold px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-indigo-50 hover:text-indigo-600 text-gray-700 border border-gray-200/70 transition-colors"
-                >
-                  {tech}
-                </span>
-              ))}
+            {/* Applied Tech Stack */}
+            <div className="pt-4 border-t border-gray-100">
+              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block mb-2.5">
+                // TECHNOLOGIES APPLIED
+              </span>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                {experienceData.technologies.map((tech) => (
+                  <span
+                    key={tech.name}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 hover:bg-white border border-gray-200/90 text-xs font-mono font-medium text-gray-800 transition-colors"
+                  >
+                    {tech.icon}
+                    <span>{tech.name}</span>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-
         </motion.div>
+
+        <div className="border-t border-gray-200/90" />
 
       </div>
     </section>

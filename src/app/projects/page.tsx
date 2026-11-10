@@ -219,8 +219,9 @@ export default function AllProjectsPage() {
                     src={project.image || project.images[0]}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 580px"
-                    className="object-cover object-top group-hover/img:scale-104 transition-transform duration-500 ease-out"
+                    quality={95}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
+                    className="object-cover object-center group-hover/img:scale-104 transition-transform duration-500 ease-out"
                     loading={idx < 2 ? "eager" : "lazy"}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-5">

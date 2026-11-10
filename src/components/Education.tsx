@@ -223,11 +223,11 @@ export default function Education() {
             </h2>
           </div>
 
-          {/* ── 2 Tabs: Education & Certification ── */}
-          <div className="inline-flex p-1 sm:p-1.5 rounded-full bg-white border border-gray-200/80 shadow-sm self-start md:self-end">
+          {/* ── 2 Tabs: Education & Certification (Fully Responsive) ── */}
+          <div className="flex w-full sm:w-auto p-1 sm:p-1.5 rounded-full bg-white border border-gray-200/90 shadow-sm self-stretch sm:self-start md:self-end">
             <button
               onClick={() => setActiveTab("education")}
-              className={`relative flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`relative flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap ${
                 activeTab === "education"
                   ? "text-white shadow-sm"
                   : "text-gray-500 hover:text-gray-900"
@@ -240,10 +240,10 @@ export default function Education() {
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <GraduationCap size={15} className="relative z-10" />
+              <GraduationCap size={14} className="relative z-10 shrink-0" />
               <span className="relative z-10">Education</span>
               <span
-                className={`relative z-10 text-[10px] font-black px-1.5 py-0.5 rounded-full ${
+                className={`relative z-10 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full ${
                   activeTab === "education"
                     ? "bg-white/20 text-white"
                     : "bg-gray-100 text-gray-600"
@@ -255,7 +255,7 @@ export default function Education() {
 
             <button
               onClick={() => setActiveTab("certification")}
-              className={`relative flex items-center gap-2.5 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`relative flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap ${
                 activeTab === "certification"
                   ? "text-white shadow-sm"
                   : "text-gray-500 hover:text-gray-900"
@@ -268,10 +268,10 @@ export default function Education() {
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <Award size={15} className="relative z-10" />
+              <Award size={14} className="relative z-10 shrink-0" />
               <span className="relative z-10">Certifications</span>
               <span
-                className={`relative z-10 text-[10px] font-black px-1.5 py-0.5 rounded-full ${
+                className={`relative z-10 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full ${
                   activeTab === "certification"
                     ? "bg-white/20 text-white"
                     : "bg-gray-100 text-gray-600"
@@ -419,10 +419,28 @@ export default function Education() {
               {educationList.map((item) => (
                 <div
                   key={item.institution + item.degree}
-                  className="group border-t border-gray-200/90 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 hover:bg-white/60 transition-colors px-4 -mx-4 rounded-2xl relative"
+                  className="group border-t border-gray-200/90 py-8 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 hover:bg-white/60 transition-colors px-4 -mx-4 rounded-2xl relative"
                 >
-                  {/* Left: Period, Location, Status */}
-                  <div className="md:col-span-3 flex flex-col gap-2.5">
+                  {/* ── Mobile-Only Clean Top Meta Row (Consolidated, No Clutter) ── */}
+                  <div className="flex md:hidden items-center justify-between gap-3 flex-wrap pb-3 border-b border-gray-100">
+                    <div className="flex items-center gap-2.5">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100">
+                        <CheckCircle2 size={10} />
+                        {item.status}
+                      </span>
+                      <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-gray-600">
+                        <Calendar size={12} className="text-gray-400" />
+                        <span>{item.period}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-gray-500 font-medium">
+                      <MapPin size={11} className="text-indigo-500" />
+                      <span>{item.location}</span>
+                    </div>
+                  </div>
+
+                  {/* ── Desktop Left Column (Hidden on Mobile to Prevent Duplicate Clutter) ── */}
+                  <div className="hidden md:flex md:col-span-3 flex-col gap-2.5">
                     <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 w-fit">
                       <CheckCircle2 size={11} />
                       {item.status}
@@ -436,7 +454,7 @@ export default function Education() {
                       <span>{item.location}</span>
                     </div>
 
-                    {/* Quick Button to open full campus gallery modal */}
+                    {/* Quick Button to open full campus gallery modal on desktop */}
                     <button
                       onClick={() => {
                         setModalCampusIndex(0);
@@ -452,40 +470,46 @@ export default function Education() {
                     </button>
                   </div>
 
-                  {/* Middle: Title & Institution with Interactive Hover Trigger */}
+                  {/* ── Middle: Institution, Degree & Campus Photo Strip ── */}
                   <div
                     className="md:col-span-5 relative"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={() => setIsHoveringCampus(false)}
                     onMouseMove={handleMouseMove}
                   >
-                    <div className="inline-block cursor-pointer">
-                      <div className="flex items-center gap-2 mb-1.5">
+                    <div className="inline-block cursor-pointer w-full">
+                      {/* Clean Badges Row */}
+                      <div className="flex items-center gap-2 mb-2">
                         <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50/80 px-2.5 py-0.5 rounded-full border border-indigo-100">
                           <Building2 size={11} />
                           Permanent Campus
                         </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                        {/* Hover hint only on desktop with mouse pointer */}
+                        <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          Hover to view all 4 photos
+                          Hover to preview
                         </span>
                       </div>
 
-                      <h3 className="text-2xl sm:text-3xl font-black tracking-tighter text-gray-900 group-hover:text-indigo-600 transition-colors">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-gray-900 group-hover:text-indigo-600 transition-colors leading-tight">
                         {item.institution}
                       </h3>
 
-                      <p className="text-sm font-semibold text-gray-600 mt-1 italic">
+                      <p className="text-xs sm:text-sm font-semibold text-gray-600 mt-1 italic">
                         {item.degree}
                       </p>
 
-                      {/* ── ALL 4 CAMPUS PHOTOS PREVIEW STRIP (Visible directly) ── */}
+                      {/* ── ALL 4 CAMPUS PHOTOS PREVIEW STRIP (Compact & Responsive) ── */}
                       <div className="mt-4 pt-1">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-mono text-gray-400 font-semibold">
-                            Campus Views (4 photos)
+                          <span className="text-[11px] font-mono text-gray-500 font-semibold flex items-center gap-1.5">
+                            <Images size={12} className="text-indigo-500" />
+                            Campus Gallery (4 views)
                           </span>
-                          <span className="text-[10px] font-mono text-indigo-600 font-medium">
+                          <span className="text-[10px] font-mono text-indigo-600 font-medium md:hidden">
+                            Tap to expand
+                          </span>
+                          <span className="hidden md:inline-block text-[10px] font-mono text-indigo-600 font-medium">
                             Click to expand
                           </span>
                         </div>
@@ -498,19 +522,14 @@ export default function Education() {
                                 setModalCampusIndex(i);
                                 setShowCampusModal(true);
                               }}
-                              className="group/thumb relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200/90 shadow-sm hover:scale-105 hover:shadow-md hover:border-indigo-500 transition-all cursor-pointer bg-gray-100"
-                              title={`${img.title} — Click to view`}
+                              className="group/thumb relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200/80 shadow-2xs hover:scale-[1.03] hover:shadow-md hover:border-indigo-400 transition-all cursor-pointer bg-gray-100"
                             >
                               <Image
                                 src={img.src}
-                                alt={img.title}
+                                alt="ULAB Campus View"
                                 fill
-                                className="object-cover group-hover/thumb:scale-110 transition-transform duration-300"
+                                className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
                               />
-                              <div className="absolute inset-0 bg-black/10 group-hover/thumb:bg-black/0 transition-colors" />
-                              <div className="absolute bottom-1 right-1 px-1 rounded bg-black/60 text-white text-[8px] font-mono font-bold">
-                                #{i + 1}
-                              </div>
                             </div>
                           ))}
                         </div>
@@ -541,13 +560,13 @@ export default function Education() {
 
       </div>
 
-      {/* ── FLOATING CAMPUS PREVIEW CARD (SHOWING ALL 4 IMAGES SIMULTANEOUSLY, 100% NON-BLOCKING SCROLL) ── */}
+      {/* ── FLOATING CAMPUS PREVIEW CARD (CLEAN, CURATED GALLERY - ZERO CLUTTER) ── */}
       <AnimatePresence>
         {isHoveringCampus && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+            exit={{ opacity: 0, scale: 0.94 }}
             transition={{ type: "spring", damping: 28, stiffness: 360 }}
             style={{
               position: "fixed",
@@ -556,141 +575,105 @@ export default function Education() {
               x: cardX,
               y: cardY,
               zIndex: 9999,
-              pointerEvents: "none", // Critical: prevents blocking native smooth scroll or wheel events
+              pointerEvents: "none",
               willChange: "transform",
             }}
-            className="pointer-events-none select-none w-[320px] sm:w-[480px] rounded-2xl bg-white/95 dark:bg-[#0c0e14]/95 backdrop-blur-2xl border border-white/80 dark:border-white/10 p-3 shadow-[0_30px_70px_rgba(0,0,0,0.28)] ring-1 ring-black/5 flex flex-col gap-2.5"
+            className="pointer-events-none select-none w-[320px] sm:w-[440px] rounded-2xl bg-white border border-gray-200/90 p-2.5 shadow-[0_24px_55px_-12px_rgba(0,0,0,0.18)] flex flex-col gap-2"
           >
-            {/* Top Bar inside Floating Card */}
-            <div className="flex items-center justify-between px-1 text-[11px] font-mono text-gray-500">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-                  ULAB Permanent Campus
-                </span>
-              </div>
-              <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 font-bold border border-indigo-100 text-[10px]">
-                All 4 Views
-              </span>
-            </div>
-
-            {/* ── 2x2 GRID DISPLAYING ALL 4 PHOTOS AT THE SAME TIME ── */}
+            {/* ── Clean 2x2 Photo Grid (Pure Photographs Only, Zero Text Overlays) ── */}
             <div className="grid grid-cols-2 gap-2">
               {campusImages.map((img, idx) => (
                 <motion.div
                   key={img.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.04, duration: 0.2 }}
-                  className="relative aspect-[16/11] rounded-xl overflow-hidden bg-slate-900 border border-black/5 dark:border-white/10 shadow-sm"
+                  transition={{ delay: idx * 0.03, duration: 0.2 }}
+                  className="relative aspect-[16/10] rounded-xl overflow-hidden bg-gray-100"
                 >
                   <Image
                     src={img.src}
-                    alt={img.title}
+                    alt="ULAB Campus"
                     fill
-                    sizes="(max-width: 640px) 160px, 240px"
+                    sizes="(max-width: 640px) 160px, 230px"
                     className="object-cover"
                   />
-                  {/* Dark gradient for text legibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-
-                  {/* Top-right index badge */}
-                  <div className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded-full bg-black/60 text-white font-mono text-[9px] font-bold border border-white/20">
-                    {idx + 1}/4
-                  </div>
-
-                  {/* Bottom caption */}
-                  <div className="absolute bottom-1.5 left-2 right-2 flex flex-col pointer-events-none">
-                    <span className="text-[9px] font-mono uppercase tracking-wider text-indigo-300 font-bold leading-tight">
-                      {img.tag}
-                    </span>
-                    <span className="text-[10px] font-bold text-white truncate drop-shadow-sm">
-                      {img.title}
-                    </span>
-                  </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Card Footer with Location & Non-blocking info */}
-            <div className="px-1 pt-0.5 flex items-center justify-between text-[11px] text-gray-500">
-              <div className="flex items-center gap-1.5">
-                <MapPin size={11} className="text-indigo-600" />
-                <span className="text-gray-700 font-medium">Mohammadpur, Dhaka</span>
-              </div>
-              <span className="text-[10px] font-mono text-gray-400">
-                100% Green Permanent Campus
+            {/* Quiet, Understated Footer Caption */}
+            <div className="px-1.5 pt-0.5 flex items-center justify-between text-xs">
+              <span className="font-semibold text-gray-800 tracking-tight">
+                ULAB Permanent Campus
+              </span>
+              <span className="text-[11px] text-gray-400">
+                Mohammadpur, Dhaka
               </span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── FULLSCREEN CAMPUS GALLERY LIGHTBOX MODAL ── */}
+      {/* ── FULLSCREEN CAMPUS GALLERY LIGHTBOX MODAL (PURE EDITORIAL VIEWER) ── */}
       <AnimatePresence>
         {showCampusModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/85 backdrop-blur-md"
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-md"
             onClick={() => setShowCampusModal(false)}
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl bg-[#0e1117] rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col max-h-[92vh]"
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
+              className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200/80 flex flex-col max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Modal Top Header */}
-              <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between gap-4 bg-white/[0.02]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                    <Building2 size={18} />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white leading-tight">
-                      University of Liberal Arts Bangladesh (ULAB)
-                    </h3>
-                    <p className="text-xs text-gray-400 font-medium">
-                      Permanent Campus Architecture &amp; Grounds · Mohammadpur, Dhaka
-                    </p>
-                  </div>
+              {/* Clean Minimal Header */}
+              <div className="px-5 py-4 sm:px-6 border-b border-gray-100 flex items-center justify-between gap-4">
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
+                    University of Liberal Arts Bangladesh (ULAB)
+                  </h3>
+                  <p className="text-xs text-gray-500">
+                    Mohammadpur, Dhaka
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="hidden sm:inline-block text-xs font-mono text-gray-400 px-3 py-1 rounded-full bg-white/5 border border-white/10">
-                    {modalCampusIndex + 1} of {campusImages.length}
+                  <span className="text-xs font-mono text-gray-400">
+                    {modalCampusIndex + 1} / {campusImages.length}
                   </span>
                   <button
                     onClick={() => setShowCampusModal(false)}
                     aria-label="Close modal"
-                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <X size={16} />
                   </button>
                 </div>
               </div>
 
-              {/* Main Image Display with Next/Prev Controls */}
-              <div className="relative w-full flex-1 min-h-[320px] sm:min-h-[500px] bg-black flex items-center justify-center p-2 sm:p-6 overflow-hidden">
+              {/* Main Clean Image Display */}
+              <div className="relative w-full flex-1 min-h-[300px] sm:min-h-[460px] bg-gray-50 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={campusImages[modalCampusIndex].src}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative w-full h-full min-h-[320px] sm:min-h-[500px] flex items-center justify-center"
+                    transition={{ duration: 0.25 }}
+                    className="relative w-full h-full min-h-[300px] sm:min-h-[460px] flex items-center justify-center"
                   >
                     <Image
                       src={campusImages[modalCampusIndex].src}
-                      alt={campusImages[modalCampusIndex].title}
+                      alt="ULAB Campus Photo"
                       fill
-                      className="object-contain"
+                      className="object-contain rounded-xl"
                       priority
                     />
                   </motion.div>
@@ -703,10 +686,10 @@ export default function Education() {
                       (prev) => (prev - 1 + campusImages.length) % campusImages.length
                     )
                   }
-                  className="absolute left-4 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all cursor-pointer shadow-lg hover:scale-105"
+                  className="absolute left-3 sm:left-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-gray-900 border border-gray-200/80 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
                   aria-label="Previous photo"
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={18} />
                 </button>
 
                 <button
@@ -715,50 +698,33 @@ export default function Education() {
                       (prev) => (prev + 1) % campusImages.length
                     )
                   }
-                  className="absolute right-4 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all cursor-pointer shadow-lg hover:scale-105"
+                  className="absolute right-3 sm:right-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-gray-900 border border-gray-200/80 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
                   aria-label="Next photo"
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={18} />
                 </button>
               </div>
 
-              {/* Modal Footer with Thumbnail Strip & Info */}
-              <div className="p-4 sm:p-6 bg-[#0c0e14] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-400 font-bold px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20">
-                      {campusImages[modalCampusIndex].tag}
-                    </span>
-                    <h4 className="text-sm font-bold text-white">
-                      {campusImages[modalCampusIndex].title}
-                    </h4>
-                  </div>
-                  <p className="text-xs text-gray-400 max-w-xl">
-                    {campusImages[modalCampusIndex].description}
-                  </p>
-                </div>
-
-                {/* Thumbnail Strip */}
-                <div className="flex items-center gap-2 self-start sm:self-center">
-                  {campusImages.map((img, idx) => (
-                    <button
-                      key={img.id}
-                      onClick={() => setModalCampusIndex(idx)}
-                      className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                        modalCampusIndex === idx
-                          ? "border-indigo-500 scale-105 shadow-md"
-                          : "border-white/20 opacity-60 hover:opacity-100"
-                      }`}
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
+              {/* Clean Centered Thumbnail Strip Only (No Image Names/Tags) */}
+              <div className="px-5 py-4 bg-white border-t border-gray-100 flex items-center justify-center gap-2.5">
+                {campusImages.map((img, idx) => (
+                  <button
+                    key={img.id}
+                    onClick={() => setModalCampusIndex(idx)}
+                    className={`relative w-14 h-10 sm:w-16 sm:h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                      modalCampusIndex === idx
+                        ? "border-indigo-600 scale-105 shadow-sm"
+                        : "border-transparent opacity-55 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={img.src}
+                      alt="Campus thumbnail"
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
               </div>
             </motion.div>
           </motion.div>

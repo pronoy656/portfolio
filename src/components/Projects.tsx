@@ -34,7 +34,7 @@ const GithubIcon = () => (
   </svg>
 );
 
-const featuredProjects = projectsData.slice(0, 6);
+const featuredProjects = projectsData.slice(0, 7);
 
 export default function Projects() {
   const shouldReduceMotion = useReducedMotion();
@@ -123,7 +123,7 @@ export default function Projects() {
         tl.to(
           card,
           {
-            y: i * 36,
+            y: i * 32,
             opacity: 1,
             ease: "power1.out",
             duration: 1,
@@ -256,8 +256,14 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* 3-Column Image Showcase Row */}
-                    <div className="flex-1 min-h-[170px] max-h-[265px] grid grid-cols-3 gap-4 my-2.5">
+                    {/* Image Showcase Row */}
+                    <div
+                      className={`flex-1 min-h-[170px] max-h-[265px] grid ${
+                        project.images.length === 2
+                          ? "grid-cols-2 max-w-4xl mx-auto w-full gap-5"
+                          : "grid-cols-3 w-full gap-4"
+                      } my-2.5`}
+                    >
                       {project.images.map((img, imgIdx) => (
                         <Link
                           key={imgIdx}
@@ -276,8 +282,9 @@ export default function Projects() {
                             src={img}
                             alt={`${project.title} screen ${imgIdx + 1}`}
                             fill
-                            sizes="(max-width: 1024px) 33vw, 380px"
-                            className="object-cover object-top group-hover/img:scale-102 transition-transform duration-500 ease-out"
+                            quality={95}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 560px"
+                            className="object-cover object-center group-hover/img:scale-102 transition-transform duration-500 ease-out"
                             loading={i === 0 ? "eager" : "lazy"}
                             priority={i === 0 && imgIdx === 0}
                           />
@@ -443,8 +450,9 @@ export default function Projects() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    sizes="90vw"
-                    className="object-cover object-top group-hover:scale-102 transition-transform duration-500"
+                    quality={95}
+                    sizes="(max-width: 640px) 95vw, 480px"
+                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                   />
                 </Link>
 

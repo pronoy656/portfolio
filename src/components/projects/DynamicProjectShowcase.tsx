@@ -41,6 +41,8 @@ import {
   Cpu,
   Database,
   Code2,
+  Eye,
+  Maximize2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -110,7 +112,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
   const nextProject =
     projectsData[(currentIndex + 1) % projectsData.length] || projectsData[0];
 
-  // Prepared data (JSON優先 with fallback to base project attributes)
+  // Prepared data (JSON prioritised with clean fallbacks to base project attributes)
   const title = richData?.title || project.title;
   const tagline = richData?.tagline || project.tagline;
   const category = richData?.category || project.category;
@@ -119,11 +121,20 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
   const summary = richData?.summary || project.fullDesc || project.desc;
   const metrics = richData?.metrics || project.metrics || [];
   
-  // Gallery images with labels
-  const images = richData?.images || project.images?.map((url, idx) => ({
-    url,
-    label: `Screen ${idx + 1}`,
-  })) || [{ url: project.image, label: "Main Screenshot" }];
+  // Gallery images with rich labels and captions
+  const images = richData?.images || (
+    project.images && project.images.length > 0
+      ? project.images.map((url, idx) => ({
+          url,
+          label: `Screen 0${idx + 1} — Overview & Interface`,
+          caption: `${title} visual interface screen ${idx + 1} showcasing responsive layout and user workflows.`,
+        }))
+      : [{
+          url: project.image,
+          label: "Screen 01 — Main Interface Showcase",
+          caption: `${title} primary high-resolution interface preview.`,
+        }]
+  );
 
   const currentImage = images[activeImageIndex] || images[0];
 
@@ -140,8 +151,14 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
   // Technical Architecture
   const techArchitecture = richData?.techArchitecture || [];
 
+  // Features list
+  const features = project.features || [];
+
   // Contributions
   const contributions = richData?.contributions || project.contributions || [];
+
+  // Tech stack
+  const techStack = richData?.techStack || project.techStack || [];
 
   // Live and GitHub links
   const liveLink = richData?.liveLink || project.liveLink || "https://github.com/pronoy656";
@@ -178,7 +195,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs active:scale-95 transition-all"
             >
-              <span>Explore Platform</span>
+              <span>Explore Live</span>
               <ExternalLink size={13} />
             </a>
 
@@ -195,7 +212,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         </div>
 
         {/* ── Title & Executive Header ── */}
-        <div className="space-y-6 mb-16">
+        <div className="space-y-6 mb-14">
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-[11px] font-mono font-bold uppercase tracking-wider">
               <Sparkles size={13} className="text-indigo-600" />
@@ -209,7 +226,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
             </span>
           </div>
 
-          <div className="max-w-4xl space-y-4">
+          <div className="max-w-4xl space-y-3.5">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-950 tracking-tight leading-[1.08]">
               {title} — {tagline}
             </h1>
@@ -220,7 +237,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
 
           {/* Quick Metrics Grid */}
           {metrics.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
               {metrics.map((m: any, idx: number) => (
                 <div key={idx} className="p-4 rounded-2xl bg-white border border-gray-200/80 shadow-2xs">
                   <span className="text-2xl sm:text-3xl font-black text-indigo-600 font-mono tracking-tight">
@@ -233,46 +250,164 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
           )}
         </div>
 
-        {/* ── Mockup Interactive Showcase ── */}
-        <div className="mb-20">
+        {/* ── SECTION 1: Featured Main Screen Stage ── */}
+        <div className="mb-8">
           <div className="relative rounded-3xl bg-gradient-to-b from-gray-900 via-gray-950 to-black p-3 sm:p-5 md:p-6 shadow-2xl border border-gray-800 overflow-hidden">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 px-2 border-b border-gray-800/80 gap-3">
-              <div className="flex items-center gap-1.5">
+            {/* Top Browser Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 px-2 border-b border-gray-800/80 gap-3">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-red-500/80" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                <span className="ml-3 text-[11px] font-mono text-gray-400 hidden sm:inline">
-                  {title.toLowerCase().replace(/\s+/g, "")}.app — {currentImage.label}
+                <span className="ml-3 text-[11px] font-mono text-gray-400 hidden sm:inline bg-gray-900/90 px-3 py-1 rounded-md border border-gray-800">
+                  {title.toLowerCase().replace(/\s+/g, "")}.production.app
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {images.map((img: any, idx: number) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveImageIndex(idx)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
-                      activeImageIndex === idx
-                        ? "bg-indigo-600 text-white shadow-sm"
-                        : "bg-gray-800 text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    {img.label}
-                  </button>
-                ))}
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-bold text-indigo-400">
+                  {currentImage.label}
+                </span>
               </div>
             </div>
 
-            <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mt-3 bg-gray-950">
+            {/* Featured Image */}
+            <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mt-3 bg-gray-950 border border-gray-800/50">
               <Image
                 src={currentImage.url}
-                alt={`${title} mockup screen ${activeImageIndex + 1}`}
+                alt={`${title} featured mockup`}
                 fill
                 priority
                 className="object-cover object-top transition-all duration-500"
               />
             </div>
+
+            {/* Caption beneath active image */}
+            {currentImage.caption && (
+              <div className="mt-4 px-2 pt-3 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
+                <span className="line-clamp-1">{currentImage.caption}</span>
+                <span className="font-mono text-indigo-400 shrink-0 ml-4">
+                  0{activeImageIndex + 1} / 0{images.length}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* ── Interactive Thumbnails Row ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-4">
+            {images.map((img: any, idx: number) => {
+              const isActive = activeImageIndex === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveImageIndex(idx)}
+                  className={`p-3 rounded-2xl border text-left transition-all flex items-center gap-3.5 cursor-pointer ${
+                    isActive
+                      ? "bg-white border-indigo-600 shadow-md ring-2 ring-indigo-500/20"
+                      : "bg-white/80 hover:bg-white border-gray-200/90 shadow-2xs hover:shadow-xs"
+                  }`}
+                >
+                  <div className="relative w-16 h-11 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 shrink-0">
+                    <Image
+                      src={img.url}
+                      alt={img.label}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+                        isActive ? "text-indigo-600" : "text-gray-400"
+                      }`}>
+                        Screen 0{idx + 1}
+                      </span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                      )}
+                    </div>
+                    <p className="text-xs font-bold text-gray-900 truncate">
+                      {img.label.replace(/^Screen\s*\d+\s*[-—]\s*/i, "")}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
+
+        {/* ── SECTION 2: All Screens Interface Walkthrough (100% VISIBLE TOGETHER) ── */}
+        <section className="mt-20 mb-24 space-y-8">
+          <div className="max-w-3xl">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              Visual Interface &amp; Design System
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              Complete High-Resolution Screen Walkthrough
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 mt-2">
+              Every critical screen, dashboard console, and interface designed for {title}. Inspect all high-resolution layouts simultaneously below.
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {images.map((img: any, idx: number) => (
+              <div
+                key={idx}
+                className="rounded-3xl bg-white border border-gray-200/90 shadow-sm overflow-hidden p-5 sm:p-7 md:p-8 flex flex-col gap-6"
+              >
+                {/* Header for each screen */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                      0{idx + 1}
+                    </span>
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight">
+                        {img.label}
+                      </h3>
+                      <p className="text-xs text-gray-500 font-medium mt-0.5">
+                        {img.caption}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setActiveImageIndex(idx);
+                      window.scrollTo({ top: 380, behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-100 hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 text-xs font-bold transition-all shrink-0 self-start sm:self-auto cursor-pointer"
+                  >
+                    <Maximize2 size={13} />
+                    <span>Focus View</span>
+                  </button>
+                </div>
+
+                {/* MacBook Browser Frame */}
+                <div className="rounded-2xl bg-gray-950 p-2 sm:p-3 border border-gray-800 shadow-xl overflow-hidden">
+                  <div className="flex items-center gap-1.5 pb-2 px-2 border-b border-gray-800">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                    <span className="ml-2 text-[10px] font-mono text-gray-400">
+                      {title.toLowerCase().replace(/\s+/g, "")}.com / screen-{idx + 1}
+                    </span>
+                  </div>
+
+                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden mt-2 bg-gray-900">
+                    <Image
+                      src={img.url}
+                      alt={`${title} Screen ${idx + 1}`}
+                      fill
+                      sizes="(max-width: 1280px) 100vw, 1200px"
+                      className="object-cover object-top hover:scale-[1.01] transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* ── Domain Problem Analysis (Comparison Matrix) ── */}
         {comparison && (
@@ -352,7 +487,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                   <button
                     key={sub.id}
                     onClick={() => setActiveSubsystem(sub.id)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer ${
                       isActive
                         ? "bg-gray-950 text-white shadow-sm"
                         : "bg-white hover:bg-gray-100 text-gray-700 border border-gray-200"
@@ -531,6 +666,34 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
           </section>
         )}
 
+        {/* ── Core Features & Capabilities ── */}
+        {features.length > 0 && (
+          <section className="mb-24 space-y-8">
+            <div className="max-w-3xl">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+                Platform Capabilities
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+                Core Features &amp; User Workflows
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {features.map((feat: string, idx: number) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-2xl bg-white border border-gray-200/90 shadow-2xs flex items-start gap-3.5"
+                >
+                  <CheckCircle2 size={18} className="text-indigo-600 shrink-0 mt-0.5" />
+                  <span className="text-sm font-medium text-gray-800 leading-relaxed">
+                    {feat}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* ── Lead Engineering Contributions ── */}
         {contributions.length > 0 && (
           <section className="mb-24 space-y-6">
@@ -561,6 +724,25 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
           </section>
         )}
 
+        {/* ── Tech Stack Badges ── */}
+        {techStack.length > 0 && (
+          <section className="mb-24 space-y-4">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 block">
+              Core Technologies
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((tech: string) => (
+                <span
+                  key={tech}
+                  className="px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 text-xs sm:text-sm font-bold shadow-2xs"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* ── Next Project Footer Banner ── */}
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2">
@@ -577,7 +759,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
 
           <Link
             href={`/projects/${nextProject.slug || nextProject.id}`}
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white text-gray-950 hover:bg-gray-100 font-black text-xs uppercase tracking-wider shadow-md active:scale-95 transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white text-gray-950 hover:bg-gray-100 font-black text-xs uppercase tracking-wider shadow-md active:scale-95 transition-all shrink-0 cursor-pointer"
           >
             <span>Next Project</span>
             <ArrowUpRight size={16} />
@@ -591,4 +773,3 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
     </div>
   );
 }
-
