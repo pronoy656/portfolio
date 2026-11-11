@@ -2,21 +2,56 @@
 
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Send, CheckCircle2 } from "lucide-react";
+import { ArrowRight, AlertCircle, Mail, Check, Loader2 } from "lucide-react";
 
 export default function Contact() {
   const shouldReduceMotion = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
-  const [formState, setFormState] = useState<"idle" | "submitting" | "success">("idle");
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [submittedSender, setSubmittedSender] = useState<{ name: string; email: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("submitting");
-    // Simulate API call
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.ok) {
+        setFormState("error");
+        setErrorMessage(
+          data?.error || "Could not send message right now. Please try emailing directly."
+        );
+        return;
+      }
+
+      setSubmittedSender({ name: name.trim(), email: email.trim() });
+      setName("");
+      setEmail("");
+      setMessage("");
       setFormState("success");
-    }, 2000);
+    } catch {
+      setFormState("error");
+      setErrorMessage("Network error. Please check your connection or email directly.");
+    }
   };
+
+  const fallbackMailto = `mailto:pronoypaul56@gmail.com?subject=${encodeURIComponent(
+    name ? `Portfolio Inquiry from ${name}` : "Portfolio Project Inquiry"
+  )}&body=${encodeURIComponent(
+    `${message || ""}${email ? `\n\nReply to: ${email}` : ""}`
+  )}`;
 
   return (
     <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-[#08090f] dark:bg-gradient-to-b dark:from-[#090a11] dark:via-[#0d1021] dark:to-[#08090f] transition-colors duration-300">
@@ -91,65 +126,174 @@ export default function Contact() {
           >
             {formState === "success" ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="h-full flex flex-col items-center justify-center text-center py-20"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease }}
+                className="h-full flex flex-col items-center justify-center text-center py-8 sm:py-12 px-2"
               >
-                <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 mb-6">
-                  <CheckCircle2 size={40} />
-                </div>
-                <h3 className="text-3xl font-bold mb-4">Message Received!</h3>
-                <p className="text-muted-text">
-                  Thanks for reaching out. I&apos;ll get back to you within 24 hours.
-                </p>
-                <button 
-                  onClick={() => setFormState("idle")}
-                  className="mt-8 text-sm font-bold uppercase tracking-widest text-brand border-b border-brand pb-1"
+                {/* Centered Clean Check Icon */}
+                <motion.div
+                  initial={{ scale: 0.75, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.35, delay: 0.06, ease }}
+                  className="w-14 h-14 rounded-2xl bg-indigo-600/10 dark:bg-indigo-500/15 border border-indigo-600/20 dark:border-indigo-400/25 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-5 shadow-xs"
                 >
-                  Send another
+                  <Check size={26} strokeWidth={2.5} />
+                </motion.div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-950 dark:text-white leading-tight">
+                  Thank you{submittedSender?.name ? `, ${submittedSender.name}` : ""}!
+                </h3>
+
+                <p className="text-sm sm:text-base font-semibold text-indigo-600 dark:text-indigo-400 mt-1.5">
+                  Your message is sent.
+                </p>
+
+                <p className="text-sm text-gray-600 dark:text-zinc-400 leading-relaxed max-w-sm mt-3">
+                  I appreciate you reaching out. Whether it&apos;s about a new opportunity, a project, or just saying hello, I&apos;ll get back to you soon.
+                </p>
+
+                <div className="mt-7 w-full max-w-sm border-t border-b border-border-color divide-y divide-border-color text-left">
+                  <div className="py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-text shrink-0">Sent To</span>
+                    <span className="font-medium text-gray-900 dark:text-zinc-100 truncate">pronoypaul56@gmail.com</span>
+                  </div>
+                  {submittedSender?.email && (
+                    <div className="py-3 flex items-center justify-between gap-4 text-xs sm:text-sm">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-text shrink-0">Reply To</span>
+                      <span className="font-medium text-gray-900 dark:text-zinc-100 truncate">{submittedSender.email}</span>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmittedSender(null);
+                    setFormState("idle");
+                  }}
+                  className="mt-7 group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full border border-border-color hover:border-indigo-600 dark:hover:border-indigo-400 bg-white/70 dark:bg-zinc-900/70 text-xs font-bold uppercase tracking-[0.18em] text-gray-900 dark:text-white transition-all duration-300 cursor-pointer"
+                >
+                  <span>Send Another Message</span>
+                  <ArrowRight size={15} className="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">What&apos;s your name?</label>
+                  <label htmlFor="contact-name" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">What&apos;s your name?</label>
                   <input
+                    id="contact-name"
+                    name="name"
                     required
                     type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    disabled={formState === "submitting"}
                     placeholder="John Doe"
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600 disabled:opacity-60"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">Your email address</label>
+                  <label htmlFor="contact-email" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">Your email address</label>
                   <input
+                    id="contact-email"
+                    name="email"
                     required
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={formState === "submitting"}
                     placeholder="john@example.com"
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600 disabled:opacity-60"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">Tell me about your project</label>
+                  <label htmlFor="contact-message" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-text ml-1">Tell me about your project</label>
                   <textarea
+                    id="contact-message"
+                    name="message"
                     required
                     rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    disabled={formState === "submitting"}
                     placeholder="I have an idea for..."
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600 resize-none"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600 resize-none disabled:opacity-60"
                   />
                 </div>
+
+                {formState === "error" && errorMessage && (
+                  <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/25 text-red-600 dark:text-red-400 text-xs sm:text-sm flex flex-col gap-2">
+                    <div className="flex items-start gap-2">
+                      <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                      <span>{errorMessage}</span>
+                    </div>
+                    <a
+                      href={fallbackMailto}
+                      className="inline-flex items-center gap-1.5 font-bold text-indigo-600 dark:text-indigo-400 hover:underline w-fit ml-6"
+                    >
+                      <Mail size={14} />
+                      <span>Send via Email App instead</span>
+                    </a>
+                  </div>
+                )}
                 
-                <motion.button 
+                <motion.button
+                  type="submit"
                   disabled={formState === "submitting"}
-                  whileTap={{ scale: 0.98 }}
-                  className="relative w-full py-6 rounded-full bg-foreground text-background font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 overflow-hidden group transition-colors duration-500 hover:text-white disabled:opacity-50"
+                  whileTap={{ scale: formState === "submitting" ? 1 : 0.98 }}
+                  className={`relative w-full py-5 sm:py-6 rounded-full font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 overflow-hidden group transition-colors duration-300 ${
+                    formState === "submitting"
+                      ? "bg-brand text-white cursor-wait shadow-md"
+                      : "bg-foreground text-background hover:text-white cursor-pointer"
+                  }`}
                 >
-                  {/* Left-to-right fill effect */}
-                  <div className="absolute inset-0 bg-brand scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
-                  
-                  <span className="relative z-10 flex items-center gap-3">
-                    {formState === "submitting" ? "Sending..." : "Start Project"}
-                    <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-500 ease-out" />
+                  {/* Hover fill effect */}
+                  {formState !== "submitting" && (
+                    <div className="absolute inset-0 bg-brand scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
+                  )}
+
+                  {/* Subtle hairline progress bar at bottom during submission */}
+                  {formState === "submitting" && (
+                    <motion.span
+                      aria-hidden="true"
+                      initial={{ x: "-100%" }}
+                      animate={{ x: "100%" }}
+                      transition={{ repeat: Infinity, duration: 1.1, ease: "easeInOut" }}
+                      className="absolute bottom-0 inset-x-0 h-[2.5px] bg-white/70 pointer-events-none"
+                    />
+                  )}
+
+                  <span className="relative z-10 flex items-center gap-2.5 text-xs sm:text-sm">
+                    {formState === "submitting" ? (
+                      <>
+                        <Loader2 size={17} strokeWidth={2.4} className="animate-spin" />
+                        <span>Sending</span>
+                        <span className="inline-flex items-center gap-1 ml-0.5">
+                          <motion.span
+                            animate={{ opacity: [0.3, 1, 0.3] }}
+                            transition={{ repeat: Infinity, duration: 1, delay: 0 }}
+                            className="w-1 h-1 rounded-full bg-white"
+                          />
+                          <motion.span
+                            animate={{ opacity: [0.3, 1, 0.3] }}
+                            transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}
+                            className="w-1 h-1 rounded-full bg-white"
+                          />
+                          <motion.span
+                            animate={{ opacity: [0.3, 1, 0.3] }}
+                            transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}
+                            className="w-1 h-1 rounded-full bg-white"
+                          />
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Start Project</span>
+                        <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-500 ease-out" />
+                      </>
+                    )}
                   </span>
                 </motion.button>
               </form>
