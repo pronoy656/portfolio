@@ -165,7 +165,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
   const githubLink = richData?.githubLink || project.githubLink || "https://github.com/pronoy656";
 
   return (
-    <div className="min-h-screen bg-[#fafbfc] text-gray-900 flex flex-col selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen bg-[#fafbfc] dark:bg-[#08090f] dark:bg-[radial-gradient(ellipse_at_top,#141731_0%,#090a11_48%,#07080d_100%)] text-gray-900 dark:text-zinc-50 flex flex-col selection:bg-indigo-600 selection:text-white transition-colors duration-300">
       {/* ── Top Navbar ── */}
       <Navbar />
 
@@ -173,19 +173,19 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-32 sm:pt-36 md:pt-40 pb-28">
         
         {/* ── Breadcrumb & Action Bar ── */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-200/80">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-500">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-200/80 dark:border-zinc-800/80">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-500 dark:text-zinc-400">
             <Link
               href="/projects"
-              className="hover:text-indigo-600 transition-colors flex items-center gap-1.5 group"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1.5 group"
             >
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
               <span>Projects</span>
             </Link>
-            <span className="text-gray-300">/</span>
-            <span className="text-indigo-600 font-mono font-bold">{title}</span>
-            <span className="text-gray-300">/</span>
-            <span className="text-gray-400 font-medium">Enterprise Case Study</span>
+            <span className="text-gray-300 dark:text-zinc-700">/</span>
+            <span className="text-indigo-600 dark:text-indigo-400 font-mono font-bold">{title}</span>
+            <span className="text-gray-300 dark:text-zinc-700">/</span>
+            <span className="text-gray-400 dark:text-zinc-500 font-medium">Enterprise Case Study</span>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -203,7 +203,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 hover:text-indigo-600 hover:border-indigo-600 text-xs font-bold shadow-2xs active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-400 text-xs font-bold shadow-2xs active:scale-95 transition-all"
             >
               <GithubIcon />
               <span>Source Code</span>
@@ -214,23 +214,23 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {/* ── Title & Executive Header ── */}
         <div className="space-y-6 mb-14">
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-[11px] font-mono font-bold uppercase tracking-wider">
-              <Sparkles size={13} className="text-indigo-600" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-400 text-[11px] font-mono font-bold uppercase tracking-wider">
+              <Sparkles size={13} className="text-indigo-600 dark:text-indigo-400" />
               {category}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-700 text-[11px] font-mono font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-700 dark:text-zinc-300 text-[11px] font-mono font-bold uppercase tracking-wider">
               {role}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[11px] font-mono font-bold uppercase tracking-wider">
               {badge}
             </span>
           </div>
 
           <div className="max-w-4xl space-y-3.5">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-950 tracking-tight leading-[1.08]">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-950 dark:text-white tracking-tight leading-[1.08]">
               {title} — {tagline}
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-zinc-400 leading-relaxed font-normal">
               {summary}
             </p>
           </div>
@@ -239,11 +239,11 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
           {metrics.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
               {metrics.map((m: any, idx: number) => (
-                <div key={idx} className="p-4 rounded-2xl bg-white border border-gray-200/80 shadow-2xs">
-                  <span className="text-2xl sm:text-3xl font-black text-indigo-600 font-mono tracking-tight">
+                <div key={idx} className="p-4 rounded-2xl bg-white dark:bg-[#111218] border border-gray-200/80 dark:border-zinc-800 shadow-2xs">
+                  <span className="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">
                     {m.value}
                   </span>
-                  <p className="text-xs font-semibold text-gray-500 mt-0.5">{m.label}</p>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-zinc-400 mt-0.5">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -302,30 +302,30 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                   onClick={() => setActiveImageIndex(idx)}
                   className={`p-3 rounded-2xl border text-left transition-all flex items-center gap-3.5 cursor-pointer ${
                     isActive
-                      ? "bg-white border-indigo-600 shadow-md ring-2 ring-indigo-500/20"
-                      : "bg-white/80 hover:bg-white border-gray-200/90 shadow-2xs hover:shadow-xs"
+                      ? "bg-white dark:bg-[#111218] border-indigo-600 dark:border-indigo-400 shadow-md ring-2 ring-indigo-500/20"
+                      : "bg-white/80 dark:bg-zinc-900/80 hover:bg-white dark:hover:bg-[#111218] border-gray-200/90 dark:border-zinc-800 shadow-2xs hover:shadow-xs"
                   }`}
                 >
-                  <div className="relative w-16 h-11 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 shrink-0">
+                  <div className="relative w-16 h-11 rounded-lg overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shrink-0">
                     <Image
                       src={img.url}
                       alt={img.label}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-center"
                     />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
                       <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
-                        isActive ? "text-indigo-600" : "text-gray-400"
+                        isActive ? "text-indigo-600 dark:text-indigo-400" : "text-gray-400 dark:text-zinc-500"
                       }`}>
                         Screen 0{idx + 1}
                       </span>
                       {isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />
                       )}
                     </div>
-                    <p className="text-xs font-bold text-gray-900 truncate">
+                    <p className="text-xs font-bold text-gray-900 dark:text-white truncate">
                       {img.label.replace(/^Screen\s*\d+\s*[-—]\s*/i, "")}
                     </p>
                   </div>
@@ -338,13 +338,13 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {/* ── SECTION 2: All Screens Interface Walkthrough (100% VISIBLE TOGETHER) ── */}
         <section className="mt-20 mb-24 space-y-8">
           <div className="max-w-3xl">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
               Visual Interface &amp; Design System
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
               Complete High-Resolution Screen Walkthrough
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 mt-2">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 mt-2">
               Every critical screen, dashboard console, and interface designed for {title}. Inspect all high-resolution layouts simultaneously below.
             </p>
           </div>
@@ -353,19 +353,19 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
             {images.map((img: any, idx: number) => (
               <div
                 key={idx}
-                className="rounded-3xl bg-white border border-gray-200/90 shadow-sm overflow-hidden p-5 sm:p-7 md:p-8 flex flex-col gap-6"
+                className="rounded-3xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-sm overflow-hidden p-5 sm:p-7 md:p-8 flex flex-col gap-6"
               >
                 {/* Header for each screen */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100 dark:border-zinc-800">
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                    <span className="w-7 h-7 rounded-xl bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-100 dark:border-indigo-500/30 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-xs flex items-center justify-center shrink-0">
                       0{idx + 1}
                     </span>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight">
+                      <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight">
                         {img.label}
                       </h3>
-                      <p className="text-xs text-gray-500 font-medium mt-0.5">
+                      <p className="text-xs text-gray-500 dark:text-zinc-400 font-medium mt-0.5">
                         {img.caption}
                       </p>
                     </div>
@@ -376,7 +376,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                       setActiveImageIndex(idx);
                       window.scrollTo({ top: 380, behavior: "smooth" });
                     }}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-100 hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 text-xs font-bold transition-all shrink-0 self-start sm:self-auto cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-100 hover:bg-indigo-50 dark:bg-zinc-900 dark:hover:bg-indigo-500/15 text-gray-700 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400 text-xs font-bold transition-all shrink-0 self-start sm:self-auto cursor-pointer"
                   >
                     <Maximize2 size={13} />
                     <span>Focus View</span>
@@ -400,7 +400,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                       alt={`${title} Screen ${idx + 1}`}
                       fill
                       sizes="(max-width: 1280px) 100vw, 1200px"
-                      className="object-cover object-top hover:scale-[1.01] transition-transform duration-500"
+                      className="object-cover object-center hover:scale-[1.01] transition-transform duration-500"
                     />
                   </div>
                 </div>
@@ -413,13 +413,13 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {comparison && (
           <section className="mb-24 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Domain Problem Analysis
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 {comparison.sectionTitle}
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-2">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 mt-2">
                 {comparison.sectionDesc}
               </p>
             </div>
@@ -430,27 +430,27 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                 return (
                   <div
                     key={idx}
-                    className="p-6 rounded-2xl bg-white border border-gray-200/90 shadow-2xs flex flex-col justify-between gap-4"
+                    className="p-6 rounded-2xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-2xs flex flex-col justify-between gap-4"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-100 dark:border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
                         <IconComponent size={20} />
                       </div>
-                      <h3 className="text-base font-black text-gray-900 tracking-tight">
+                      <h3 className="text-base font-black text-gray-900 dark:text-white tracking-tight">
                         {item.title}
                       </h3>
                     </div>
 
                     <div className="space-y-3 text-xs sm:text-[13px] leading-relaxed">
-                      <div className="p-3 rounded-xl bg-red-50/70 border border-red-100/80 text-red-950">
-                        <span className="font-bold text-red-600 block text-[11px] font-mono uppercase tracking-wider mb-0.5">
+                      <div className="p-3 rounded-xl bg-red-50/70 dark:bg-red-500/10 border border-red-100/80 dark:border-red-500/20 text-red-950 dark:text-red-200">
+                        <span className="font-bold text-red-600 dark:text-red-400 block text-[11px] font-mono uppercase tracking-wider mb-0.5">
                           Traditional limitation:
                         </span>
                         {item.traditional}
                       </div>
 
-                      <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100/80 text-emerald-950">
-                        <span className="font-bold text-emerald-600 block text-[11px] font-mono uppercase tracking-wider mb-0.5">
+                      <div className="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-500/10 border border-emerald-100/80 dark:border-emerald-500/20 text-emerald-950 dark:text-emerald-200">
+                        <span className="font-bold text-emerald-600 dark:text-emerald-400 block text-[11px] font-mono uppercase tracking-wider mb-0.5">
                           Purpose-Built Solution:
                         </span>
                         {item.solution}
@@ -467,19 +467,19 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {subsystems.length > 0 && (
           <section className="mb-24 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 System Architecture
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 Exhaustive Breakdown by Core Subsystems
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-2">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 mt-2">
                 Explore the modular subsystems engineered to power core workflows and high-concurrency domains.
               </p>
             </div>
 
             {/* Subsystem Selectors */}
-            <div className="flex flex-wrap gap-2 pb-2 border-b border-gray-200">
+            <div className="flex flex-wrap gap-2 pb-2 border-b border-gray-200 dark:border-zinc-800">
               {subsystems.map((sub: any) => {
                 const IconComponent = ICON_MAP[sub.icon] || Layers;
                 const isActive = activeSubsystem === sub.id;
@@ -489,8 +489,8 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                     onClick={() => setActiveSubsystem(sub.id)}
                     className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer ${
                       isActive
-                        ? "bg-gray-950 text-white shadow-sm"
-                        : "bg-white hover:bg-gray-100 text-gray-700 border border-gray-200"
+                        ? "bg-gray-950 dark:bg-white text-white dark:text-zinc-950 shadow-sm"
+                        : "bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-700 dark:text-zinc-300 border border-gray-200 dark:border-zinc-800"
                     }`}
                   >
                     <IconComponent size={16} />
@@ -509,24 +509,24 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.25 }}
-                  className="p-6 sm:p-8 rounded-3xl bg-white border border-gray-200/90 shadow-sm"
+                  className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-sm"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-gray-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-gray-100 dark:border-zinc-800">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                      <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-100 dark:border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                         {React.createElement(ICON_MAP[activeSub.icon] || Layers, { size: 24 })}
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-600">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
                           {activeSub.badge}
                         </span>
-                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">
                           {activeSub.title}
                         </h3>
                       </div>
                     </div>
 
-                    <span className="text-xs font-mono font-semibold text-gray-500">
+                    <span className="text-xs font-mono font-semibold text-gray-500 dark:text-zinc-400">
                       {activeSub.subtitle}
                     </span>
                   </div>
@@ -535,17 +535,17 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
                     {activeSub.details?.map((detail: any, idx: number) => (
                       <div
                         key={idx}
-                        className="p-5 rounded-2xl bg-gray-50/70 border border-gray-200/70 flex flex-col gap-2.5"
+                        className="p-5 rounded-2xl bg-gray-50/70 dark:bg-zinc-900/70 border border-gray-200/70 dark:border-zinc-800 flex flex-col gap-2.5"
                       >
                         <div className="flex items-center gap-2">
                           <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-mono font-bold flex items-center justify-center">
                             {idx + 1}
                           </span>
-                          <h4 className="text-sm font-black text-gray-900 leading-snug">
+                          <h4 className="text-sm font-black text-gray-900 dark:text-white leading-snug">
                             {detail.heading}
                           </h4>
                         </div>
-                        <p className="text-xs sm:text-[13px] text-gray-600 leading-relaxed font-normal">
+                        <p className="text-xs sm:text-[13px] text-gray-600 dark:text-zinc-400 leading-relaxed font-normal">
                           {detail.text}
                         </p>
                       </div>
@@ -561,59 +561,59 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {dualCommission && (
           <section className="mb-24 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Affiliate Business Logic
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 {dualCommission.sectionTitle}
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-2">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 mt-2">
                 {dualCommission.sectionDesc}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Model A */}
-              <div className="p-7 rounded-3xl bg-white border border-gray-200/90 shadow-xs flex flex-col justify-between gap-6">
+              <div className="p-7 rounded-3xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-xs flex flex-col justify-between gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono text-xs font-bold uppercase">
+                    <span className="px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-400 font-mono text-xs font-bold uppercase">
                       {dualCommission.modelA.title}
                     </span>
-                    <span className="text-xs font-mono text-gray-400">{dualCommission.modelA.badge}</span>
+                    <span className="text-xs font-mono text-gray-400 dark:text-zinc-500">{dualCommission.modelA.badge}</span>
                   </div>
-                  <h3 className="text-xl font-black text-gray-900 tracking-tight">
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
                     {dualCommission.modelA.rate}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mt-2.5">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-zinc-400 leading-relaxed mt-2.5">
                     {dualCommission.modelA.desc}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-indigo-50/60 border border-indigo-100 text-xs text-indigo-950 font-mono space-y-1.5">
+                <div className="p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-xs text-indigo-950 dark:text-indigo-200 font-mono space-y-1.5">
                   <p className="font-bold">Yield Projection:</p>
                   <p>{dualCommission.modelA.example}</p>
                 </div>
               </div>
 
               {/* Model B */}
-              <div className="p-7 rounded-3xl bg-white border border-gray-200/90 shadow-xs flex flex-col justify-between gap-6">
+              <div className="p-7 rounded-3xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-xs flex flex-col justify-between gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-mono text-xs font-bold uppercase">
+                    <span className="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-mono text-xs font-bold uppercase">
                       {dualCommission.modelB.title}
                     </span>
-                    <span className="text-xs font-mono text-gray-400">{dualCommission.modelB.badge}</span>
+                    <span className="text-xs font-mono text-gray-400 dark:text-zinc-500">{dualCommission.modelB.badge}</span>
                   </div>
-                  <h3 className="text-xl font-black text-gray-900 tracking-tight">
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
                     {dualCommission.modelB.rate}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mt-2.5">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-zinc-400 leading-relaxed mt-2.5">
                     {dualCommission.modelB.desc}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-950 font-mono space-y-1.5">
+                <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 text-xs text-emerald-950 dark:text-emerald-200 font-mono space-y-1.5">
                   <p className="font-bold">Yield Projection:</p>
                   <p>{dualCommission.modelB.example}</p>
                 </div>
@@ -621,7 +621,7 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
             </div>
 
             {dualCommission.contractRules && (
-              <div className="p-6 rounded-2xl bg-gray-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="p-6 rounded-2xl bg-gray-900 dark:bg-zinc-900 border border-transparent dark:border-zinc-800 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-400">
                     Guaranteed Contract Rules
@@ -642,22 +642,22 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {techArchitecture.length > 0 && (
           <section className="mb-24 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Engineering Specs
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 Technology Stack &amp; Architectural Decisions
               </h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {techArchitecture.map((arch: any, idx: number) => (
-                <div key={idx} className="p-5 rounded-2xl bg-white border border-gray-200/90 shadow-2xs">
-                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-600 mb-2">
+                <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-2xs">
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">
                     {arch.title}
                   </h4>
-                  <p className="text-base font-black text-gray-900">{arch.tech}</p>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                  <p className="text-base font-black text-gray-900 dark:text-white">{arch.tech}</p>
+                  <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1 leading-relaxed">
                     {arch.desc}
                   </p>
                 </div>
@@ -670,10 +670,10 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {features.length > 0 && (
           <section className="mb-24 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Platform Capabilities
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 Core Features &amp; User Workflows
               </h2>
             </div>
@@ -682,10 +682,10 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
               {features.map((feat: string, idx: number) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl bg-white border border-gray-200/90 shadow-2xs flex items-start gap-3.5"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-2xs flex items-start gap-3.5"
                 >
-                  <CheckCircle2 size={18} className="text-indigo-600 shrink-0 mt-0.5" />
-                  <span className="text-sm font-medium text-gray-800 leading-relaxed">
+                  <CheckCircle2 size={18} className="text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+                  <span className="text-sm font-medium text-gray-800 dark:text-zinc-200 leading-relaxed">
                     {feat}
                   </span>
                 </div>
@@ -698,10 +698,10 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {contributions.length > 0 && (
           <section className="mb-24 space-y-6">
             <div className="max-w-3xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Personal Engineering Impact
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-gray-950 tracking-tight mt-1.5">
+              <h2 className="text-2xl sm:text-3xl font-black text-gray-950 dark:text-white tracking-tight mt-1.5">
                 Key Deliverables &amp; Lead Engineering Roles
               </h2>
             </div>
@@ -710,12 +710,12 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
               {contributions.map((con: string, idx: number) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-2xs flex items-start gap-3.5"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#111218] border border-gray-200/80 dark:border-zinc-800 shadow-2xs flex items-start gap-3.5"
                 >
-                  <div className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center text-xs font-mono font-bold shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-lg bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 flex items-center justify-center text-xs font-mono font-bold shrink-0 mt-0.5">
                     {idx + 1}
                   </div>
-                  <p className="text-xs sm:text-sm font-medium text-gray-800 leading-relaxed">
+                  <p className="text-xs sm:text-sm font-medium text-gray-800 dark:text-zinc-200 leading-relaxed">
                     {con}
                   </p>
                 </div>
@@ -727,14 +727,14 @@ export default function DynamicProjectShowcase({ project }: DynamicProjectShowca
         {/* ── Tech Stack Badges ── */}
         {techStack.length > 0 && (
           <section className="mb-24 space-y-4">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 block">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400 block">
               Core Technologies
             </span>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech: string) => (
                 <span
                   key={tech}
-                  className="px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 text-xs sm:text-sm font-bold shadow-2xs"
+                  className="px-4 py-2 rounded-xl bg-white dark:bg-[#111218] border border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 text-xs sm:text-sm font-bold shadow-2xs"
                 >
                   {tech}
                 </span>

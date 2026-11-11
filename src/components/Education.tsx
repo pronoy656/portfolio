@@ -56,7 +56,7 @@ interface CampusPhoto {
 const campusImages: CampusPhoto[] = [
   {
     id: 1,
-    src: "/ulab-campus-4.jpg",
+    src: "/ulab-campus-4.webp",
     title: "Campus Grounds & Architecture",
     tag: "Permanent Campus",
     description:
@@ -64,7 +64,7 @@ const campusImages: CampusPhoto[] = [
   },
   {
     id: 2,
-    src: "/ulab-campus-1.jpg",
+    src: "/ulab-campus-1.webp",
     title: "Red-Brick Atrium & Spiral Columns",
     tag: "Architectural Core",
     description:
@@ -72,7 +72,7 @@ const campusImages: CampusPhoto[] = [
   },
   {
     id: 3,
-    src: "/ulab-campus-2.jpg",
+    src: "/ulab-campus-2.webp",
     title: "Open-Air Balcony & Greenery",
     tag: "Veranda View",
     description:
@@ -80,7 +80,7 @@ const campusImages: CampusPhoto[] = [
   },
   {
     id: 4,
-    src: "/ulab-campus-3.jpg",
+    src: "/ulab-campus-3.webp",
     title: "ULAB Main Entrance & Pavilion",
     tag: "Main Gate",
     description:
@@ -111,7 +111,7 @@ const certificationList: CertificationItem[] = [
     institution: "Programming Hero",
     title: "Complete Web Development Course",
     period: "Issued Jun 2024",
-    image: "/programming-hero-certificate.png",
+    image: "/programming-hero-certificate.webp",
     pdfUrl: "https://drive.google.com/file/d/1ybXLDUERHXevoHB4FKON83tkpHuV_IUd/view?usp=sharing",
     credentialUrl: "https://drive.google.com/file/d/1ybXLDUERHXevoHB4FKON83tkpHuV_IUd/view?usp=sharing",
     status: "Verified Credential",
@@ -135,7 +135,7 @@ const certificationList: CertificationItem[] = [
     instructor: "Ayman Sadiq (CEO, 10 Minute School)",
     period: "Issued Oct 26, 2024",
     credentialId: "671cf57a4dee5",
-    image: "/10min-school-certificate.png",
+    image: "/10min-school-certificate.webp",
     pdfUrl: "https://drive.google.com/file/d/1WkeoenL4_knX1smqOOcGYizj4MEvqc39/view?usp=sharing",
     credentialUrl: "https://drive.google.com/file/d/1WkeoenL4_knX1smqOOcGYizj4MEvqc39/view?usp=sharing",
     status: "Verified Credential",
@@ -202,7 +202,7 @@ export default function Education() {
   };
 
   return (
-    <section id="education" className="scroll-mt-24 md:scroll-mt-28 pt-20 pb-16 sm:pt-24 sm:pb-24 md:py-32 px-4 sm:px-6 bg-[#fafafa]/70 border-t border-gray-100 relative">
+    <section id="education" className="scroll-mt-24 md:scroll-mt-28 py-14 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 bg-[#fafafa]/70 dark:bg-[#090a11] dark:bg-gradient-to-b dark:from-[#090a11] dark:via-[#0e1121] dark:to-[#090a11] border-t border-gray-100 dark:border-zinc-800/80 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Header (Scroll Reveal) ── */}
@@ -211,32 +211,32 @@ export default function Education() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, ease }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-8 mb-8 sm:mb-14 md:mb-16"
         >
           <div className="flex flex-col gap-2.5 sm:gap-3">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 dark:text-indigo-400">
               Academic &amp; Credentials
             </span>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900">
-              KNOWLEDGE <span className="text-gray-300">&amp;</span> <br />
-              <span className="text-gray-300 italic">GROWTH.</span>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-none text-gray-900 dark:text-zinc-50">
+              KNOWLEDGE <span className="text-gray-300 dark:text-zinc-600">&amp;</span> <br />
+              <span className="text-gray-300 dark:text-zinc-600 italic">GROWTH.</span>
             </h2>
           </div>
 
           {/* ── 2 Tabs: Education & Certification (Fully Responsive) ── */}
-          <div className="flex w-full sm:w-auto p-1 sm:p-1.5 rounded-full bg-white border border-gray-200/90 shadow-sm self-stretch sm:self-start md:self-end">
+          <div className="flex w-full sm:w-auto p-1 sm:p-1.5 rounded-full bg-white dark:bg-zinc-900 border border-gray-200/90 dark:border-zinc-800 shadow-sm self-stretch sm:self-start md:self-end">
             <button
               onClick={() => setActiveTab("education")}
               className={`relative flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap ${
                 activeTab === "education"
-                  ? "text-white shadow-sm"
-                  : "text-gray-500 hover:text-gray-900"
+                  ? "text-white dark:text-zinc-950 shadow-sm"
+                  : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100"
               }`}
             >
               {activeTab === "education" && (
                 <motion.div
                   layoutId="activeEducationPill"
-                  className="absolute inset-0 rounded-full bg-[#1a1c20]"
+                  className="absolute inset-0 rounded-full bg-[#1a1c20] dark:bg-white"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -245,8 +245,8 @@ export default function Education() {
               <span
                 className={`relative z-10 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full ${
                   activeTab === "education"
-                    ? "bg-white/20 text-white"
-                    : "bg-gray-100 text-gray-600"
+                    ? "bg-white/20 dark:bg-zinc-950/15 text-white dark:text-zinc-950"
+                    : "bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400"
                 }`}
               >
                 {educationList.length}
@@ -257,14 +257,14 @@ export default function Education() {
               onClick={() => setActiveTab("certification")}
               className={`relative flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap ${
                 activeTab === "certification"
-                  ? "text-white shadow-sm"
-                  : "text-gray-500 hover:text-gray-900"
+                  ? "text-white dark:text-zinc-950 shadow-sm"
+                  : "text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100"
               }`}
             >
               {activeTab === "certification" && (
                 <motion.div
                   layoutId="activeEducationPill"
-                  className="absolute inset-0 rounded-full bg-[#1a1c20]"
+                  className="absolute inset-0 rounded-full bg-[#1a1c20] dark:bg-white"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -273,8 +273,8 @@ export default function Education() {
               <span
                 className={`relative z-10 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full ${
                   activeTab === "certification"
-                    ? "bg-white/20 text-white"
-                    : "bg-gray-100 text-gray-600"
+                    ? "bg-white/20 dark:bg-zinc-950/15 text-white dark:text-zinc-950"
+                    : "bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400"
                 }`}
               >
                 {certificationList.length}
@@ -298,18 +298,18 @@ export default function Education() {
               {certificationList.map((cert) => (
                 <div
                   key={cert.id}
-                  className="group relative bg-white rounded-3xl overflow-hidden border border-gray-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between"
+                  className="group relative bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] rounded-3xl overflow-hidden border border-gray-200/80 dark:border-indigo-500/15 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.45)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between"
                 >
                   {/* Top Bar inside Card */}
-                  <div className="p-6 sm:p-8 pb-4 flex items-center justify-between gap-4 border-b border-gray-100">
+                  <div className="p-6 sm:p-8 pb-4 flex items-center justify-between gap-4 border-b border-gray-100 dark:border-zinc-800">
                     <div className="flex items-center gap-2.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-indigo-600">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                         {cert.institution}
                       </span>
                     </div>
 
-                    <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/30">
                       <CheckCircle2 size={11} />
                       {cert.status}
                     </span>
@@ -319,7 +319,7 @@ export default function Education() {
                   <div className="px-6 sm:px-8 pt-5">
                     <div
                       onClick={() => setPreviewCert(cert)}
-                      className="relative aspect-[16/11] rounded-2xl overflow-hidden bg-gray-50 border border-gray-200/90 shadow-sm cursor-pointer group/preview"
+                      className="relative aspect-[16/11] rounded-2xl overflow-hidden bg-gray-50 dark:bg-zinc-900 border border-gray-200/90 dark:border-zinc-800 shadow-sm cursor-pointer group/preview"
                     >
                       <Image
                         src={cert.image}
@@ -342,29 +342,29 @@ export default function Education() {
                   {/* ── Certificate Details ── */}
                   <div className="p-6 sm:p-8 pt-6 flex flex-col gap-4 flex-1 justify-between">
                     <div className="space-y-2">
-                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-gray-400">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-gray-400 dark:text-zinc-500">
                         <div className="flex items-center gap-1.5">
-                          <Calendar size={13} className="text-gray-400" />
+                          <Calendar size={13} className="text-gray-400 dark:text-zinc-500" />
                           <span>{cert.period}</span>
                         </div>
                         {cert.credentialId && (
-                          <span className="px-2 py-0.5 rounded bg-gray-100 text-gray-600 text-[10px] font-bold">
+                          <span className="px-2 py-0.5 rounded bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 text-[10px] font-bold">
                             ID: {cert.credentialId}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight group-hover:text-indigo-600 transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                         {cert.title}
                       </h3>
 
                       {cert.instructor && (
-                        <p className="text-xs text-gray-500 font-medium">
-                          Instructor: <span className="text-gray-800 font-semibold">{cert.instructor}</span>
+                        <p className="text-xs text-gray-500 dark:text-zinc-400 font-medium">
+                          Instructor: <span className="text-gray-800 dark:text-zinc-200 font-semibold">{cert.instructor}</span>
                         </p>
                       )}
 
-                      <p className="text-xs sm:text-sm text-gray-500 leading-relaxed pt-1">
+                      <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 leading-relaxed pt-1">
                         {cert.description}
                       </p>
                     </div>
@@ -374,7 +374,7 @@ export default function Education() {
                       {cert.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-gray-100 text-gray-700"
+                          className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300"
                         >
                           {skill}
                         </span>
@@ -382,21 +382,21 @@ export default function Education() {
                     </div>
 
                     {/* ── Action Buttons ── */}
-                    <div className="pt-4 mt-2 border-t border-gray-100 flex items-center justify-between gap-4">
+                    <div className="pt-4 mt-2 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between gap-4">
                       <a
                         href={cert.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs font-bold text-gray-900 hover:text-indigo-600 transition-colors"
+                        className="inline-flex items-center gap-2 text-xs font-bold text-gray-900 dark:text-zinc-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                       >
-                        <FileText size={14} className="text-indigo-600" />
+                        <FileText size={14} className="text-indigo-600 dark:text-indigo-400" />
                         <span>View Credential</span>
                         <ExternalLink size={12} className="opacity-60" />
                       </a>
 
                       <button
                         onClick={() => setPreviewCert(cert)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 hover:bg-indigo-600 text-white text-xs font-semibold transition-all cursor-pointer shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 dark:bg-white hover:bg-indigo-600 dark:hover:bg-indigo-500 text-white dark:text-zinc-950 dark:hover:text-white text-xs font-semibold transition-all cursor-pointer shadow-sm"
                       >
                         <Eye size={13} />
                         <span>Preview</span>
@@ -419,101 +419,69 @@ export default function Education() {
               {educationList.map((item) => (
                 <div
                   key={item.institution + item.degree}
-                  className="group border-t border-gray-200/90 py-8 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 hover:bg-white/60 transition-colors px-4 -mx-4 rounded-2xl relative"
+                  className="group rounded-2xl md:rounded-2xl p-4 sm:p-5 md:py-12 md:px-4 md:-mx-4 bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] md:bg-transparent md:dark:bg-transparent md:dark:bg-none border border-gray-200/85 dark:border-indigo-500/15 md:border-0 md:border-t md:border-gray-200/90 md:dark:border-zinc-800/90 grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 hover:bg-white/60 dark:hover:bg-zinc-900/40 transition-colors relative"
                 >
-                  {/* ── Mobile-Only Clean Top Meta Row (Consolidated, No Clutter) ── */}
-                  <div className="flex md:hidden items-center justify-between gap-3 flex-wrap pb-3 border-b border-gray-100">
-                    <div className="flex items-center gap-2.5">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100">
-                        <CheckCircle2 size={10} />
-                        {item.status}
-                      </span>
-                      <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-gray-600">
-                        <Calendar size={12} className="text-gray-400" />
-                        <span>{item.period}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-mono text-gray-500 font-medium">
-                      <MapPin size={11} className="text-indigo-500" />
-                      <span>{item.location}</span>
-                    </div>
-                  </div>
-
-                  {/* ── Desktop Left Column (Hidden on Mobile to Prevent Duplicate Clutter) ── */}
-                  <div className="hidden md:flex md:col-span-3 flex-col gap-2.5">
-                    <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 w-fit">
-                      <CheckCircle2 size={11} />
-                      {item.status}
-                    </span>
-                    <div className="flex items-center gap-2 text-sm font-bold text-gray-500 uppercase tracking-widest mt-1">
-                      <Calendar size={13} className="text-gray-400" />
+                  {/* ── Desktop Left Column (Quiet, Clean Editorial Metadata) ── */}
+                  <div className="hidden md:flex md:col-span-4 flex-col gap-2 pt-1">
+                    <div className="flex items-center gap-2 text-sm font-mono font-semibold text-gray-800 dark:text-zinc-200">
+                      <Calendar size={13} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
                       <span>{item.period}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs text-gray-400 font-medium">
-                      <MapPin size={12} className="text-gray-400" />
-                      <span>{item.location}</span>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-zinc-400 font-medium">
+                      <MapPin size={12} className="text-gray-400 dark:text-zinc-500 shrink-0" />
+                      <span>{item.location} · {item.status}</span>
                     </div>
 
-                    {/* Quick Button to open full campus gallery modal on desktop */}
                     <button
                       onClick={() => {
                         setModalCampusIndex(0);
                         setShowCampusModal(true);
                       }}
-                      className="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-100 hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 border border-gray-200/80 transition-all cursor-pointer w-fit group/btn"
+                      className="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-100 hover:bg-indigo-50 dark:bg-zinc-900 dark:hover:bg-indigo-500/15 text-gray-700 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400 border border-gray-200/80 dark:border-zinc-800 transition-all cursor-pointer w-fit group/btn"
                     >
-                      <Images size={13} className="text-indigo-500 group-hover/btn:scale-110 transition-transform" />
+                      <Images size={13} className="text-indigo-500 dark:text-indigo-400 group-hover/btn:scale-110 transition-transform" />
                       <span>Campus Gallery</span>
-                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white text-indigo-600 border border-gray-200">
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white dark:bg-zinc-800 text-indigo-600 dark:text-indigo-400 border border-gray-200 dark:border-zinc-700">
                         {campusImages.length}
                       </span>
                     </button>
                   </div>
 
-                  {/* ── Middle: Institution, Degree & Campus Photo Strip ── */}
+                  {/* ── Main: Institution, Degree & Campus Photo Strip ── */}
                   <div
-                    className="md:col-span-5 relative"
+                    className="md:col-span-8 relative"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={() => setIsHoveringCampus(false)}
                     onMouseMove={handleMouseMove}
                   >
                     <div className="inline-block cursor-pointer w-full">
-                      {/* Clean Badges Row */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50/80 px-2.5 py-0.5 rounded-full border border-indigo-100">
-                          <Building2 size={11} />
-                          Permanent Campus
-                        </span>
-                        {/* Hover hint only on desktop with mouse pointer */}
-                        <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          Hover to preview
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-gray-900 group-hover:text-indigo-600 transition-colors leading-tight">
+                      <h3 className="text-lg sm:text-2xl lg:text-[26px] font-bold tracking-[-0.015em] text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
                         {item.institution}
                       </h3>
 
-                      <p className="text-xs sm:text-sm font-semibold text-gray-600 mt-1 italic">
+                      <p className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1">
                         {item.degree}
                       </p>
 
-                      {/* ── ALL 4 CAMPUS PHOTOS PREVIEW STRIP (Compact & Responsive) ── */}
-                      <div className="mt-4 pt-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-mono text-gray-500 font-semibold flex items-center gap-1.5">
-                            <Images size={12} className="text-indigo-500" />
-                            Campus Gallery (4 views)
+                      <p className="md:hidden text-[11px] font-mono text-gray-500 dark:text-zinc-400 mt-1.5">
+                        {item.period} · {item.location} · {item.status}
+                      </p>
+
+                      {/* ── ALL 4 CAMPUS PHOTOS PREVIEW STRIP ── */}
+                      <div className="mt-4 pt-3.5 border-t border-gray-100 dark:border-zinc-800/80">
+                        <div className="flex items-center justify-between mb-2.5">
+                          <span className="text-[11px] font-mono text-gray-500 dark:text-zinc-400 font-medium flex items-center gap-1.5">
+                            <Images size={12} className="text-indigo-500 dark:text-indigo-400" />
+                            Campus Gallery
                           </span>
-                          <span className="text-[10px] font-mono text-indigo-600 font-medium md:hidden">
-                            Tap to expand
+                          <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium md:hidden">
+                            Tap to view
                           </span>
-                          <span className="hidden md:inline-block text-[10px] font-mono text-indigo-600 font-medium">
-                            Click to expand
+                          <span className="hidden md:inline-block text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium">
+                            {campusImages.length} photos
                           </span>
                         </div>
-                        <div className="grid grid-cols-4 gap-2">
+                        <div className="grid grid-cols-4 gap-2 sm:gap-3">
                           {campusImages.map((img, i) => (
                             <div
                               key={img.id}
@@ -522,7 +490,7 @@ export default function Education() {
                                 setModalCampusIndex(i);
                                 setShowCampusModal(true);
                               }}
-                              className="group/thumb relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200/80 shadow-2xs hover:scale-[1.03] hover:shadow-md hover:border-indigo-400 transition-all cursor-pointer bg-gray-100"
+                              className="group/thumb relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200/80 dark:border-zinc-800 shadow-2xs hover:scale-[1.03] hover:shadow-md hover:border-indigo-400 transition-all cursor-pointer bg-gray-100 dark:bg-zinc-900"
                             >
                               <Image
                                 src={img.src}
@@ -536,24 +504,9 @@ export default function Education() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Right: Description & Highlights */}
-                  <div className="md:col-span-4 flex flex-col gap-4">
-                    <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                      {item.description}
-                    </p>
-                    <ul className="space-y-2 mt-1">
-                      {item.highlights.map((h, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs text-gray-500">
-                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
               ))}
-              <div className="border-t border-gray-200/90" />
+              <div className="hidden md:block border-t border-gray-200/90 dark:border-zinc-800/90" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -578,7 +531,7 @@ export default function Education() {
               pointerEvents: "none",
               willChange: "transform",
             }}
-            className="pointer-events-none select-none w-[320px] sm:w-[440px] rounded-2xl bg-white border border-gray-200/90 p-2.5 shadow-[0_24px_55px_-12px_rgba(0,0,0,0.18)] flex flex-col gap-2"
+            className="pointer-events-none select-none w-[320px] sm:w-[440px] rounded-2xl bg-white dark:bg-[#111218] border border-gray-200/90 dark:border-zinc-800 p-2.5 shadow-[0_24px_55px_-12px_rgba(0,0,0,0.18)] dark:shadow-[0_24px_55px_-12px_rgba(0,0,0,0.65)] flex flex-col gap-2"
           >
             {/* ── Clean 2x2 Photo Grid (Pure Photographs Only, Zero Text Overlays) ── */}
             <div className="grid grid-cols-2 gap-2">
@@ -588,7 +541,7 @@ export default function Education() {
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.03, duration: 0.2 }}
-                  className="relative aspect-[16/10] rounded-xl overflow-hidden bg-gray-100"
+                  className="relative aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-900"
                 >
                   <Image
                     src={img.src}
@@ -603,10 +556,10 @@ export default function Education() {
 
             {/* Quiet, Understated Footer Caption */}
             <div className="px-1.5 pt-0.5 flex items-center justify-between text-xs">
-              <span className="font-semibold text-gray-800 tracking-tight">
+              <span className="font-semibold text-gray-800 dark:text-zinc-100 tracking-tight">
                 ULAB Permanent Campus
               </span>
-              <span className="text-[11px] text-gray-400">
+              <span className="text-[11px] text-gray-400 dark:text-zinc-500">
                 Mohammadpur, Dhaka
               </span>
             </div>
@@ -630,28 +583,28 @@ export default function Education() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ type: "spring", damping: 28, stiffness: 320 }}
-              className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200/80 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-white dark:bg-[#111218] rounded-3xl overflow-hidden shadow-2xl border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Clean Minimal Header */}
-              <div className="px-5 py-4 sm:px-6 border-b border-gray-100 flex items-center justify-between gap-4">
-                <div>
-                  <h3 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
+              <div className="px-4 py-3.5 sm:px-6 sm:py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white leading-snug truncate">
                     University of Liberal Arts Bangladesh (ULAB)
                   </h3>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-[11px] sm:text-xs text-gray-500 dark:text-zinc-400 truncate">
                     Mohammadpur, Dhaka
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-gray-400">
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <span className="text-xs font-mono text-gray-400 dark:text-zinc-500 whitespace-nowrap">
                     {modalCampusIndex + 1} / {campusImages.length}
                   </span>
                   <button
                     onClick={() => setShowCampusModal(false)}
                     aria-label="Close modal"
-                    className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-700 dark:text-zinc-200 flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <X size={16} />
                   </button>
@@ -659,7 +612,7 @@ export default function Education() {
               </div>
 
               {/* Main Clean Image Display */}
-              <div className="relative w-full flex-1 min-h-[300px] sm:min-h-[460px] bg-gray-50 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+              <div className="relative w-full aspect-[4/3] sm:aspect-auto sm:flex-1 sm:min-h-[450px] bg-gray-50 dark:bg-zinc-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={campusImages[modalCampusIndex].src}
@@ -667,7 +620,7 @@ export default function Education() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.25 }}
-                    className="relative w-full h-full min-h-[300px] sm:min-h-[460px] flex items-center justify-center"
+                    className="relative w-full h-full flex items-center justify-center"
                   >
                     <Image
                       src={campusImages[modalCampusIndex].src}
@@ -686,7 +639,7 @@ export default function Education() {
                       (prev) => (prev - 1 + campusImages.length) % campusImages.length
                     )
                   }
-                  className="absolute left-3 sm:left-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-gray-900 border border-gray-200/80 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
+                  className="absolute left-3 sm:left-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white dark:bg-zinc-900/90 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200/80 dark:border-zinc-700 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
                   aria-label="Previous photo"
                 >
                   <ChevronLeft size={18} />
@@ -698,7 +651,7 @@ export default function Education() {
                       (prev) => (prev + 1) % campusImages.length
                     )
                   }
-                  className="absolute right-3 sm:right-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-gray-900 border border-gray-200/80 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
+                  className="absolute right-3 sm:right-5 w-9 h-9 rounded-full bg-white/90 hover:bg-white dark:bg-zinc-900/90 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200/80 dark:border-zinc-700 flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105"
                   aria-label="Next photo"
                 >
                   <ChevronRight size={18} />
@@ -706,14 +659,14 @@ export default function Education() {
               </div>
 
               {/* Clean Centered Thumbnail Strip Only (No Image Names/Tags) */}
-              <div className="px-5 py-4 bg-white border-t border-gray-100 flex items-center justify-center gap-2.5">
+              <div className="px-5 py-4 bg-white dark:bg-[#111218] border-t border-gray-100 dark:border-zinc-800 flex items-center justify-center gap-2.5">
                 {campusImages.map((img, idx) => (
                   <button
                     key={img.id}
                     onClick={() => setModalCampusIndex(idx)}
                     className={`relative w-14 h-10 sm:w-16 sm:h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
                       modalCampusIndex === idx
-                        ? "border-indigo-600 scale-105 shadow-sm"
+                        ? "border-indigo-600 dark:border-indigo-400 scale-105 shadow-sm"
                         : "border-transparent opacity-55 hover:opacity-100"
                     }`}
                   >
@@ -747,31 +700,31 @@ export default function Education() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-white dark:bg-[#111218] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between gap-4 bg-gray-50/80">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
-                    <Award size={18} />
+              <div className="p-3.5 sm:p-5 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between gap-3 bg-gray-50/80 dark:bg-zinc-900/80">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-indigo-50 dark:bg-indigo-500/15 border border-indigo-100 dark:border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
+                    <Award size={16} />
                   </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white leading-snug truncate">
                       {previewCert.title}
                     </h3>
-                    <p className="text-xs text-gray-500 font-medium">
+                    <p className="text-[11px] sm:text-xs text-gray-500 dark:text-zinc-400 font-medium truncate">
                       {previewCert.institution} · {previewCert.period}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <a
                     href={previewCert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 hover:bg-indigo-600 text-white text-xs font-bold transition-all shadow-sm"
+                    className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 dark:bg-white hover:bg-indigo-600 dark:hover:bg-indigo-500 text-white dark:text-zinc-950 dark:hover:text-white text-xs font-bold whitespace-nowrap transition-all shadow-sm"
                   >
                     <span>View Credential</span>
                     <ExternalLink size={12} />
@@ -780,7 +733,7 @@ export default function Education() {
                   <button
                     onClick={() => setPreviewCert(null)}
                     aria-label="Close modal"
-                    className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-600 dark:text-zinc-300 flex items-center justify-center transition-colors cursor-pointer shrink-0"
                   >
                     <X size={16} />
                   </button>
@@ -788,8 +741,8 @@ export default function Education() {
               </div>
 
               {/* Modal Image Area */}
-              <div className="relative w-full flex-1 min-h-[300px] sm:min-h-[460px] bg-[#0c0e14] flex items-center justify-center p-4 sm:p-8 overflow-auto">
-                <div className="relative w-full h-full min-h-[300px] sm:min-h-[460px] flex items-center justify-center">
+              <div className="relative w-full aspect-[16/11] sm:aspect-auto sm:flex-1 sm:min-h-[450px] bg-[#0c0e14] flex items-center justify-center p-2.5 sm:p-6 overflow-hidden">
+                <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={previewCert.image}
                     alt={previewCert.title}
@@ -801,16 +754,26 @@ export default function Education() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 sm:p-6 bg-white border-t border-gray-100 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-500">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span className="font-semibold text-gray-700">{previewCert.status}</span>
+              <div className="px-4 py-3 sm:px-6 sm:py-4 bg-white dark:bg-[#111218] border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between gap-3 text-xs text-gray-500 dark:text-zinc-400">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                  <span className="font-semibold text-gray-700 dark:text-zinc-200 truncate">{previewCert.status}</span>
                   {previewCert.credentialId && (
-                    <span className="font-mono text-gray-400">· ID: {previewCert.credentialId}</span>
+                    <span className="hidden sm:inline font-mono text-gray-400 dark:text-zinc-500">· ID: {previewCert.credentialId}</span>
                   )}
                 </div>
 
-                <p className="text-[11px] text-gray-400">
+                <a
+                  href={previewCert.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sm:hidden inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gray-900 dark:bg-white text-white dark:text-zinc-950 text-[11px] font-bold whitespace-nowrap shrink-0 shadow-xs"
+                >
+                  <span>View Credential</span>
+                  <ExternalLink size={11} />
+                </a>
+
+                <p className="hidden sm:block text-[11px] text-gray-400 dark:text-zinc-500">
                   Click anywhere outside or the close button to dismiss
                 </p>
               </div>

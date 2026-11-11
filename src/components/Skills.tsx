@@ -55,6 +55,7 @@ interface SkillItemProps {
   catIndex: number;
   skillIndex: number;
   categoryInView: boolean;
+  hideOnMobile?: boolean;
 }
 
 function SkillItem({
@@ -62,6 +63,7 @@ function SkillItem({
   catIndex,
   skillIndex,
   categoryInView,
+  hideOnMobile = false,
 }: SkillItemProps) {
   const [hoverCount, setHoverCount] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -73,9 +75,15 @@ function SkillItem({
         setHoverCount((prev) => prev + 1);
       }}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex items-center justify-between group cursor-pointer select-none py-1 transition-all"
+      className={`${hideOnMobile ? "hidden md:flex" : "flex"} items-center justify-between group cursor-pointer select-none py-0.5 sm:py-1 transition-all`}
     >
-      <div className="relative flex items-center">
+      <div
+        className={`relative flex items-center shrink-0 transition-colors duration-200 ${
+          isHovered
+            ? "text-indigo-600 dark:text-indigo-400"
+            : "text-gray-800/80 dark:text-zinc-200/85"
+        }`}
+      >
         <ExplodeText
           text={skill}
           trigger={categoryInView}
@@ -88,19 +96,21 @@ function SkillItem({
           blur={6}
           duration={0.45}
           charDelay={0.016}
-          color={isHovered ? "#4f46e5" : "rgba(31, 41, 55, 0.75)"}
-          fontSize="text-lg lg:text-xl font-bold tracking-tight"
-          className="transition-colors duration-200"
+          color="currentColor"
+          fontSize="text-[11.5px] sm:text-base lg:text-xl font-bold tracking-tight"
+          className="transition-colors duration-200 whitespace-nowrap"
         />
       </div>
       <span
-        className={`h-px flex-1 mx-3 transition-colors duration-300 ${
-          isHovered ? "bg-indigo-500/40" : "bg-gray-100"
+        className={`h-px flex-1 min-w-[6px] mx-1.5 sm:mx-3 transition-colors duration-300 ${
+          isHovered ? "bg-indigo-500/40 dark:bg-indigo-400/50" : "bg-gray-100 dark:bg-zinc-800"
         }`}
       />
       <span
-        className={`text-[10px] font-mono font-bold tracking-wider transition-colors duration-200 ${
-          isHovered ? "text-indigo-600 font-black" : "text-gray-400"
+        className={`text-[8.5px] sm:text-[10px] font-mono font-bold tracking-wider shrink-0 transition-colors duration-200 ${
+          isHovered
+            ? "text-indigo-600 dark:text-indigo-400 font-black"
+            : "text-gray-400 dark:text-zinc-500"
         }`}
       >
         0{catIndex + 1}—0{skillIndex + 1}
@@ -138,10 +148,10 @@ function SkillCategory({
         ease,
       }}
     >
-      <h3 className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-8 border-b border-indigo-500/20 pb-4">
+      <h3 className="text-[11px] sm:text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3.5 sm:mb-6 md:mb-8 border-b border-indigo-500/20 pb-2 sm:pb-3 md:pb-4">
         {cat.title}
       </h3>
-      <div className="space-y-4">
+      <div className="space-y-2 sm:space-y-3 md:space-y-4">
         {cat.skills.map((skill, j) => (
           <SkillItem
             key={skill}
@@ -149,6 +159,7 @@ function SkillCategory({
             catIndex={catIndex}
             skillIndex={j}
             categoryInView={isInView}
+            hideOnMobile={cat.title === "Tools & Core" && skill === "Responsive UI"}
           />
         ))}
       </div>
@@ -165,7 +176,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="scroll-mt-24 md:scroll-mt-28 relative z-20 pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-100"
+      className="scroll-mt-24 md:scroll-mt-28 relative z-20 pt-10 sm:pt-14 md:pt-16 pb-12 sm:pb-20 md:pb-28 px-4 sm:px-8 md:px-12 bg-white dark:bg-[#090a11] dark:bg-gradient-to-b dark:from-[#090a11] dark:via-[#0d101e] dark:to-[#090a11] border-t border-gray-100 dark:border-zinc-800/80 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header (Scroll Reveal) */}
@@ -174,19 +185,19 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
-          className="flex flex-col gap-2.5 sm:gap-3 mb-8 sm:mb-10 md:mb-12"
+          className="flex flex-col gap-2 sm:gap-3 mb-6 sm:mb-10 md:mb-12"
         >
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 dark:text-indigo-400">
             Technical Expertise
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter leading-none text-gray-900">
-            CRAFT <span className="text-gray-200">&amp;</span>{" "}
-            <span className="text-gray-200 italic">STACK.</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter leading-none text-gray-900 dark:text-zinc-50">
+            CRAFT <span className="text-gray-200 dark:text-zinc-600">&amp;</span>{" "}
+            <span className="text-gray-200 dark:text-zinc-600 italic">STACK.</span>
           </h2>
         </motion.div>
 
-        {/* Categories Grid - Each column triggers its own text effect when in view */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
+        {/* Categories Grid - Preserves identical editorial structure in 2-col mobile & 4-col desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7 sm:gap-x-8 sm:gap-y-10 lg:gap-8">
           {categories.map((cat, i) => (
             <SkillCategory key={cat.title} cat={cat} catIndex={i} />
           ))}

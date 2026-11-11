@@ -4,30 +4,28 @@
     "slug": "shabos-rent",
     "number": "01",
     "title": "ShabbosRent",
-    "tagline": "Halakhic Prop-Tech, Reciprocal Apartment Swap & Affiliate ERP",
+    "tagline": "Apartment Booking Management, Apartment Swap & Affiliate ERP",
     "category": "Prop-Tech & Community Hospitality",
     "role": "Lead Full-Stack Engineer",
     "badge": "Production Deployed",
     "summary": "An enterprise-grade hospitality and accommodation ecosystem engineered specifically for the global Shabbat-observant community. Features walking-distance calculation via the Haversine formula (4.8 km/h), reciprocal home exchange, multi-tier dual commission affiliate modeling, and an omnichannel administrative ERP.",
     "metrics": [
-      { "value": "1,520+", "label": "Verified Listings" },
       { "value": "4.8 km/h", "label": "Pedestrian Transit Math" },
-      { "value": "₪265+", "label": "Max Yield / Property" },
-      { "value": "100%", "label": "Halakhic & Kosher Aware" }
+      { "value": "₪265+", "label": "Max Yield / Property" }
     ],
     "images": [
       {
-        "url": "/shabosrent-mockup-1.jpg",
+        "url": "/shabosrent-mockup-1.webp",
         "label": "Screen 01 — Landing Hero & Walking Distance Search",
         "caption": "Consumer search experience with pedestrian walking-distance radius filter to synagogues, Torah portion selectors, and Rent vs. Swap modes."
       },
       {
-        "url": "/shabosrent-mockup-2.jpg",
+        "url": "/shabosrent-mockup-2.webp",
         "label": "Screen 02 — Administrative ERP & Analytics Dashboard",
         "caption": "Platform operator console tracking 1,520+ total apartments, active listings, monthly revenue metrics, and city-level search demand."
       },
       {
-        "url": "/shabosrent-mockup-3.jpg",
+        "url": "/shabosrent-mockup-3.webp",
         "label": "Screen 03 — Ambassador Affiliate & Commission Portal",
         "caption": "Promoter portal with Model A vs B selection, 7-day model lock alerts, referral link generation, and approved balance ledger."
       }
@@ -243,7 +241,7 @@
     "slug": "island-hop",
     "number": "05",
     "title": "IslandHop",
-    "tagline": "Enterprise Maritime Transit & Fleet Management Platform",
+    "tagline": "Ferry Booking Platform & Fleet Management",
     "category": "Maritime & Transit ERP",
     "role": "Lead Frontend Engineer",
     "badge": "Production Deployed",
@@ -256,17 +254,17 @@
     ],
     "images": [
       {
-        "url": "/islandhop-mockup-1.jpg",
+        "url": "/islandhop-mockup-1.webp",
         "label": "Screen 01 — Consumer Ferry Booking Hero",
         "caption": "Passenger booking interface with one-way/round-trip routing, terminal departure scheduling, and dynamic passenger count picker."
       },
       {
-        "url": "/islandhop-mockup-2.jpg",
+        "url": "/islandhop-mockup-2.webp",
         "label": "Screen 02 — Harbor Terminal Operator Console",
         "caption": "Operator dashboard monitoring daily passenger counts (348), vessel statuses (3/3 active), departures, and manifest verification."
       },
       {
-        "url": "/islandhop-mockup-3.jpg",
+        "url": "/islandhop-mockup-3.webp",
         "label": "Screen 03 — Desktop Laptop Ticket Dispatch",
         "caption": "High-resolution MacBook desktop perspective showing instant ticket issuance, passenger manifests, and route telemetry."
       }
@@ -396,17 +394,17 @@
     ],
     "images": [
       {
-        "url": "/k10-mockup-1.jpg",
+        "url": "/k10-mockup-1.webp",
         "label": "Screen 01 — Coach Profile & Analytics Console",
         "caption": "Executive head coach dashboard showcasing tactical radar analysis, tournament win-loss breakdown, and active club contracts."
       },
       {
-        "url": "/k10-mockup-2.jpg",
+        "url": "/k10-mockup-2.webp",
         "label": "Screen 02 — Tactical Formation & Pitch Board",
         "caption": "Interactive squad strategy whiteboard displaying pitch positioning, team movement corridors, and player substitution benches."
       },
       {
-        "url": "/k10-mockup-3.jpg",
+        "url": "/k10-mockup-3.webp",
         "label": "Screen 03 — Scouting & Match Performance Stats",
         "caption": "Scouting network registry tracking athlete benchmark metrics, European club interest inquiries, and live match reports."
       }
@@ -513,17 +511,17 @@
     ],
     "images": [
       {
-        "url": "/heaven-mockup-1.jpg",
+        "url": "/heaven-mockup-1.webp",
         "label": "Screen 01 — Modern Living Room Atelier Hero",
         "caption": "Editorial landing page showcasing solid-wood living room collections, free delivery badges, and master atelier certifications."
       },
       {
-        "url": "/heaven-mockup-2.jpg",
+        "url": "/heaven-mockup-2.webp",
         "label": "Screen 02 — Handcrafted Solid Wood Product Catalog",
         "caption": "High-density catalog grid with multi-filter drawer (Category, Price Range, Material), live pricing, and 1-click cart addition."
       },
       {
-        "url": "/heaven-mockup-3.jpg",
+        "url": "/heaven-mockup-3.webp",
         "label": "Screen 03 — Product Detail, Materials & Spatial Fit",
         "caption": "Detailed specification viewport featuring 10-year warranty breakdown, timber seasoning specs, and high-res wood texture previews."
       }
@@ -585,17 +583,17 @@
     ],
     "images": [
       {
-        "url": "/fixpair-mockup-1.jpg",
+        "url": "/fixpair-mockup-1.webp",
         "label": "Screen 01 — Consultant Directory & Hero Consultation",
         "caption": "Trust-centered hero experience with instant consultant booking, client testimonials, and verified professional counts."
       },
       {
-        "url": "/fixpair-mockup-2.jpg",
+        "url": "/fixpair-mockup-2.webp",
         "label": "Screen 02 — Real-Time Video Call Room & Live Audio",
         "caption": "Low-latency WebRTC video room featuring live audio-visual controls, participant screen-sharing, and encrypted channels."
       },
       {
-        "url": "/fixpair-mockup-3.jpg",
+        "url": "/fixpair-mockup-3.webp",
         "label": "Screen 03 — Live Speech Transcription & Summary Report",
         "caption": "Streaming speech-to-text transcription engine delivering real-time dialogue captions and automated AI summary exports."
       }
@@ -658,17 +656,17 @@
     ],
     "images": [
       {
-        "url": "/bytespace-mockup-1.jpg",
+        "url": "/bytespace-mockup-1.webp",
         "label": "Screen 01 — Course Search & Student Learning Hero",
         "caption": "High-energy hero landing page with live course search, enrolled student progress counters (55%), and creator spotlights."
       },
       {
-        "url": "/bytespace-mockup-2.jpg",
+        "url": "/bytespace-mockup-2.webp",
         "label": "Screen 02 — Creator Community & Testimonial Feed",
         "caption": "Creator recruitment portal with course editor benefits, student testimonial cards, and verified creator accreditation."
       },
       {
-        "url": "/bytespace-mockup-3.jpg",
+        "url": "/bytespace-mockup-3.webp",
         "label": "Screen 03 — Creator Studio & Course Portfolio Showcase",
         "caption": "Creator profile (PurePearl Studio) showcasing active products, follower metrics, curriculum modules, and video lessons."
       }
@@ -730,17 +728,17 @@
     ],
     "images": [
       {
-        "url": "/alfabk-mockup-1.jpg",
+        "url": "/alfabk-mockup-1.webp",
         "label": "Screen 01 — Public University Portal & Program Search",
         "caption": "International landing portal showcasing Fall 2026 admissions, instant search across 138 programs, faculty exploration, and institutional impact metrics."
       },
       {
-        "url": "/alfabk-mockup-2.jpg",
+        "url": "/alfabk-mockup-2.webp",
         "label": "Screen 02 — ABK Administration Control Panel ERP",
         "caption": "Executive registrar console monitoring 1,245 active student enrollments, faculty rosters, attendance alerts, pending exam approvals, and system activity logs."
       },
       {
-        "url": "/alfabk-mockup-3.jpg",
+        "url": "/alfabk-mockup-3.webp",
         "label": "Screen 03 — Student Parliament Digital Hub",
         "caption": "Official student governance portal featuring suggestion submissions, club initiative tracking, academic year 2025/2026 mandate highlights, and direct office communication."
       }

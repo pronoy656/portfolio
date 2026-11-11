@@ -5,7 +5,7 @@ import CurvedMarquee from "./CurvedMarquee";
 
 export default function MarqueeSection() {
   return (
-    <section className="relative w-full h-20 sm:h-24 md:h-28 lg:h-32 overflow-hidden bg-[#fcfcfd] flex items-center justify-center select-none">
+    <section className="relative w-full h-20 sm:h-24 md:h-28 lg:h-32 overflow-hidden bg-[#fcfcfd] dark:bg-[#08090f] dark:bg-gradient-to-b dark:from-[#07080d] dark:via-[#0b0d19] dark:to-[#090a11] flex items-center justify-center select-none transition-colors duration-300">
       <CurvedMarquee
         text="Be ✦ Creative ✦ With ✦ Next.js ✦ React ✦"
         color="#6366f1"

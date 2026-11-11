@@ -19,8 +19,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-brand/10 blur-[150px] rounded-full" />
+    <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-20 sm:py-32 md:py-48 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-[#08090f] dark:bg-gradient-to-b dark:from-[#090a11] dark:via-[#0d1021] dark:to-[#08090f] transition-colors duration-300">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-brand/10 dark:bg-gradient-to-r dark:from-indigo-500/20 dark:via-violet-500/15 dark:to-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -58,13 +58,13 @@ export default function Contact() {
               <div className="flex flex-col sm:flex-row gap-6 sm:gap-8">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Phone</p>
-                  <a href="tel:+8801843387800" className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800 hover:text-brand transition-colors">
+                  <a href="tel:+8801843387800" className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800 dark:text-zinc-200 hover:text-brand transition-colors">
                     +880 1843-387800
                   </a>
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand mb-2">Location</p>
-                  <p className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800">
+                  <p className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-gray-800 dark:text-zinc-200">
                     Dhaka, Bangladesh
                   </p>
                 </div>
@@ -117,7 +117,7 @@ export default function Contact() {
                     required
                     type="text"
                     placeholder="John Doe"
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600"
                   />
                 </div>
                 <div className="space-y-2">
@@ -126,7 +126,7 @@ export default function Contact() {
                     required
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600"
                   />
                 </div>
                 <div className="space-y-2">
@@ -135,7 +135,7 @@ export default function Contact() {
                     required
                     rows={4}
                     placeholder="I have an idea for..."
-                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium resize-none"
+                    className="w-full bg-transparent border-b border-border-color py-4 outline-none focus:border-brand transition-colors text-xl font-medium text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-600 resize-none"
                   />
                 </div>
                 

@@ -293,7 +293,7 @@ export default function VisitorDashboard() {
                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-500 border-2 border-[#0a0a0f]" />
              </button>
              <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10 relative">
-               <Image src="/logo-2.png" alt="Avatar" fill className="object-cover" />
+               <Image src="/logo-2.webp" alt="Avatar" fill className="object-cover" />
              </div>
            </div>
          </header>

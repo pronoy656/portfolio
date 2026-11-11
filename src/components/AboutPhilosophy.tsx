@@ -26,14 +26,14 @@ const LinkedinIcon = () => (
 
 const coreArsenal = [
   { name: "React", icon: <SiReact className="w-3.5 h-3.5 text-[#61DAFB]" /> },
-  { name: "Next.js", icon: <SiNextdotjs className="w-3.5 h-3.5 text-black" /> },
+  { name: "Next.js", icon: <SiNextdotjs className="w-3.5 h-3.5 text-black dark:text-white" /> },
   { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5 text-[#3178C6]" /> },
   { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5 text-[#5FA04E]" /> },
-  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5 text-gray-900" /> },
+  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5 text-gray-900 dark:text-white" /> },
   { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" /> },
   { name: "Tailwind CSS", icon: <SiTailwindcss className="w-3.5 h-3.5 text-[#06B6D4]" /> },
   { name: "Stripe", icon: <SiStripe className="w-3.5 h-3.5 text-[#635BFF]" /> },
-  { name: "Agentic AI", icon: <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> },
+  { name: "Agentic AI", icon: <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" /> },
   { name: "Redux / Zustand", icon: <SiRedux className="w-3.5 h-3.5 text-[#764ABC]" /> },
 ];
 
@@ -66,8 +66,8 @@ export default function AboutPhilosophy() {
 
   return (
     <section
-      id="about-philosophy"
-      className="scroll-mt-24 md:scroll-mt-28 py-14 sm:py-18 md:py-24 px-4 sm:px-8 md:px-12 bg-white border-t border-gray-200/80 relative overflow-hidden"
+      id="about"
+      className="scroll-mt-24 md:scroll-mt-28 py-14 sm:py-18 md:py-24 px-4 sm:px-8 md:px-12 bg-white dark:bg-[#090a11] dark:bg-gradient-to-b dark:from-[#090a11] dark:via-[#0e1120] dark:to-[#090a11] border-t border-gray-200/80 dark:border-zinc-800/80 relative overflow-hidden transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -79,13 +79,13 @@ export default function AboutPhilosophy() {
           transition={{ duration: shouldReduceMotion ? 0.01 : 0.55, ease }}
           className="flex flex-col gap-1.5 sm:gap-2 mb-8 sm:mb-10"
         >
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 dark:text-indigo-400">
             About Me
           </span>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.1] text-gray-950">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.1] text-gray-950 dark:text-zinc-50">
             Engineering interfaces <br className="hidden sm:block" />
             that feel{" "}
-            <span className="font-serif italic font-normal text-indigo-600 sm:text-[1.04em]">
+            <span className="font-serif italic font-normal text-indigo-600 dark:text-indigo-400 sm:text-[1.04em]">
               effortless.
             </span>
           </h2>
@@ -102,50 +102,69 @@ export default function AboutPhilosophy() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, ease }}
             className="lg:col-span-4 flex flex-col"
           >
-            <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.03)] p-4 sm:p-5 flex flex-col justify-between h-full">
+            <div className="bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-indigo-500/15 shadow-[0_15px_35px_rgba(0,0,0,0.03)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.45)] p-3.5 sm:p-5 flex flex-col justify-between h-full transition-colors">
               
-              {/* Photo Box with Floating Availability Pill */}
-              <div className="relative w-full aspect-[4/4.4] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 border border-gray-200/80 shadow-2xs">
-                <Image
-                  src="/pronoy-about.jpg"
-                  alt="Pronoy Pal - Frontend Focused & Full Stack Developer"
-                  fill
-                  className="object-cover object-[center_12%]"
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  priority
-                />
+              {/* Responsive Profile Header: Compact horizontal layout on mobile/tablet, vertical showcase on desktop */}
+              <div className="flex flex-row lg:flex-col items-center lg:items-stretch gap-3.5 sm:gap-5 lg:gap-0">
+                {/* Photo Box with Floating Availability Pill (Desktop) */}
+                <div className="relative w-[98px] h-[118px] sm:w-[132px] sm:h-[152px] lg:w-full lg:h-auto lg:aspect-[4/4.4] shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-zinc-800 border border-gray-200/80 dark:border-zinc-700/80 shadow-2xs">
+                  <Image
+                    src="/pronoy-about.webp"
+                    alt="Pronoy Pal - Frontend Focused & Full Stack Developer"
+                    fill
+                    className="object-cover object-[center_12%]"
+                    sizes="(max-width: 640px) 110px, (max-width: 1024px) 150px, 400px"
+                    priority
+                  />
 
-                {/* Floating Availability Pill */}
-                <div className="absolute bottom-2.5 inset-x-2.5 bg-white/95 backdrop-blur-md border border-gray-200/90 px-3 py-1.5 rounded-full flex items-center justify-between shadow-2xs z-10">
-                  <div className="flex items-center gap-1.5">
-                    <span className="relative flex h-2 w-2">
+                  {/* Desktop Floating Availability Pill */}
+                  <div className="hidden lg:flex absolute bottom-2.5 inset-x-2.5 bg-white/95 dark:bg-zinc-950/90 backdrop-blur-md border border-gray-200/90 dark:border-zinc-800 px-3 py-1.5 rounded-full items-center justify-between shadow-2xs z-10">
+                    <div className="flex items-center gap-1.5">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      <span className="text-[11px] font-bold text-gray-900 dark:text-zinc-100 whitespace-nowrap">
+                        Available for Work
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 text-[11px] font-medium text-gray-600 dark:text-zinc-400 whitespace-nowrap">
+                      <MapPin size={11} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                      <span>Dhaka, BD</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Name, Title & Mobile Status Pill */}
+                <div className="flex-1 min-w-0 lg:pt-3.5 lg:pb-2 text-left">
+                  {/* Mobile / Tablet Compact Status Pill */}
+                  <div className="inline-flex lg:hidden items-center gap-1.5 px-2.5 py-1 mb-2 rounded-full bg-gray-50 dark:bg-zinc-900/90 border border-gray-200/80 dark:border-zinc-800 max-w-full">
+                    <span className="relative flex h-1.5 w-1.5 shrink-0">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                     </span>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-gray-900">
-                      Available for Work
+                    <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-zinc-100 truncate">
+                      Available
+                    </span>
+                    <span className="text-gray-300 dark:text-zinc-700 text-[10px]">•</span>
+                    <span className="inline-flex items-center gap-0.5 text-[10px] sm:text-[11px] font-medium text-gray-600 dark:text-zinc-400 truncate">
+                      <MapPin size={10} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                      Dhaka, BD
                     </span>
                   </div>
-                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-medium text-gray-600">
-                    <MapPin size={11} className="text-indigo-600 shrink-0" />
-                    <span>Dhaka, BD</span>
-                  </div>
+
+                  <h3 className="text-lg sm:text-2xl font-black text-gray-950 dark:text-white tracking-tight leading-tight">
+                    Pronoy Pal
+                  </h3>
+                  <p className="text-[11px] sm:text-[13px] font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5 leading-snug">
+                    Frontend Focused &amp; Full Stack Developer
+                  </p>
                 </div>
               </div>
 
-              {/* Name & Title */}
-              <div className="pt-3.5 pb-2">
-                <h3 className="text-xl sm:text-2xl font-black text-gray-950 tracking-tight leading-tight">
-                  Pronoy Pal
-                </h3>
-                <p className="text-xs sm:text-[13px] font-semibold text-indigo-600 mt-0.5">
-                  Frontend Focused &amp; Full Stack Developer
-                </p>
-              </div>
-
               {/* Connect Footer */}
-              <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+              <div className="pt-3 mt-3 lg:mt-0 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-400">
                   CONNECT
                 </span>
                 <div className="flex items-center gap-1.5">
@@ -154,7 +173,7 @@ export default function AboutPhilosophy() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub Profile"
-                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-800 transition-colors shadow-2xs"
+                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-gray-200 dark:border-zinc-700 flex items-center justify-center text-gray-800 dark:text-zinc-200 transition-colors shadow-2xs"
                   >
                     <GithubIcon />
                   </a>
@@ -163,14 +182,14 @@ export default function AboutPhilosophy() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn Profile"
-                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-800 transition-colors shadow-2xs"
+                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-gray-200 dark:border-zinc-700 flex items-center justify-center text-gray-800 dark:text-zinc-200 transition-colors shadow-2xs"
                   >
                     <LinkedinIcon />
                   </a>
                   <a
                     href="mailto:pronoypaul56@gmail.com"
                     aria-label="Email Pronoy Pal"
-                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-800 transition-colors shadow-2xs"
+                    className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-gray-200 dark:border-zinc-700 flex items-center justify-center text-gray-800 dark:text-zinc-200 transition-colors shadow-2xs"
                   >
                     <Mail size={14} />
                   </a>
@@ -192,14 +211,14 @@ export default function AboutPhilosophy() {
             }}
             className="lg:col-span-8 flex flex-col"
           >
-            <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col justify-between h-full">
+            <div className="bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-indigo-500/15 shadow-[0_15px_35px_rgba(0,0,0,0.03)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.45)] p-5 sm:p-6 flex flex-col justify-between h-full transition-colors">
               
               {/* Header Row */}
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-indigo-600 uppercase tracking-widest">
+                <span className="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">
                   // BACKGROUND &amp; PHILOSOPHY
                 </span>
-                <span className="font-serif italic text-xs sm:text-sm text-gray-400">
+                <span className="font-serif italic text-xs sm:text-sm text-gray-400 dark:text-zinc-500">
                   Story
                 </span>
               </div>
@@ -207,9 +226,9 @@ export default function AboutPhilosophy() {
               {/* Narrative Content with exactly 18px (15-20px) top gap */}
               <div className="mt-[18px] mb-3 flex flex-col gap-2.5">
                 {/* Main Focus Statement (Larger size & Hero-style Solid Brand Highlights) */}
-                <p className="text-[15px] sm:text-base md:text-[17px] font-medium leading-[1.65] text-gray-900 tracking-[-0.01em]">
-                  I&apos;m <strong className="text-gray-950 font-black">Pronoy Pal</strong> — a{" "}
-                  <strong className="text-gray-950 font-black">Frontend-Focused Full-Stack Engineer</strong>{" "}
+                <p className="text-[15px] sm:text-base md:text-[17px] font-medium leading-[1.65] text-gray-900 dark:text-zinc-200 tracking-[-0.01em]">
+                  I&apos;m <strong className="text-gray-950 dark:text-white font-black">Pronoy Pal</strong> — a{" "}
+                  <strong className="text-gray-950 dark:text-white font-black">Frontend-Focused Full-Stack Engineer</strong>{" "}
                   currently focused on architecting resilient{" "}
                   <span className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-md bg-indigo-600 text-white font-semibold text-xs sm:text-sm shadow-2xs">
                     System Design
@@ -226,22 +245,22 @@ export default function AboutPhilosophy() {
                 </p>
 
                 {/* Subtext Paragraph */}
-                <p className="text-xs sm:text-[13.5px] text-gray-600 leading-relaxed font-normal">
+                <p className="text-xs sm:text-[13.5px] text-gray-600 dark:text-zinc-400 leading-relaxed font-normal">
                   Bridging client-side fidelity with server-side stability across the{" "}
-                  <strong className="text-gray-900 font-semibold">MERN stack</strong> (React, Next.js, Node.js, Express, MongoDB) while actively exploring cutting-edge AI technologies — integrating autonomous agent pipelines, LLM tooling, and Model Context Protocols (MCP) to automate complex engineering workflows into production-grade applications.
+                  <strong className="text-gray-900 dark:text-zinc-100 font-semibold">MERN stack</strong> (React, Next.js, Node.js, Express, MongoDB) while actively exploring cutting-edge AI technologies — integrating autonomous agent pipelines, LLM tooling, and Model Context Protocols (MCP) to automate complex engineering workflows into production-grade applications.
                 </p>
               </div>
 
               {/* Core Tech Arsenal with Reduced Gap */}
               <div className="mt-1 pt-1">
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                <span className="text-[11px] font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider block mb-2">
                   // CORE TECH ARSENAL
                 </span>
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   {coreArsenal.map((tech) => (
                     <span
                       key={tech.name}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 border border-gray-200 text-xs font-mono font-medium text-gray-800 shadow-2xs"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-xs font-mono font-medium text-gray-800 dark:text-zinc-200 shadow-2xs"
                     >
                       {tech.icon}
                       <span>{tech.name}</span>
@@ -251,32 +270,32 @@ export default function AboutPhilosophy() {
               </div>
 
               {/* 4 Feature Checklist Points (Compact 2x2 Grid - Strictly 1 Line Each) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 pt-3 border-t border-gray-100/90 mt-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 pt-3 border-t border-gray-100/90 dark:border-zinc-800 mt-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <CheckCircle2 size={14} className="text-indigo-600 shrink-0" />
-                  <p className="text-xs text-gray-700 truncate">
-                    <strong className="text-gray-950 font-bold">Pixel Precision:</strong> Flawless design-system translation
+                  <CheckCircle2 size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <p className="text-xs text-gray-700 dark:text-zinc-300 truncate">
+                    <strong className="text-gray-950 dark:text-white font-bold">Pixel Precision:</strong> Flawless design-system translation
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 min-w-0">
-                  <CheckCircle2 size={14} className="text-indigo-600 shrink-0" />
-                  <p className="text-xs text-gray-700 truncate">
-                    <strong className="text-gray-950 font-bold">Secure Endpoints:</strong> JWT, OAuth &amp; protected data flows
+                  <CheckCircle2 size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <p className="text-xs text-gray-700 dark:text-zinc-300 truncate">
+                    <strong className="text-gray-950 dark:text-white font-bold">Secure Endpoints:</strong> JWT, OAuth &amp; protected data flows
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 min-w-0">
-                  <CheckCircle2 size={14} className="text-indigo-600 shrink-0" />
-                  <p className="text-xs text-gray-700 truncate">
-                    <strong className="text-gray-950 font-bold">Agile Execution:</strong> Sprint velocity, CI/CD &amp; peer reviews
+                  <CheckCircle2 size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <p className="text-xs text-gray-700 dark:text-zinc-300 truncate">
+                    <strong className="text-gray-950 dark:text-white font-bold">Agile Execution:</strong> Sprint velocity, CI/CD &amp; peer reviews
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 min-w-0">
-                  <CheckCircle2 size={14} className="text-indigo-600 shrink-0" />
-                  <p className="text-xs text-gray-700 truncate">
-                    <strong className="text-gray-950 font-bold">Error Resilience:</strong> Fault tolerance &amp; graceful fallbacks
+                  <CheckCircle2 size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <p className="text-xs text-gray-700 dark:text-zinc-300 truncate">
+                    <strong className="text-gray-950 dark:text-white font-bold">Error Resilience:</strong> Fault tolerance &amp; graceful fallbacks
                   </p>
                 </div>
               </div>
@@ -296,21 +315,21 @@ export default function AboutPhilosophy() {
             delay: shouldReduceMotion ? 0 : 0.15,
             ease,
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4"
         >
           {metricStats.map((item, idx) => (
             <div
               key={idx}
-              className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-200/90 shadow-[0_5px_15px_rgba(0,0,0,0.02)] flex flex-col justify-between"
+              className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white dark:bg-[#11131f] dark:bg-gradient-to-br dark:from-[#16192a] dark:via-[#11131f] dark:to-[#0c0e17] border border-gray-200/90 dark:border-indigo-500/15 shadow-[0_5px_15px_rgba(0,0,0,0.02)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.35)] flex flex-col justify-between transition-colors"
             >
-              <span className="text-2xl sm:text-3xl font-black text-indigo-600 tracking-tight leading-none inline-block">
+              <span className="text-xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400 tracking-tight leading-none inline-block">
                 {item.value}
               </span>
-              <div className="mt-2.5">
-                <span className="text-xs font-bold text-gray-900 block leading-tight">
+              <div className="mt-2 sm:mt-2.5">
+                <span className="text-[11px] sm:text-xs font-bold text-gray-900 dark:text-zinc-100 block leading-tight">
                   {item.label}
                 </span>
-                <span className="text-[11px] font-mono text-gray-500 block mt-0.5">
+                <span className="text-[10px] sm:text-[11px] font-mono text-gray-500 dark:text-zinc-400 block mt-0.5 leading-snug">
                   {item.detail}
                 </span>
               </div>

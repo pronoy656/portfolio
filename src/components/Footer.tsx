@@ -21,26 +21,26 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-white overflow-hidden select-none">
+    <footer className="relative bg-white dark:bg-[#08090f] overflow-hidden select-none transition-colors duration-300">
       
       {/* ── Soft Ambient Glow bridging Contact & Footer ── */}
-      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[800px] h-[160px] bg-indigo-500/[0.08] blur-[100px] rounded-full pointer-events-none z-[1]" />
+      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[800px] h-[160px] bg-indigo-500/[0.08] dark:bg-indigo-500/[0.18] blur-[100px] rounded-full pointer-events-none z-[1]" />
 
       {/* ── Immersive Full-Width Nature Canvas (All Footer Content Inside the Image) ── */}
       <div className="relative w-full h-[540px] sm:h-[620px] md:h-[720px] lg:h-[780px] overflow-hidden select-none flex flex-col justify-between">
         
         {/* 4K HD Illustrated Mountain Landscape */}
         <Image
-          src="/footer-nature-mountain.jpg"
+          src="/footer-nature-mountain.webp"
           alt="Curated 4K HD Mountain Landscape Horizon"
           fill
           sizes="100vw"
           priority
-          className="object-cover object-center select-none pointer-events-none"
+          className="object-cover object-center select-none pointer-events-none transition-all duration-500 dark:brightness-[0.72] dark:contrast-[1.08] dark:saturate-[0.9]"
         />
 
         {/* Seamless top blend into page background */}
-        <div className="absolute inset-x-0 top-0 h-32 sm:h-44 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 top-0 h-32 sm:h-44 bg-gradient-to-b from-white via-white/80 dark:from-[#08090f] dark:via-[#0a0c16]/85 to-transparent pointer-events-none z-10 transition-colors duration-300" />
 
         {/* Soft bottom vignette for dock legibility */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 via-black/20 to-transparent pointer-events-none z-10" />
@@ -54,11 +54,11 @@ export default function Footer() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, ease }}
             className="w-full select-none pointer-events-none flex flex-col items-center"
           >
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-md border border-white/80 text-[11px] font-mono font-semibold text-gray-800 shadow-2xs mb-2 sm:mb-4">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 dark:bg-zinc-900/75 backdrop-blur-md border border-white/80 dark:border-zinc-700/70 text-[11px] font-mono font-semibold text-gray-800 dark:text-zinc-100 shadow-2xs mb-2 sm:mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Dhaka, Bangladesh • Open for select opportunities
             </span>
-            <h1 className="text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] font-black tracking-tight leading-none text-gray-950/20 uppercase select-none drop-shadow-xs">
+            <h1 className="text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] font-black tracking-tight leading-none text-gray-950/20 dark:text-white/20 uppercase select-none drop-shadow-xs">
               PRONOY
             </h1>
           </motion.div>

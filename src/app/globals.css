@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark, .dark *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -10,8 +12,8 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
-  --primary: #000000;
+  --foreground: #09090b;
+  --primary: #09090b;
   --muted-text: #737373;
   --brand: #6366f1;
   --bg-gradient-start: rgba(240, 240, 240, 1);
@@ -20,6 +22,20 @@
   --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-border: rgba(0, 0, 0, 0.05);
   --nav-bg: rgba(255, 255, 255, 0.5);
+}
+
+.dark {
+  --background: #08090f;
+  --foreground: #fafafa;
+  --primary: #fafafa;
+  --muted-text: #a1a1aa;
+  --brand: #818cf8;
+  --bg-gradient-start: rgba(23, 25, 48, 1);
+  --bg-gradient-end: rgba(7, 8, 13, 1);
+  --border-color: rgba(148, 163, 184, 0.14);
+  --glass-bg: linear-gradient(145deg, rgba(22, 24, 38, 0.78) 0%, rgba(13, 15, 24, 0.84) 100%);
+  --glass-border: rgba(129, 140, 248, 0.16);
+  --nav-bg: rgba(15, 17, 28, 0.82);
 }
 
 @layer base {
@@ -43,6 +59,7 @@
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -67,4 +84,25 @@
 
 .outline-text {
   -webkit-text-stroke: 1px var(--border-color);
+}
+
+/* Circular Radial View Transition for Dark/Light Mode Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+html.theme-burst *,
+html.theme-burst *::before,
+html.theme-burst *::after {
+  transition: none !important;
 }

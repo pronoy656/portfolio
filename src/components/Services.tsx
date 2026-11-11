@@ -151,7 +151,7 @@ export default function Services() {
                   {service.artwork === "digital" && (
                     <div className="relative w-full h-full">
                       <Image
-                        src="/services-card1-glass.jpg"
+                        src="/services-card1-glass.webp"
                         alt="Digital Products 3D Glass Artwork"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 420px"
@@ -166,7 +166,7 @@ export default function Services() {
                   {service.artwork === "content" && (
                     <div className="relative w-full h-full">
                       <Image
-                        src="/services-card2-glass.jpg"
+                        src="/services-card2-glass.webp"
                         alt="Content & Marketing 3D Glass Artwork"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 420px"

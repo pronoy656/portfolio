@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,11 +45,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light" style={{ colorScheme: "light" }} suppressHydrationWarning>
       <body className={`${inter.className} antialiased selection:bg-indigo-500 selection:text-white`}>
-        <SmoothScroll />
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,_var(--bg-gradient-start)_0%,_var(--bg-gradient-end)_100%)] pointer-events-none -z-10" />
-        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{localStorage.removeItem("theme");localStorage.removeItem("portfolio-theme");document.documentElement.classList.remove("dark");document.documentElement.classList.add("light");document.documentElement.style.colorScheme="light";}catch(e){}`,
+          }}
+        />
+        <ThemeProvider
+          attribute="class"
+          storageKey="portfolio-theme"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange={false}
+        >
+          <SmoothScroll />
+          <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,_var(--bg-gradient-start)_0%,_var(--bg-gradient-end)_100%)] pointer-events-none -z-10" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
