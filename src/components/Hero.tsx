@@ -340,10 +340,9 @@ export default function Hero() {
 
             {/* Secondary CTA: Download Resume */}
             <a
-              href="/resume.pdf"
+              href="https://drive.google.com/file/d/1gUIGo-8uYLgRPA1SKYWc2b63JtcBBI5k/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              download="Pronoy_Pal_Resume.pdf"
               className="group relative inline-flex items-center justify-center gap-1.5 sm:gap-3 h-11 sm:h-auto px-3 sm:px-7 sm:py-4 rounded-full transition-all duration-300 active:scale-95 border border-gray-200/90 dark:border-zinc-800 hover:border-indigo-600 dark:hover:border-indigo-400 bg-white dark:bg-zinc-900 shadow-xs hover:shadow-md cursor-pointer"
             >
               <span className="relative z-10 text-[11px] sm:text-sm font-bold text-[#1a1c20] dark:text-zinc-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors whitespace-nowrap tracking-tight sm:tracking-normal">

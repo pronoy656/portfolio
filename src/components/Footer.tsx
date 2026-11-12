@@ -135,7 +135,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/resume.pdf"
+                    href="https://drive.google.com/file/d/1gUIGo-8uYLgRPA1SKYWc2b63JtcBBI5k/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLinkClass}

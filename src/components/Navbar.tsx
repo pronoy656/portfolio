@@ -403,8 +403,9 @@ export default function Navbar() {
             </button>
 
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              href="https://drive.google.com/file/d/1gUIGo-8uYLgRPA1SKYWc2b63JtcBBI5k/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display:         "block",
                 borderRadius:    "9999px",
