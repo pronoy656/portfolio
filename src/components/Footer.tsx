@@ -1,100 +1,218 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { ArrowUp, MapPin } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
+
+const menuLinks = [
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Work", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
+const footerLinkClass =
+  "relative inline-flex items-center gap-1 w-fit text-sm sm:text-base font-medium text-[#090a10]/90 hover:text-[#090a10] transition-colors after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-full after:bg-[#090a10] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 export default function Footer() {
-  const shouldReduceMotion = useReducedMotion();
-  const ease = [0.22, 1, 0.36, 1] as const;
+  const [dhakaTime, setDhakaTime] = useState("--:--:--");
+
+  useEffect(() => {
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Dhaka",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+
+    const tick = () => setDhakaTime(formatter.format(new Date()));
+    tick();
+    const timer = setInterval(tick, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const scrollToTop = () => {
     if (typeof window !== "undefined") {
-      const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number, opts?: { duration?: number }) => void } }).__lenis;
+      const lenis = (
+        window as unknown as {
+          __lenis?: { scrollTo: (target: number, opts?: { duration?: number }) => void };
+        }
+      ).__lenis;
       if (lenis && typeof lenis.scrollTo === "function") {
-        lenis.scrollTo(0, { duration: 1.2 });
+        lenis.scrollTo(0, { duration: 1.1 });
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
   };
 
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    e.preventDefault();
+    const navClearance = window.innerWidth < 768 ? 85 : 95;
+    const targetY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navClearance);
+    const lenis = (
+      window as unknown as {
+        __lenis?: { scrollTo: (target: number, opts?: { duration?: number; force?: boolean }) => void };
+      }
+    ).__lenis;
+
+    if (lenis && typeof lenis.scrollTo === "function") {
+      lenis.scrollTo(targetY, { duration: 1.0, force: true });
+    } else {
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+    }
+    window.history.pushState(null, "", href);
+  };
+
   return (
     <footer className="relative bg-white dark:bg-[#08090f] overflow-hidden select-none transition-colors duration-300">
-      
-      {/* ── Soft Ambient Glow bridging Contact & Footer ── */}
-      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[800px] h-[160px] bg-indigo-500/[0.08] dark:bg-indigo-500/[0.18] blur-[100px] rounded-full pointer-events-none z-[1]" />
+      {/* Brand-colored Swiss Editorial Rounded Footer Surface */}
+      <div className="relative w-full bg-[#6366f1] text-[#090a10] rounded-t-[28px] sm:rounded-t-[40px] overflow-hidden pt-10 sm:pt-14 md:pt-16">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14">
+          {/* ── Top 4-Area Grid ── */}
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-y-8 gap-x-6 pb-10 sm:pb-14">
+            {/* Brand Contact */}
+            <div className="col-span-2 md:col-span-4 flex flex-col items-start">
+              <h2 className="text-2xl sm:text-3xl md:text-[34px] font-bold tracking-tight text-[#090a10] leading-tight">
+                Contact{" "}
+                <span className="font-serif italic font-normal">Pronoy</span>
+              </h2>
+              <a
+                href="mailto:pronoypaul56@gmail.com"
+                className="relative inline-block mt-2 text-sm sm:text-base md:text-[17px] font-medium text-[#090a10]/90 hover:text-[#090a10] transition-colors break-all after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-full after:bg-[#090a10] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)]"
+              >
+                pronoypaul56@gmail.com
+              </a>
+            </div>
 
-      {/* ── Immersive Full-Width Nature Canvas (All Footer Content Inside the Image) ── */}
-      <div className="relative w-full h-[540px] sm:h-[620px] md:h-[720px] lg:h-[780px] overflow-hidden select-none flex flex-col justify-between">
-        
-        {/* 4K HD Illustrated Mountain Landscape */}
-        <Image
-          src="/footer-nature-mountain.webp"
-          alt="Curated 4K HD Mountain Landscape Horizon"
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover object-center select-none pointer-events-none transition-all duration-500 dark:brightness-[0.72] dark:contrast-[1.08] dark:saturate-[0.9]"
-        />
+            {/* Menu Navigation */}
+            <div className="col-span-1 md:col-span-2">
+              <p className="text-xs sm:text-[13px] font-mono font-bold uppercase tracking-[0.18em] text-[#090a10]/70 mb-3.5">
+                Menu
+              </p>
+              <ul className="space-y-2 sm:space-y-2.5">
+                {menuLinks.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={`/${item.href}`}
+                      onClick={(e) => handleAnchorClick(e, item.href)}
+                      className={footerLinkClass}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* Seamless top blend into page background */}
-        <div className="absolute inset-x-0 top-0 h-32 sm:h-44 bg-gradient-to-b from-white via-white/80 dark:from-[#08090f] dark:via-[#0a0c16]/85 to-transparent pointer-events-none z-10 transition-colors duration-300" />
+            {/* Explore Links */}
+            <div className="col-span-1 md:col-span-2">
+              <p className="text-xs sm:text-[13px] font-mono font-bold uppercase tracking-[0.18em] text-[#090a10]/70 mb-3.5">
+                Explore
+              </p>
+              <ul className="space-y-2 sm:space-y-2.5">
+                <li>
+                  <Link href="/projects" className={footerLinkClass}>
+                    All projects
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/projects/shabos-rent" className={footerLinkClass}>
+                    ShabbosRent
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/projects/islandhop" className={footerLinkClass}>
+                    IslandHop
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={footerLinkClass}
+                  >
+                    <span>Résumé</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-        {/* Soft bottom vignette for dock legibility */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 via-black/20 to-transparent pointer-events-none z-10" />
+            {/* Local Time & Social Pills */}
+            <div className="col-span-2 md:col-span-4 flex flex-col items-start md:items-end md:text-right">
+              <p className="text-[10px] font-mono font-semibold uppercase tracking-[0.18em] text-[#090a10]/65">
+                Local Time &bull; Dhaka
+              </p>
+              <p
+                suppressHydrationWarning
+                className="mt-1 text-2xl sm:text-[28px] font-extrabold tracking-tight tabular-nums text-[#090a10] leading-none"
+              >
+                {dhakaTime}
+              </p>
+              <div className="mt-3.5 flex items-center gap-2">
+                <a
+                  href="https://linkedin.com/in/pronoy-pal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-1.5 rounded-full border border-[#090a10]/25 hover:border-[#090a10] hover:bg-[#090a10] hover:text-[#6366f1] text-xs font-medium text-[#090a10] transition-all duration-200"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/pronoy656"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-1.5 rounded-full border border-[#090a10]/25 hover:border-[#090a10] hover:bg-[#090a10] hover:text-[#6366f1] text-xs font-medium text-[#090a10] transition-all duration-200"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
 
-        {/* ── Top Area: Brand Identity in the Sky ── */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.97, y: shouldReduceMotion ? 0 : 16 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, ease }}
-            className="w-full select-none pointer-events-none flex flex-col items-center"
-          >
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 dark:bg-zinc-900/75 backdrop-blur-md border border-white/80 dark:border-zinc-700/70 text-[11px] font-mono font-semibold text-gray-800 dark:text-zinc-100 shadow-2xs mb-2 sm:mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Dhaka, Bangladesh • Open for select opportunities
-            </span>
-            <h1 className="text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] font-black tracking-tight leading-none text-gray-950/20 dark:text-white/20 uppercase select-none drop-shadow-xs">
-              PRONOY
-            </h1>
-          </motion.div>
+          {/* ── Middle Divider with Centered Ring Ornament, Copyright & Back to Top ── */}
+          <div className="relative border-t border-[#090a10]/15 py-5 flex items-center justify-between gap-4">
+            <span
+              aria-hidden="true"
+              className="hidden sm:block absolute left-1/2 -top-[13px] -translate-x-1/2 w-6 h-6 rounded-full border border-[#090a10]/20 bg-[#6366f1]"
+            />
+
+            <p className="text-xs sm:text-sm font-mono font-semibold uppercase tracking-[0.16em] text-[#090a10]/85">
+              &copy; {new Date().getFullYear()} Pronoy Pal
+            </p>
+
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="group inline-flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#090a10]/90 hover:text-[#090a10] transition-colors cursor-pointer"
+            >
+              <span>Back to top</span>
+              <span className="w-7 h-7 rounded-full bg-[#090a10] text-[#6366f1] flex items-center justify-center group-hover:-translate-y-0.5 transition-transform duration-200">
+                <ArrowUp size={13} strokeWidth={2.5} />
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* ── Bottom Edge Glass Dock (Inside the Image, Zero Separate Section) ── */}
-        <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: shouldReduceMotion ? 0.01 : 0.6, delay: shouldReduceMotion ? 0 : 0.15, ease }}
-          className="relative z-20 w-full backdrop-blur-md bg-black/30 border-t border-white/15 px-6 sm:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-white/90 pointer-events-auto"
-        >
-          {/* Location */}
-          <div className="flex items-center gap-2 font-bold text-white order-2 sm:order-1">
-            <MapPin size={14} className="text-indigo-400 shrink-0" />
-            <span className="tracking-tight">Dhaka, Bangladesh</span>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center order-3 sm:order-2 text-white/80 font-medium">
-            <span>© {new Date().getFullYear()} Pronoy Pal. All rights reserved.</span>
-          </div>
-
-          {/* Back to top button */}
-          <button
-            onClick={scrollToTop}
-            className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-gray-950 border border-white/25 hover:border-white transition-all duration-200 active:scale-95 cursor-pointer order-1 sm:order-3"
+        {/* ── Monumental Cropped Display Name ── */}
+        <div className="w-full overflow-hidden pt-2 sm:pt-4">
+          <div
+            aria-hidden="true"
+            className="w-full text-center font-black uppercase text-[#090a10] tracking-[-0.04em] leading-[0.76] text-[22.5vw] sm:text-[22vw] translate-y-[6%] pointer-events-none select-none"
           >
-            <span className="text-xs font-bold font-sans">Back to top</span>
-            <ArrowUp size={11} className="transition-transform group-hover:-translate-y-0.5" />
-          </button>
-        </motion.div>
-
+            PRONOY
+          </div>
+        </div>
       </div>
-
     </footer>
   );
 }
